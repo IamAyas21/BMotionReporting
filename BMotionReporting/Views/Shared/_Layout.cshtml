@@ -1,42 +1,126 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>BMotion Reporting</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
+    <!-- Bootstrap core CSS -->
+    <link href="~/Content/AdminLTE/all.min.css" rel="stylesheet" />
+    <link href="~/Content/AdminLTE/adminlte.min.css" rel="stylesheet" />
+    @*<link href="../Content/bootstrap.css" rel="stylesheet">*@
+       
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
+        .container {
+            width: auto;
+            max-width: 680px;
+            padding: 0 15px;
+        }
+
+        .footer {
+            background-color: #f5f5f5;
+        }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="~/Content/CSS/dashboard.css" rel="stylesheet">
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">BMotion Reporting</a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#">Sign out</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style="overflow-y:hidden">
+                <div class="sidebar-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item" style="margin:10px;">
+                            <a class="nav-link active" href="#">
+                                <img src="~/Assets/icon_home.png" width="20" height="20" />
+                                <span data-feather="home" style="padding:5px"></span>
+                                Home
+                            </a>
+                        </li>
+                        <li class="nav-item" style="margin:10px;">
+                            <a class="nav-link" href="#">
+                                <img src="~/Assets/icon_daftar_pengguna.png" width="20" height="20" />
+                                <span data-feather="file" style="padding:5px"></span>
+                                Daftar Pengguna
+                            </a>
+                        </li>
+                        <li class="nav-item" style="margin:10px;">
+                            <a class="nav-link" href="#">
+                                <img src="~/Assets/icon_pengambilan_bbm.png" width="20" height="20" />
+                                <span data-feather="shopping-cart" style="padding:5px"></span>
+                                Pengambilan BBM
+                            </a>
+                        </li>
+                        <li class="nav-item"  style="margin:10px;">
+                            <a class="nav-link" href="#">
+                                <img src="~/Assets/icon_notifikasi.png" width="30" height="30" />
+                                <span data-feather="users" style="padding:5px"></span>
+                                Notifikasi
+                            </a>
+                        </li>
+                        <li class="nav-item" style="margin:10px;">
+                            <a class="nav-link" href="#">
+                                <img src="~/Assets/icon_riwayat_pengambilan_bbm.png" width="20" height="20" />
+                                <span data-feather="bar-chart-2" style="padding:5px"></span>
+                                Riwayat Pengambilan BBM
+                            </a>
+                        </li>
+                    </ul>
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <a class="nav-link" href="#">
+                            <img src="~/Assets/icon_keluar.png" width="20" height="20" />
+                            <span data-feather="bar-chart-2" style="padding:5px"></span>
+                            Keluar
+                        </a>
+                    </h6>
+
+                </div>
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                @RenderBody()
+                <footer class="footer mt-auto py-3">
+                    <div class="container">
+                        <span class="text-muted">&copy;@DateTime.Now.Year - BMotion Reporting</span>
+                    </div>
+                </footer> 
+            </main>        
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+    <script src="~/Scripts/AdminLTE/jquery.min.js"></script>
+    <script src="~/Scripts/AdminLTE/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/AdminLTE/adminlte.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>   
+    
+    
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
