@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="46202bd823f547a69d481e47ef5c0a73" Name="Diagram1">
+      <Diagram DiagramId="b5f8c3877c0d4decac120881ad0e3f36" Name="Diagram1">
         <EntityTypeShape EntityType="BMotionDBModel.Document" Width="1.5" PointX="8.25" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="BMotionDBModel.Fuel" Width="1.5" PointX="8.25" PointY="10.875" IsExpanded="true" />
         <EntityTypeShape EntityType="BMotionDBModel.Menu" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />

@@ -10,10 +10,34 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/dashboard/">
     <!-- Bootstrap core CSS -->
     <link href="~/Content/AdminLTE/all.min.css" rel="stylesheet" />
+    <link href="~/Content/AdminLTE/daterangepicker.css" rel="stylesheet" />
+    <link href="~/Content/AdminLTE/bootstrap-colorpicker.min.css" rel="stylesheet" />
+    <link href="~/Content/AdminLTE/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+    <link href="~/Content/AdminLTE/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/Content/AdminLTE/responsive.bootstrap4.min.css" rel="stylesheet" />
     <link href="~/Content/AdminLTE/adminlte.min.css" rel="stylesheet" />
-    @*<link href="../Content/bootstrap.css" rel="stylesheet">*@
-       
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+    @RenderSection("scripts", required: false)
+
+    <script src="~/Scripts/AdminLTE/jquery.min.js"></script>
+    <script src="~/Scripts/JS/qrcode.min.js"></script>
+    <script src="~/Scripts/JS/instascan.min.js"></script>
+    <script src="~/Scripts/AdminLTE/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/AdminLTE/moment.min.js"></script>
+    <script src="~/Scripts/AdminLTE/jquery.inputmask.bundle.min.js"></script>
+    <script src="~/Scripts/AdminLTE/daterangepicker.js"></script>
+    <script src="~/Scripts/AdminLTE/bootstrap-colorpicker.min.js"></script>
+    <script src="~/Scripts/AdminLTE/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="~/Scripts/AdminLTE/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/AdminLTE/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Scripts/AdminLTE/dataTables.responsive.min.js"></script>
+    <script src="~/Scripts/AdminLTE/responsive.bootstrap4.min.js"></script>
+    <script src="~/Scripts/AdminLTE/adminlte.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")*@
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -64,14 +88,14 @@
                             </a>
                         </li>
                         <li class="nav-item" style="margin:10px;">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="@Url.Action("Index","Users")">
                                 <img src="~/Assets/icon_daftar_pengguna.png" width="20" height="20" />
                                 <span data-feather="file" style="padding:5px"></span>
                                 Daftar Pengguna
                             </a>
                         </li>
                         <li class="nav-item" style="margin:10px;">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="@Url.Action("Index","Orders")">
                                 <img src="~/Assets/icon_pengambilan_bbm.png" width="20" height="20" />
                                 <span data-feather="shopping-cart" style="padding:5px"></span>
                                 Pengambilan BBM
@@ -104,25 +128,17 @@
             </nav>
 
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-                @RenderBody()
-                <footer class="footer mt-auto py-3">
+                <div style="margin:5%">
+                    @RenderBody()
+                </div>
+                
+                @*<footer class="footer mt-auto py-3">
                     <div class="container">
                         <span class="text-muted">&copy;@DateTime.Now.Year - BMotion Reporting</span>
                     </div>
-                </footer> 
+                </footer>*@ 
             </main>        
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
-    <script src="~/Scripts/AdminLTE/jquery.min.js"></script>
-    <script src="~/Scripts/AdminLTE/bootstrap.bundle.min.js"></script>
-    <script src="~/Scripts/AdminLTE/adminlte.js"></script>
-    <script src="~/Scripts/bootstrap.bundle.js"></script>   
-    
-    
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

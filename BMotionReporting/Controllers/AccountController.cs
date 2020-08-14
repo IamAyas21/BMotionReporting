@@ -73,6 +73,7 @@ namespace BMotionReporting.Controllers
             var user = db.Users.Where(usr => usr.Email.Equals(model.Email) && usr.Password.Equals(model.Password)).ToList();
             if(user.Count > 0)
             {
+                Session["nip"] = user.FirstOrDefault().NIP;
                 return RedirectToLocal(returnUrl);
             }
             else

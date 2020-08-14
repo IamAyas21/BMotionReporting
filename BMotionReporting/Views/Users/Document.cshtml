@@ -1,0 +1,117 @@
+﻿@model BMotionReporting.Models.PagedList<BMotionReporting.Models.DocumentModels>
+
+<table class="table table-bordered table-striped" id="example1">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("No")
+            </th>
+            <th>
+                @Html.DisplayName("Tanggal")
+            </th>
+            <th>
+                @Html.DisplayName("Dokumen No")
+            </th>
+            <th>
+                @Html.DisplayName("Tanggal Berakhir")
+            </th>
+            <th>
+                @Html.DisplayName("Quota")
+            </th>
+            <th>
+                @Html.DisplayName("Status")
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Content.Count; i++)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Content[i].No)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Content[i].CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Content[i].DocumentNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Content[i].ExpDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Content[i].Quota)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Content[i].IsVerify)
+                </td>
+                <td>
+                    <button type="button" value="loop" style="border:none" id="btnShow_@Model.Content[i].No" onclick="ShowModal(@Model.Content[i].No)">
+                        <img src="~/Assets/icon_loop.png" width="20" height="20" />
+                    </button>
+                    <div class="modal fade" tabindex="-1" id="modalShow_@Model.Content[i].No"
+                         data-keyboard="false" data-backdrop="static">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row" align="center">
+                                        <div class="col-lg-12">
+                                            <object data="@Model.Content[i].PathDocument" type="application/pdf"
+                                                    width="700" height="500"></object>  
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" id="btnHide_@Model.Content[i].No" class="btn btn-primary button button4"
+                                            onclick="HideModal(@Model.Content[i].No)">
+                                        Tutup
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @{
+                        if (Model.Content[i].IsVerify == null)
+                        {
+                            <input value="Verification" type="button" onclick="Verification('@Model.Content[i].DocumentNo','@Model.Content[i].NIP')" />
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    function ShowModal(idx)
+    {
+        $("#modalShow_" + idx).modal('show');
+    }
+
+    function HideModal(idx)
+    {
+       $("#modalShow_"+idx).modal('hide');
+    }
+
+    function Verification(docNo, nip)
+    {
+        if (confirm("Apa Anda yakin ingin konfirmasi dokumen nomor " + docNo + "?")) {
+            var model = [ docNo, nip ];
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("Verification","Users")",
+                    data: { arrValue : model },
+                    success: function (response) {
+                        //alert(response)
+                    },
+                    error: function (response) {
+                        //alert(response)
+                    }
+                });
+            }
+    }
+</script>

@@ -1,0 +1,70 @@
+Time: 13/08/2020 07:50:20 PM
+------------------------------------------------------------------------
+Message: Non-static field requires a target.
+StackTrace:    at System.Reflection.RtFieldInfo.CheckConsistency(Object target)
+   at System.Reflection.RtFieldInfo.InternalGetValue(Object obj, StackCrawlMark& stackMark)
+   at System.Reflection.RtFieldInfo.GetValue(Object obj)
+   at System.Data.Entity.Core.Objects.ELinq.QueryParameterExpression.TryGetFieldOrPropertyValue(MemberExpression me, Object instance, Object& memberValue)
+   at System.Data.Entity.Core.Objects.ELinq.QueryParameterExpression.TryEvaluatePath(Expression expression, ConstantExpression& constantExpression)
+   at System.Data.Entity.Core.Objects.ELinq.QueryParameterExpression.EvaluateParameter(Object[] arguments)
+   at System.Data.Entity.Core.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__6()
+   at System.Data.Entity.Core.Objects.ObjectContext.ExecuteInTransaction[T](Func`1 func, IDbExecutionStrategy executionStrategy, Boolean startLocalTransaction, Boolean releaseConnectionOnSuccess)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<>c__DisplayClass7.<GetResults>b__5()
+   at System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy.Execute[TResult](Func`1 operation)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   at System.Data.Entity.Core.Objects.ObjectQuery`1.<System.Collections.Generic.IEnumerable<T>.GetEnumerator>b__0()
+   at System.Data.Entity.Internal.LazyEnumerator`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at BMotionReporting.Logic.UserLogic.GetUserById(String id)
+   at BMotionReporting.Controllers.UsersController.Detail(String id)
+Source: mscorlib
+TargetSite: Void CheckConsistency(System.Object)
+------------------------------------------------------------------------
+
+Time: 13/08/2020 10:09:49 PM
+------------------------------------------------------------------------
+Message: Sequence contains no elements
+StackTrace:    at BMotionReporting.Logic.DocumentLogic.Verification(String documentNo) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\DocumentLogic.cs:line 136
+   at BMotionReporting.Controllers.UsersController.Verification(String documentNo) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Controllers\UsersController.cs:line 110
+Source: BMotionReporting
+TargetSite: Void Verification(System.String)
+------------------------------------------------------------------------
+
+Time: 13/08/2020 10:11:48 PM
+------------------------------------------------------------------------
+Message: Sequence contains no elements
+StackTrace:    at BMotionReporting.Logic.DocumentLogic.Verification(String documentNo) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\DocumentLogic.cs:line 136
+   at BMotionReporting.Controllers.UsersController.Verification(String documentNo) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Controllers\UsersController.cs:line 110
+Source: BMotionReporting
+TargetSite: Void Verification(System.String)
+------------------------------------------------------------------------
+
+Time: 13/08/2020 10:14:38 PM
+------------------------------------------------------------------------
+Message: Sequence contains no elements
+StackTrace:    at BMotionReporting.Logic.DocumentLogic.Verification(String documentNo) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\DocumentLogic.cs:line 136
+   at BMotionReporting.Controllers.UsersController.Verification(String documentNo) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Controllers\UsersController.cs:line 110
+Source: BMotionReporting
+TargetSite: Void Verification(System.String)
+------------------------------------------------------------------------
+
+Time: 13/08/2020 10:57:20 PM
+------------------------------------------------------------------------
+Message: Sequence contains no elements
+StackTrace:    at BMotionReporting.Logic.UserLogic.Verification(String nip) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\UserLogic.cs:line 150
+   at BMotionReporting.Controllers.UsersController.Detail(UserModels model) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Controllers\UsersController.cs:line 95
+Source: BMotionReporting
+TargetSite: Void Verification(System.String)
+------------------------------------------------------------------------
+
+Time: 13/08/2020 10:59:26 PM
+------------------------------------------------------------------------
+Message: Sequence contains no elements
+StackTrace:    at BMotionReporting.Logic.UserLogic.Verification(String nip) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\UserLogic.cs:line 150
+   at BMotionReporting.Controllers.UsersController.Detail(UserModels model) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Controllers\UsersController.cs:line 95
+Source: BMotionReporting
+TargetSite: Void Verification(System.String)
+------------------------------------------------------------------------
+

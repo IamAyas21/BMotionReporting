@@ -1,0 +1,146 @@
+﻿@model BMotionReporting.Models.UserModels
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm("Create", "Users", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="row" style="margin:10px">
+                <div class="col-lg-12 col-md-12">
+
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="form-horizontal box-body">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Data Pengguna</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Nama <span style="color:red">*</span></label>
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @maxlength = 100, @placeholder = "Nama", autocomplete = "off", required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">NIP <span style="color:red">*</span></label>
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.NIP, new { @class = "form-control", @maxlength = 16, @placeholder = "NIP", autocomplete = "off", required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Profesi <span style="color:red">*</span></label>
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.Profesi, new { @class = "form-control", @maxlength = 100, @placeholder = "Profesi", autocomplete = "off", required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Email <span style="color:red">*</span></label>
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @maxlength = 50, @placeholder = "Email", autocomplete = "off", required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">No Telp <span style="color:red">*</span></label>
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.Telp, new { @class = "form-control", @maxlength = 12, @placeholder = "Telp", autocomplete = "off", required = "required", @type = "number" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Password <span style="color:red">*</span></label>
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @maxlength = 50, @placeholder = "***********", autocomplete = "off", required = "required", @type = "password" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Data Dokumen</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Quota <span style="color:red">*</span></label>
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.Quota, new { @class = "form-control", @maxlength = 3, @placeholder = "Quota", autocomplete = "off", required = "required", @type = "number" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Expired Date <span style="color:red">*</span></label>
+                                    <div class="col-md-9">
+                                        <div class="input-group date" id="expDate" data-target-input="nearest">
+                                            @Html.TextBoxFor(model => model.ExpiredDate, new { @class = "form-control datetimepicker-input", @placeholder = "Expired Date", autocomplete = "off", required = "required" })
+                                            <div class="input-group-append" data-target="#expDate" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">KTP <span style="color:red">*</span></label>
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.KTP, new { type = "file", accept = "image/*,  image/*", required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Dokumen</label>
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.PDF, new { type = "file", accept = "application/pdf,  appliation/pdf" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer">
+                        <input id="btnSubmit" name="Submit" type="submit" value="Submit" class="btn btn-primary" />
+                        <a href="@Url.Action("Index","Users")" class="btn btn-default">Kembali </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    $(function () {
+        $('#expDate').datetimepicker({
+            format: 'L'
+        });
+    });
+</script>

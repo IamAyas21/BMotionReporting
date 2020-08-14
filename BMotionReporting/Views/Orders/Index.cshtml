@@ -1,0 +1,124 @@
+﻿@model BMotionReporting.Models.OrderModels
+@{
+    ViewBag.Title = "Pengambilan BBM";
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-warning" style="margin:10px">
+        <p><i class="fa fa-warning"></i> @TempData["Error"].ToString()</p>
+    </div>
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success" style="margin:10px">
+        <strong>Success!</strong> @TempData["Success"].ToString()
+    </div>
+}
+
+<h1><strong style="font-family:Arial">Pengambilan BBM</strong></h1>
+
+<div class="card card-primary" style="width:50%">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="card-title">QR Code Scanner</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <video id="preview" width="500" height="500"></video>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" id="modalOrder"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><strong style="font-family:Arial">Struk Pengambilan BBM</strong></h2>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row" align="center">
+                    <div class="col-lg-12">
+                        <h2 id="outletNo"><strong>SPBU 34.413.55</strong></h2>
+                        <h3 id="outletName"><strong>Batujaya</strong></h3>
+                    </div>
+                </div>
+                <div class="row" style="margin:2%">
+                    <div class="col-lg-6">
+                        <div id="orderDetail"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div id="qrcode"></div>
+                    </div>
+                </div>
+                @*<div class="row" align="center">
+                    <div class="col-lg-12">
+                        <div id="qrcode"></div>
+                    </div>
+                </div>*@
+                <div class="row" style="margin:2%">
+                    <div class="col-lg-12">
+                        <h6><strong>syarat & ketentuan</strong></h6>
+                        <p><small>dmsfnds dsdsk fsdf fsdfds fsdfsd fsdf sfsf dsfs dfsd fs f sd</small></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cetakOrder" class="btn btn-primary button button4">
+                    Cetak
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+    scanner.addListener('scan', function (content) {
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("StrukBBM", "Orders")",
+            data: { orderNo: content },
+            success: function (response) {
+                for (var i = 0; i < response.length; i++) {
+                    document.getElementById('outletNo').innerHTML = response[i].OutletNo;
+                    document.getElementById('outletName').innerHTML = response[i].OutletName;
+                    makeCode(response[i].OrderNo);
+
+                    document.getElementById('orderDetail').innerHTML = "";
+                    for (var k = 0; k < response[i].StruckOrderDetails.length; k++) {
+                        document.getElementById('orderDetail').innerHTML += "<div class=\"row\">" +
+                            "<div class=\"col-lg-5\" align=\"left\"><strong><label style=\"color:black\">" + response[i].StruckOrderDetails[k].FuelName + "</label></strong></div>" +
+                            "<div class=\"col-lg-2\" align=\"left\"><label style=\"color:black\">" + response[i].StruckOrderDetails[k].Liter + " Ltr</label></div>" +
+                            "<div class=\"col-lg-5\" align=\"left\"><label style=\"color:black\">" + response[i].StruckOrderDetails[k].CreatedDate + "</label></div></div>";
+                    }
+                }
+
+                $("#modalOrder").modal('show');
+            },
+            error: function (response) {
+                //alert(response)
+            }
+        });
+    });
+
+    var qrcode = new QRCode("qrcode");
+
+    function makeCode(orderNo) {
+        qrcode.makeCode(orderNo);
+    }
+
+    Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+            scanner.start(cameras[0]);
+        }
+        else {
+            console.error('No camera found');
+        }
+    }).catch(function (e) {
+        console.error(e);
+    });
+</script>

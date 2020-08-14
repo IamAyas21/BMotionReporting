@@ -24,7 +24,7 @@ namespace BMotionReporting.Logging
             }
         }
 
-        public void CreateLogError(Exception e, string payload)
+        public void CreateLogError(Exception e)
         {
             string date = DateTime.Now.ToShortDateString().Replace("/","-");
             string message = string.Format("Time: {0}", DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss tt"));
@@ -38,8 +38,6 @@ namespace BMotionReporting.Logging
             message += string.Format("Source: {0}", e.Source);
             message += Environment.NewLine;
             message += string.Format("TargetSite: {0}", e.TargetSite);
-            message += Environment.NewLine;
-            message += string.Format("Payload: {0}", payload);
             message += Environment.NewLine;
             message += "------------------------------------------------------------------------";
             message += Environment.NewLine;

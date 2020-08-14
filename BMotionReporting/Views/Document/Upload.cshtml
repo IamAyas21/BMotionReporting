@@ -1,0 +1,77 @@
+﻿@model BMotionReporting.Models.DocumentModels
+@{
+    ViewBag.Title = "Upload";
+}
+
+@using (Html.BeginForm("Upload", "Document", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.NIP)
+    <div class="card card-primary">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3 class="card-title">Tambah Dokumen</h3>
+                </div>
+                <div class="col-lg-6" align="right">
+                    <a href="@Url.Action("Detail","Users", new { id = Model.NIP})" class="btn btn-default"><span style="color:black">Kembali</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Nomor Dokumen <span style="color:red">*</span></label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.DocumentNo, new { @class = "form-control", @maxlength = 50, @placeholder = "Dokumen Nomor", autocomplete = "off", required = "required" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Quota <span style="color:red">*</span></label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Quota, new { @class = "form-control", @maxlength = 3, @placeholder = "Quota", autocomplete = "off", required = "required", @type = "number" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Tanggal Berakhir <span style="color:red">*</span></label>
+                        <div class="col-md-9">
+                            <div class="input-group date" id="expDate" data-target-input="nearest">
+                                @Html.TextBoxFor(model => model.ExpDate, new { @class = "form-control datetimepicker-input", @placeholder = "Tanggal Berakhir", autocomplete = "off", required = "required" })
+                                <div class="input-group-append" data-target="#expDate" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Dokumen <span style="color:red">*</span></label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.PDF, new { type = "file", accept = "application/pdf,  appliation/pdf", required = "required" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <input id="btnSubmit" name="Submit" type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+    </div>
+}
+<script>
+    $(function () {
+        $('#expDate').datetimepicker({
+            format: 'L'
+        });
+    });
+</script>
