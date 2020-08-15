@@ -295,6 +295,7 @@
     <Content Include="Content\AdminLTE\responsive.bootstrap4.min.css" />
     <Content Include="Content\AdminLTE\tempusdominus-bootstrap-4.min.css" />
     <Content Include="Content\CSS\jquery-ui.css" />
+    <Content Include="Content\CSS\Users.css" />
     <Content Include="Content\webfonts\fa-brands-400.svg" />
     <Content Include="Content\webfonts\fa-regular-400.svg" />
     <Content Include="Content\webfonts\fa-solid-900.svg" />
@@ -521,6 +522,7 @@
     <Content Include="Views\Users\Detail.cshtml" />
     <Content Include="Views\Document\Upload.cshtml" />
     <Content Include="Views\Users\Document.cshtml" />
+    <Content Include="Views\Users\PrintCard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -45,13 +45,13 @@ namespace BMotionReporting.Logic
             var list = db.Users.Where(us => us.NIP.Equals(id)).ToList();
             foreach (var item in list)
             {
-                usr.NIP = item.NIP;
-                usr.Email = item.Email;
-                usr.IsVerify = item.IsVerify;
-                usr.Name = item.Name;
-                usr.Password = item.Password;
-                usr.Profesi = item.Profession;
-                usr.Telp = item.Phone;
+                usr.NIP = item.NIP == null?"":item.NIP;
+                usr.Email = item.Email == null?"":item.Email;
+                usr.IsVerify = item.IsVerify==null?"":item.IsVerify;
+                usr.Name = item.Name == null?"":item.Name;
+                usr.Password = item.Password==null?"":item.Password;
+                usr.Profesi = item.Profession==null?"":item.Profession;
+                usr.Telp = item.Phone==null?"":item.Phone;
             }
             return usr;
         }

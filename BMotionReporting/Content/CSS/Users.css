@@ -1,0 +1,8 @@
+﻿.card-table td{
+    padding: 5px 10px;
+    vertical-align: middle;
+}
+
+.card-table td > label{
+    margin:0px;
+}
