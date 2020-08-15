@@ -275,6 +275,7 @@
     <Content Include="Assets\bootstrap-outline.svg" />
     <Content Include="Assets\bootstrap-solid.svg" />
     <Content Include="Assets\b_motion.png" />
+    <Content Include="Assets\card-background.jpg" />
     <Content Include="Assets\icon_card.png" />
     <Content Include="Assets\icon_daftar_pengguna.png" />
     <Content Include="Assets\icon_home.png" />
@@ -294,6 +295,7 @@
     <Content Include="Content\AdminLTE\OverlayScrollbars.min.css" />
     <Content Include="Content\AdminLTE\responsive.bootstrap4.min.css" />
     <Content Include="Content\AdminLTE\tempusdominus-bootstrap-4.min.css" />
+    <Content Include="Content\CardPrint.css" />
     <Content Include="Content\CSS\jquery-ui.css" />
     <Content Include="Content\CSS\Users.css" />
     <Content Include="Content\webfonts\fa-brands-400.svg" />
@@ -522,7 +524,7 @@
     <Content Include="Views\Users\Detail.cshtml" />
     <Content Include="Views\Document\Upload.cshtml" />
     <Content Include="Views\Users\Document.cshtml" />
-    <Content Include="Views\Users\PrintCard.cshtml" />
+    <Content Include="Views\Users\NewPrintCards.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

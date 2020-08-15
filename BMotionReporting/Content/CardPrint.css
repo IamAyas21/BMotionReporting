@@ -1,0 +1,24 @@
+﻿@media print {
+    #sidebarMenu, .sidebar-sticky, button {
+        display: none;
+    }
+    .card-member {
+        background-image: url('../Assets/card-background.jpg');
+        width: 90mm;
+        height: 55mm;
+        padding: calc(55mm * 17 / 100) 1rem 1rem 1rem;
+        position: fixed;
+        border: 1px solid;
+        left:0;
+        top:0px;
+    }
+}
+
+ .card-member {
+        background-image: url('../Assets/card-background.jpg');
+        width: 90mm;
+        height: 55mm;
+        padding: calc(55mm * 17 / 100) 1rem 1rem 1rem;
+        position: relative;
+        border: 1px solid;
+    }
