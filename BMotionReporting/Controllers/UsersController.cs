@@ -134,5 +134,32 @@ namespace BMotionReporting.Controllers
 
             return RedirectToAction("Detail", "Users", new { id = arrValue[1] });
         }
+
+        public ActionResult NewPrintCards(string nip)
+        {
+            try
+            {
+                UserModels user = UserLogic.getInstance().GetUserById(nip);
+                return Json(user, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json("error" + e.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult PrintCards(string nip)
+        {
+            try
+            {
+                UserModels user = UserLogic.getInstance().GetUserById(nip);
+                return Json(user, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json("error" + e.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }
