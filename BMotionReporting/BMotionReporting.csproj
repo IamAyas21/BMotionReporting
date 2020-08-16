@@ -259,6 +259,7 @@
     <Compile Include="Logic\UserLogic.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DocumentModels.cs" />
+    <Compile Include="Models\FuelModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OrderDetailViewModels.cs" />
@@ -522,7 +523,6 @@
     <Content Include="Views\Users\Detail.cshtml" />
     <Content Include="Views\Document\Upload.cshtml" />
     <Content Include="Views\Users\Document.cshtml" />
-    <Content Include="Views\Users\PrintCard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -25,31 +25,48 @@ namespace BMotionReporting.Controllers
         {
             StruckModels struk = new StruckModels();
             StruckOrderDetails orderDetail = new StruckOrderDetails();
+            FuelModels fuelModels = new FuelModels();
             List<StruckModels> listModel = new List<StruckModels>();
             List<StruckOrderDetails> listOrder = new List<StruckOrderDetails>();
+            List<FuelModels> fuelList = new List<FuelModels>();
             try
             {
                 var list = db.sp_StrukPengambilanBBM(orderNo).ToList();
-                foreach(var item in list)
+                if(list.Count > 0)
                 {
-                    if(struk.OutletNo == null)
+                    foreach (var item in list)
                     {
-                        struk = new StruckModels();
-                        struk.OrderNo = item.OrderNo;
-                        struk.OutletNo = item.OutletNo;
-                        struk.OutletName = item.OutletName;
+                        if (struk.OutletNo == null)
+                        {
+                            struk = new StruckModels();
+                            struk.OrderNo = item.OrderNo;
+                            struk.OutletNo = item.OutletNo;
+                            struk.OutletName = item.OutletName;
+                        }
+
+                        orderDetail = new StruckOrderDetails();
+                        orderDetail.FuelName = item.FuelName;
+                        orderDetail.Liter = item.Liter;
+                        orderDetail.CreatedDate = item.CreatedDate.Value.ToString("MM/dd/yyyy HH:mm");
+
+                        listOrder.Add(orderDetail);
                     }
-                   
-                    orderDetail = new StruckOrderDetails();
-                    orderDetail.FuelName = item.FuelName;
-                    orderDetail.Liter = item.Liter;
-                    orderDetail.CreatedDate = item.CreatedDate.Value.ToString("MM/dd/yyyy HH:mm");
 
-                    listOrder.Add(orderDetail);
+                    struk.StruckOrderDetails = listOrder;
+                    listModel.Add(struk);
                 }
-
-                struk.StruckOrderDetails = listOrder;
-                listModel.Add(struk);
+                else
+                {
+                    var listFuel = db.Fuels.ToList();
+                    foreach(var item in listFuel)
+                    {
+                        fuelModels = new FuelModels();
+                        fuelModels.FuelId = item.FuilId;
+                        fuelModels.FuelName = item.Name;
+                        fuelList.Add(fuelModels);
+                    }
+                    return Json(fuelList, JsonRequestBehavior.AllowGet);
+                }
             }
             catch (Exception e)
             {

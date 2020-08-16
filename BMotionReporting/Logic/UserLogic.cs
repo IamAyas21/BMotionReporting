@@ -134,15 +134,16 @@ namespace BMotionReporting.Logic
             }
         }
 
-        public void Verification(string nip)
+        public void Verification(UserModels model)
         {
             try
             {
                 db = new BMotionDBEntities();
                 User usr = (from u in db.Users
-                                where u.NIP.Equals(nip)
+                                where u.NIP.Equals(model.NIP)
                                 select u).First();
                 usr.IsVerify = "Y";
+                usr.Password = model.Password;
                 db.SaveChanges();
             }
             catch (Exception e)

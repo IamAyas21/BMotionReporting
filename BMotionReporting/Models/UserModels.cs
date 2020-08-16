@@ -17,6 +17,7 @@ namespace BMotionReporting.Models
         public int RoleId { get; set; }
         public string OutletNo { get; set; }
         public int Quota { get; set; }
+        public string City { get; set; }
         public string ExpiredDate { get; set; }
         public HttpPostedFileBase KTP { get; set; }
         public HttpPostedFileBase PDF { get; set; }

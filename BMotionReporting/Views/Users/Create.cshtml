@@ -35,7 +35,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2">NIP <span style="color:red">*</span></label>
                                     <div class="col-md-10">
-                                        @Html.TextBoxFor(model => model.NIP, new { @class = "form-control", @maxlength = 16, @placeholder = "NIP", autocomplete = "off", required = "required" })
+                                        @Html.TextBoxFor(model => model.NIP, new { @class = "form-control", @maxlength = 16, @placeholder = "NIP", autocomplete = "off", required = "required", onkeypress = "return IsNumeric(event);" })
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-2">No Telp <span style="color:red">*</span></label>
                                     <div class="col-md-10">
-                                        @Html.TextBoxFor(model => model.Telp, new { @class = "form-control", @maxlength = 12, @placeholder = "Telp", autocomplete = "off", required = "required", @type = "number" })
+                                        @Html.TextBoxFor(model => model.Telp, new { @class = "form-control", @maxlength = 13, @placeholder = "Telp", autocomplete = "off", required = "required", onkeypress="return IsNumeric(event);" })
                                     </div>
                                 </div>
                             </div>
@@ -87,10 +87,10 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <input id="btnSubmit" name="Submit" type="submit" value="Submit" class="btn btn-primary" />
-                    <a href="@Url.Action("Index","Users")" class="btn btn-default">Kembali </a>
+                    <div class="card-footer">
+                        <input id="btnSubmit" name="Submit" type="submit" value="Submit" class="btn btn-primary" />
+                        <a href="@Url.Action("Index","Users")" class="btn btn-default">Kembali </a>
+                    </div>
                 </div>
                 @*<div class="card card-primary">
                     <div class="card-header">
@@ -156,4 +156,13 @@
             format: 'L'
         });
     });
+
+    var specialKeys = new Array();
+    specialKeys.push(8);
+    function IsNumeric(e) {
+        var keyCode = e.which ? e.which : e.keyCode
+        var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+        //document.getElementById("error").style.display = ret ? "none" : "inline";
+        return ret;
+    }
 </script>

@@ -91,7 +91,7 @@ namespace BMotionReporting.Controllers
         {
             try
             {
-                UserLogic.getInstance().Verification(model.NIP);
+                UserLogic.getInstance().Verification(model);
                 TempData["Success"] = "Success verification for " + model.NIP;
             }
             catch (Exception e)

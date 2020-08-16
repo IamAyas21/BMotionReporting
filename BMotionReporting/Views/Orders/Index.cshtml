@@ -31,7 +31,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" tabindex="-1" id="modalOrder"
+<div class="modal fade" tabindex="-1" id="modalStruk"
      data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -54,11 +54,6 @@
                         <div id="qrcode"></div>
                     </div>
                 </div>
-                @*<div class="row" align="center">
-                    <div class="col-lg-12">
-                        <div id="qrcode"></div>
-                    </div>
-                </div>*@
                 <div class="row" style="margin:2%">
                     <div class="col-lg-12">
                         <h6><strong>syarat & ketentuan</strong></h6>
@@ -75,6 +70,25 @@
     </div>
 </div>
 
+<div class="modal fade" tabindex="-1" id="modalOrder"
+     data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><strong style="font-family:Arial">Order BBM</strong></h2>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="fuelForm"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cetakOrder" class="btn btn-primary button button4">
+                    Submit
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 <script type="text/javascript">
     let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
     scanner.addListener('scan', function (content) {
@@ -83,21 +97,32 @@
             url: "@Url.Action("StrukBBM", "Orders")",
             data: { orderNo: content },
             success: function (response) {
+                debugger
                 for (var i = 0; i < response.length; i++) {
-                    document.getElementById('outletNo').innerHTML = response[i].OutletNo;
-                    document.getElementById('outletName').innerHTML = response[i].OutletName;
-                    makeCode(response[i].OrderNo);
+                    if (response[i].OutletNo != undefined)
+                    {
+                        document.getElementById('outletNo').innerHTML = response[i].OutletNo;
+                        document.getElementById('outletName').innerHTML = response[i].OutletName;
+                        makeCode(response[i].OrderNo);
 
-                    document.getElementById('orderDetail').innerHTML = "";
-                    for (var k = 0; k < response[i].StruckOrderDetails.length; k++) {
-                        document.getElementById('orderDetail').innerHTML += "<div class=\"row\">" +
-                            "<div class=\"col-lg-5\" align=\"left\"><strong><label style=\"color:black\">" + response[i].StruckOrderDetails[k].FuelName + "</label></strong></div>" +
-                            "<div class=\"col-lg-2\" align=\"left\"><label style=\"color:black\">" + response[i].StruckOrderDetails[k].Liter + " Ltr</label></div>" +
-                            "<div class=\"col-lg-5\" align=\"left\"><label style=\"color:black\">" + response[i].StruckOrderDetails[k].CreatedDate + "</label></div></div>";
+                        document.getElementById('orderDetail').innerHTML = "";
+                        for (var k = 0; k < response[i].StruckOrderDetails.length; k++) {
+                            document.getElementById('orderDetail').innerHTML += "<div class=\"row\">" +
+                                "<div class=\"col-lg-5\" align=\"left\"><strong><label style=\"color:black\">" + response[i].StruckOrderDetails[k].FuelName + "</label></strong></div>" +
+                                "<div class=\"col-lg-2\" align=\"left\"><label style=\"color:black\">" + response[i].StruckOrderDetails[k].Liter + " Ltr</label></div>" +
+                                "<div class=\"col-lg-5\" align=\"left\"><label style=\"color:black\">" + response[i].StruckOrderDetails[k].CreatedDate + "</label></div></div>";
+                            $("#modalStruk").modal('show');
+                        }
+                    }
+                    else {
+                        for (var i = 0; i < response.length; i++) {
+                            document.getElementById('fuelForm').innerHTML += "<div class=\"row\">" +
+                                "<div class=\"col-lg-4\" align=\"left\"><label id=\"fuelId_"+ response[i].FuelId +"\" style=\"color:black\">" + response[i].FuelName + "</label></div>" +
+                                "<div class=\"col-lg-8\" align=\"left\"><input id=\"liter_" + response[i].FuelId + "\" class=\"form-control\" maxlength=\"3\" onkeypress=\"return IsNumeric(event);\"></div></div>";
+                        }
+                        $("#modalOrder").modal('show');
                     }
                 }
-
-                $("#modalOrder").modal('show');
             },
             error: function (response) {
                 //alert(response)
@@ -121,4 +146,13 @@
     }).catch(function (e) {
         console.error(e);
     });
+
+    var specialKeys = new Array();
+    specialKeys.push(8);
+    function IsNumeric(e) {
+        var keyCode = e.which ? e.which : e.keyCode
+        var ret = ((keyCode >= 48 && keyCode <= 57) || specialKeys.indexOf(keyCode) != -1);
+        //document.getElementById("error").style.display = ret ? "none" : "inline";
+        return ret;
+    }
 </script>
