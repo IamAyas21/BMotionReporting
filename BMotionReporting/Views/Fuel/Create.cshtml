@@ -1,4 +1,4 @@
-﻿@model BMotionReporting.Models.FuelModels   
+﻿@model BMotionReporting.Models.FuelModels
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -16,7 +16,7 @@
             <div class="form-horizontal box-body">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Tambah Baru - Fuel</h3>
+                        <h3 class="card-title">Tambah BBM</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -45,16 +45,17 @@
                                             </label>
                                             <label class="">
                                                 @Html.RadioButtonFor(model => model.IsSubsidy, "N")
-                                                @*<input type="radio" name="optionsRadios" id="optionsRadios2" value="N">*@
                                                 Non Subsidi
                                             </label>
                                         </div>
                                     </div>
                                 </div>
-                                <a href="@Url.Action("Index","Fuel")" class="btn btn-default pull-right">Kembali </a>
-                                <input id="btnSubmit" name="Submit" type="submit" value="Submit" class="btn btn-primary pull-right" />
                             </div>
                         </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="@Url.Action("Index","Fuel")" class="btn btn-default pull-right">Kembali </a>
+                        <input id="btnSubmit" name="Submit" type="submit" value="Submit" class="btn btn-primary pull-right" />
                     </div>
                 </div>
 

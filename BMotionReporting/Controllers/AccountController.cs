@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BMotionReporting.Models;
 using BMotionReporting.Entity;
+using System.Web.Security;
 
 namespace BMotionReporting.Controllers
 {
@@ -401,6 +402,20 @@ namespace BMotionReporting.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
+        public ActionResult Logout()
+        {
+            try
+            {
+                FormsAuthentication.SignOut();
+                Session.RemoveAll();
+            }
+            catch (Exception e)
+            {
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
+        }
         //
         // POST: /Account/LogOff
         [HttpPost]

@@ -281,6 +281,7 @@
     <Content Include="Assets\card-background.jpg" />
     <Content Include="Assets\icon_card.png" />
     <Content Include="Assets\icon_daftar_pengguna.png" />
+    <Content Include="Assets\icon_edit.png" />
     <Content Include="Assets\icon_home.png" />
     <Content Include="Assets\icon_keluar.png" />
     <Content Include="Assets\icon_loop.png" />
@@ -383,6 +384,7 @@
     <Content Include="Entity\BMotionDB.edmx.diagram">
       <DependentUpon>BMotionDB.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\BMotionReporting.pubxml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />

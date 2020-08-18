@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BMotionReporting.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace BMotionReporting.Controllers
 {
     public class HomeController : Controller
     {
+        [CheckAuthorizeAttribute()]
         public ActionResult Index()
         {
             return View();

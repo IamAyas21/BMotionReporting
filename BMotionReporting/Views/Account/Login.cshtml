@@ -42,11 +42,11 @@
             <label for="inputPassword" class="sr-only">Password</label>
             @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @type = "password", @maxlength = 50, @placeholder = "Password", autocomplete = "off", required = "required" })
             
-            <div class="checkbox mb-3">
+            @*<div class="checkbox mb-3">
                 <label>
                     <input type="checkbox" value="remember-me"> Remember me
                 </label>
-            </div>
+            </div>*@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
             <p class="mt-5 mb-3 text-muted">&copy; @DateTime.Now.Year</p>
         </form>
