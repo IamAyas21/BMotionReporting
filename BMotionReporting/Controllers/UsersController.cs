@@ -140,7 +140,7 @@ namespace BMotionReporting.Controllers
             try
             {
                 UserModels user = UserLogic.getInstance().GetUserById(nip);
-                return Json(user, JsonRequestBehavior.AllowGet);
+                return View(user);//Json(user, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
