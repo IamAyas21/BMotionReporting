@@ -82,70 +82,70 @@
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal">×</button>
                                                 </div>
-                                                    <div class="modal-body">
-                                                        <div id="printDiv_@Model.Content[i].NIP">
-                                                            <div class="row">
-                                                                <div class="col-lg-4">
-                                                                    <div id="qrcode_@Model.Content[i].NIP"></div>
-                                                                </div>
-                                                                <div class="col-lg-8">
-                                                                    <table class="card-table">
-                                                                        <tr>
-                                                                            <td>
-                                                                                NIP
-                                                                            </td>
+                                                <div class="modal-body">
+                                                    <div id="printDiv_@Model.Content[i].NIP">
+                                                        <div class="row">
+                                                            <div class="col-lg-4">
+                                                                <div id="qrcode_@Model.Content[i].NIP"></div>
+                                                            </div>
+                                                            <div class="col-lg-8">
+                                                                <table class="card-table">
+                                                                    <tr>
+                                                                        <td>
+                                                                            NIP
+                                                                        </td>
 
-                                                                            <td style="width:100%">
-                                                                                <label id="nip_@Model.Content[i].NIP"></label>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                Nama
-                                                                            </td>
+                                                                        <td style="width:100%">
+                                                                            <label id="nip_@Model.Content[i].NIP"></label>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            Nama
+                                                                        </td>
 
-                                                                            <td style="width:100%">
-                                                                                <label id="nama_@Model.Content[i].NIP"></label>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                Profesi
-                                                                            </td>
+                                                                        <td style="width:100%">
+                                                                            <label id="nama_@Model.Content[i].NIP"></label>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            Profesi
+                                                                        </td>
 
-                                                                            <td style="width:100%">
-                                                                                <label id="profesi_@Model.Content[i].NIP"></label>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                Email
-                                                                            </td>
+                                                                        <td style="width:100%">
+                                                                            <label id="profesi_@Model.Content[i].NIP"></label>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            Email
+                                                                        </td>
 
-                                                                            <td style="width:100%">
-                                                                                <label id="email_@Model.Content[i].NIP"></label>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>
-                                                                                Hp
-                                                                            </td>
+                                                                        <td style="width:100%">
+                                                                            <label id="email_@Model.Content[i].NIP"></label>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            Hp
+                                                                        </td>
 
-                                                                            <td style="width:100%">
-                                                                                <label id="hp_@Model.Content[i].NIP"></label>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </div>
+                                                                        <td style="width:100%">
+                                                                            <label id="hp_@Model.Content[i].NIP"></label>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
                                                             </div>
                                                         </div>
+                                                    </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     @*<button type="button" id="btnPrint_@Model.Content[i].NIP" class="btn btn-primary button button4"
-                                                            onclick="PrintModal(@Model.Content[i].NIP)" formtarget="_blank">
-                                                        Cetak
-                                                    </button>*@
-                                                    @Html.ActionLink("Cetak", "NewPrintCards", "Users", new { nip = Model.Content[i].NIP }, new { target = "_blank",@class = "btn btn-primary button button4" })
+                                                                onclick="PrintModal(@Model.Content[i].NIP)" formtarget="_blank">
+                                                            Cetak
+                                                        </button>*@
+                                                    @Html.ActionLink("Cetak", "NewPrintCards", "Users", new { nip = Model.Content[i].NIP }, new { target = "_blank", @class = "btn btn-primary button button4" })
                                                     <button type="button" id="btnHide_@Model.Content[i].NIP" class="btn btn-default button button4"
                                                             onclick="HideModal(@Model.Content[i].NIP)">
                                                         Tutup
@@ -163,6 +163,7 @@
         </div>
     </div>
 </div>
+
 <script type="text/javascript">
     $(function () {
         $('#example1').DataTable({
@@ -170,20 +171,18 @@
             "autoWidth": false
         });
     });
-    function ShowModal(idx)
-    {
+    function ShowModal(idx) {
         $("#modalShow_" + idx).modal('show');
     }
 
-    function HideModal(idx)
-    {
-        $("#modalShow_"+idx).modal('hide');
+    function HideModal(idx) {
+        $("#modalShow_" + idx).modal('hide');
     }
 
     function PrintModal(id) {
         var headstr = "<html><head><title></title></head><body>";
         var footstr = "</body>";
-        var newstr = document.all.item("printDiv_"+id).innerHTML;
+        var newstr = document.all.item("printDiv_" + id).innerHTML;
         var oldstr = document.body.innerHTML;
         document.body.innerHTML = headstr + newstr + footstr;
         window.print();
@@ -191,8 +190,7 @@
         return false;
     }
 
-    function ShowCard(id)
-    {
+    function ShowCard(id) {
         $.ajax({
             type: "POST",
             url: "@Url.Action("PrintCards", "Users")",
@@ -208,11 +206,11 @@
                 document.getElementById('profesi_' + id).innerHTML = response.Profesi;
 
                 ShowModal(id);
-        },
-        error: function (response) {
-            //alert(response)
-        }
-    });
+            },
+            error: function (response) {
+                //alert(response)
+            }
+        });
     }
 
 </script>

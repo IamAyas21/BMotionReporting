@@ -102,7 +102,7 @@ namespace BMotionReporting.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
         }
     
-        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        public virtual int sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
         {
             var diagramnameParameter = diagramname != null ?
                 new ObjectParameter("diagramname", diagramname) :
@@ -112,10 +112,10 @@ namespace BMotionReporting.Entity
                 new ObjectParameter("owner_id", owner_id) :
                 new ObjectParameter("owner_id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
         }
     
-        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        public virtual int sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
         {
             var diagramnameParameter = diagramname != null ?
                 new ObjectParameter("diagramname", diagramname) :
@@ -125,7 +125,7 @@ namespace BMotionReporting.Entity
                 new ObjectParameter("owner_id", owner_id) :
                 new ObjectParameter("owner_id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
         }
     
         public virtual ObjectResult<sp_HistorPerUser_Result> sp_HistorPerUser(string nip)

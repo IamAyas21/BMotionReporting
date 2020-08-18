@@ -14,6 +14,7 @@ namespace BMotionReporting.Entity
     public partial class sp_StrukPengambilanBBM_Result
     {
         public string OrderNo { get; set; }
+        public int OrderDetailId { get; set; }
         public string OutletNo { get; set; }
         public string OutletName { get; set; }
         public string FuelName { get; set; }

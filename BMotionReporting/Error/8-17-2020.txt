@@ -1,0 +1,199 @@
+Time: 17/08/2020 09:59:10 AM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 51
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 09:59:32 AM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 51
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 10:19:09 AM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 51
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 10:19:34 AM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 51
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 10:22:31 AM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 51
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 09:20:32 PM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 51
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 09:20:32 PM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 62
+   at BMotionReporting.Controllers.OrdersController.OrderFuel(String[] arrValue) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Controllers\OrdersController.cs:line 113
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 09:28:32 PM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 51
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 09:28:32 PM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 62
+   at BMotionReporting.Controllers.OrdersController.OrderFuel(String[] arrValue) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Controllers\OrdersController.cs:line 113
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 09:30:49 PM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 51
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 09:30:50 PM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 62
+   at BMotionReporting.Controllers.OrdersController.OrderFuel(String[] arrValue) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Controllers\OrdersController.cs:line 113
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 09:31:12 PM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 51
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 09:31:12 PM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 62
+   at BMotionReporting.Controllers.OrdersController.OrderFuel(String[] arrValue) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Controllers\OrdersController.cs:line 113
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 09:33:16 PM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 51
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 09:39:25 PM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 51
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 09:40:57 PM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 51
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 09:56:12 PM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 51
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 09:56:12 PM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 62
+   at BMotionReporting.Controllers.OrdersController.OrderFuel(String[] arrValue) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Controllers\OrdersController.cs:line 113
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+
+Time: 17/08/2020 09:58:52 PM
+------------------------------------------------------------------------
+Message: An error occurred while updating the entries. See the inner exception for details.
+StackTrace:    at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at BMotionReporting.Logic.OrdersLogic.Add(Orders order) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\OrdersLogic.cs:line 51
+Source: EntityFramework
+TargetSite: Int32 SaveChanges()
+------------------------------------------------------------------------
+

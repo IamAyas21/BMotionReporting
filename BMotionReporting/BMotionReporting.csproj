@@ -231,12 +231,6 @@
     <Compile Include="Entity\sp_DocumentListByUser_Result.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entity\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>BMotionDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\sp_helpdiagrams_Result.cs">
-      <DependentUpon>BMotionDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entity\sp_HistorPerUser_Result.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
@@ -250,6 +244,7 @@
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Logic\DocumentLogic.cs" />
+    <Compile Include="Logic\OrdersLogic.cs" />
     <Compile Include="Logic\SessionManager.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -262,8 +257,10 @@
     <Compile Include="Models\FuelModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\OrderDetails.cs" />
     <Compile Include="Models\OrderDetailViewModels.cs" />
     <Compile Include="Models\OrderModels.cs" />
+    <Compile Include="Models\Orders.cs" />
     <Compile Include="Models\PagedList.cs" />
     <Compile Include="Models\StruckModels.cs" />
     <Compile Include="Models\UserModels.cs" />
@@ -523,6 +520,7 @@
     <Content Include="Views\Users\Detail.cshtml" />
     <Content Include="Views\Document\Upload.cshtml" />
     <Content Include="Views\Users\Document.cshtml" />
+    <Content Include="Views\Users\NewPrintCards.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

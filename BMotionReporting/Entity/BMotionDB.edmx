@@ -626,11 +626,11 @@
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(BMotionDBModel.sp_helpdiagramdefinition_Result)">
+          <FunctionImport Name="sp_helpdiagramdefinition">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(BMotionDBModel.sp_helpdiagrams_Result)">
+          <FunctionImport Name="sp_helpdiagrams">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -662,17 +662,6 @@
           <Property Type="String" Name="Status" Nullable="false" MaxLength="12" />
           <Property Type="String" Name="DocumentName" Nullable="true" MaxLength="250" />
         </ComplexType>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
         <ComplexType Name="sp_HistorPerUser_Result">
           <Property Type="String" Name="OrderNo" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="TransactionDate" Nullable="true" MaxLength="4000" />
@@ -681,6 +670,7 @@
         </ComplexType>
         <ComplexType Name="sp_StrukPengambilanBBM_Result">
           <Property Type="String" Name="OrderNo" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="OrderDetailId" Nullable="false" />
           <Property Type="String" Name="OutletNo" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="OutletName" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="FuelName" Nullable="true" MaxLength="50" />
@@ -847,25 +837,8 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="BMotionDBModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="BMotionDBModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="BMotionDBModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="BMotionDBModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="BMotionDBModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="BMotionDBModel.Store.sp_helpdiagramdefinition" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="BMotionDBModel.Store.sp_helpdiagrams" />
           <FunctionImportMapping FunctionImportName="sp_HistorPerUser" FunctionName="BMotionDBModel.Store.sp_HistorPerUser">
             <ResultMapping>
               <ComplexTypeMapping TypeName="BMotionDBModel.sp_HistorPerUser_Result">
@@ -881,6 +854,7 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="BMotionDBModel.sp_StrukPengambilanBBM_Result">
                 <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="OrderDetailId" ColumnName="OrderDetailId" />
                 <ScalarProperty Name="OutletNo" ColumnName="OutletNo" />
                 <ScalarProperty Name="OutletName" ColumnName="OutletName" />
                 <ScalarProperty Name="FuelName" ColumnName="FuelName" />

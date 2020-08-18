@@ -1,5 +1,6 @@
 ﻿using AForge.Video.DirectShow;
 using BMotionReporting.Entity;
+using BMotionReporting.Logic;
 using BMotionReporting.Models;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace BMotionReporting.Controllers
         public ActionResult StrukBBM(string orderNo)
         {
             StruckModels struk = new StruckModels();
-            StruckOrderDetails orderDetail = new StruckOrderDetails();
+            //StruckOrderDetails orderDetail = new StruckOrderDetails();
             FuelModels fuelModels = new FuelModels();
             List<StruckModels> listModel = new List<StruckModels>();
             List<StruckOrderDetails> listOrder = new List<StruckOrderDetails>();
@@ -36,24 +37,27 @@ namespace BMotionReporting.Controllers
                 {
                     foreach (var item in list)
                     {
-                        if (struk.OutletNo == null)
-                        {
-                            struk = new StruckModels();
-                            struk.OrderNo = item.OrderNo;
-                            struk.OutletNo = item.OutletNo;
-                            struk.OutletName = item.OutletName;
-                        }
+                        struk = new StruckModels();
+                        struk.OrderNo = item.OrderNo;
+                        struk.OutletNo = item.OutletNo;
+                        struk.OutletName = item.OutletName;
 
-                        orderDetail = new StruckOrderDetails();
-                        orderDetail.FuelName = item.FuelName;
-                        orderDetail.Liter = item.Liter;
-                        orderDetail.CreatedDate = item.CreatedDate.Value.ToString("MM/dd/yyyy HH:mm");
+                        struk.FuelName = item.FuelName;
+                        struk.Liter = item.Liter;
+                        struk.OrderDetailId = item.OrderDetailId;
+                        struk.CreatedDate = item.CreatedDate.Value.ToString("MM/dd/yyyy HH:mm");
+                        listModel.Add(struk);
 
-                        listOrder.Add(orderDetail);
+                        //orderDetail = new StruckOrderDetails();
+                        //orderDetail.OrderDetailId = item.OrderDetailId;
+                        //orderDetail.FuelName = item.FuelName;
+                        //orderDetail.Liter = item.Liter;
+                        //orderDetail.CreatedDate = item.CreatedDate.Value.ToString("MM/dd/yyyy HH:mm");
+                        //listOrder.Add(orderDetail);
                     }
 
-                    struk.StruckOrderDetails = listOrder;
-                    listModel.Add(struk);
+                    //struk.StruckOrderDetails = listOrder;
+                    //listModel.Add(struk);
                 }
                 else
                 {
@@ -61,19 +65,64 @@ namespace BMotionReporting.Controllers
                     foreach(var item in listFuel)
                     {
                         fuelModels = new FuelModels();
+                        fuelModels.NIP = orderNo;
                         fuelModels.FuelId = item.FuilId;
                         fuelModels.FuelName = item.Name;
                         fuelList.Add(fuelModels);
                     }
                     return Json(fuelList, JsonRequestBehavior.AllowGet);
                 }
-            }
+            } 
             catch (Exception e)
             {
                 Logging.Log.getInstance().CreateLogError(e);
             }
            
             return Json(listModel, JsonRequestBehavior.AllowGet);   
+        }
+
+        [HttpPost]
+        public ActionResult OrderFuel(string[] arrValue)
+        {
+            try
+            {
+                Orders order = new Models.Orders();
+                OrderDetails detail = new OrderDetails();
+                Orders orderDetails = new Orders();
+
+                List<OrderDetails> listDetail = new List<OrderDetails>();
+                
+                if (arrValue != null)
+                {
+                    string[] arrNIP = arrValue[0].Split(',');
+                    string[] arrFuelId = arrValue[1].Split(',');
+                    string[] arrLiter = arrValue[2].Split(',');
+
+                    if (order.NIP == null)
+                    {
+                        order = new Models.Orders();
+                        order.NIP = arrNIP[0];
+                    }
+
+                    for (int i = 0; i < arrFuelId.Length; i++)
+                    {
+                        detail = new OrderDetails();
+                        detail.FuelId = Convert.ToInt32(arrFuelId[i]);
+                        detail.Liter = Convert.ToInt32(arrLiter[i]);
+                        listDetail.Add(detail);
+                    }
+
+                    order.OrderDetails = listDetail;
+                    orderDetails = OrdersLogic.getInstance().Add(order);
+                }
+
+                return Json(orderDetails, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                Logging.Log.getInstance().CreateLogError(e);
+                return Json(e.Message, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }
