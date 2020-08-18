@@ -1,4 +1,5 @@
 ﻿using AForge.Video.DirectShow;
+using BMotionReporting.App_Start;
 using BMotionReporting.Entity;
 using BMotionReporting.Logic;
 using BMotionReporting.Models;
@@ -19,6 +20,22 @@ namespace BMotionReporting.Controllers
         public ActionResult Index()
         {
            return View();
+        }
+
+        [CheckAuthorizeAttribute()]
+        public ActionResult Activity()
+        {
+            var page = new PagedList<sp_OrderAllActivity_Result>();
+            try
+            {
+                var model = OrdersLogic.getInstance().GetAllActivity().ToList();
+                page.Content = model;
+            }
+            catch (Exception e)
+            {
+                Logging.Log.getInstance().CreateLogError(e);
+            }
+            return View(page);
         }
 
         [HttpPost]

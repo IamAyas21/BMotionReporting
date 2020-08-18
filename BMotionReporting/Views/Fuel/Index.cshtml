@@ -43,15 +43,15 @@
                         @for (int i = 0; i < Model.Content.Count; i++)
                         {
                             <tr>
-                                <td>@Html.DisplayFor(modelItem => modelItem.Content[i].Name) </td>
+                                <td>@Html.DisplayFor(modelItem => modelItem.Content[i].FuelName) </td>
                                 <td>@Html.DisplayFor(modelItem => modelItem.Content[i].Price) </td>
                                 <td>@Html.DisplayFor(modelItem => modelItem.Content[i].IsSubsidy) </td>
-                                <td><a href="@Url.Action("Edit", "Fuel",new {ID = Model.Content[i].FuilId})">edit</a></td>
+                                <td><a href="@Url.Action("Edit", "Fuel",new {ID = Model.Content[i].FuelId})">edit</a></td>
                                 <td>
-                                    <button type="button" value="loop" style="border:none" id="btnShow_@Model.Content[i].FuilId" onclick="ShowModal(@Model.Content[i].FuilId)">
+                                    <button type="button" value="loop" style="border:none" id="btnShow_@Model.Content[i].FuelId" onclick="ShowModal(@Model.Content[i].FuelId)">
                                         <img src="~/Assets/icon_card.png" width="20" height="20" />
                                     </button>
-                                    <div id="modalShow_@Model.Content[i].FuilId" class="modal fade" tabindex="-1"  data-keyboard="false" data-backdrop="static">
+                                    <div id="modalShow_@Model.Content[i].FuelId" class="modal fade" tabindex="-1"  data-keyboard="false" data-backdrop="static">
                                         <div class="modal-dialog">
                                             <div class="modal-content" style="width:700px;">
                                                 <div class="modal-header">
@@ -59,11 +59,11 @@
                                                     <h4 class="modal-title" style="width:100px; background-color:none"> <span class="fa fa-trash"></span> Delete !</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Do you really to delete @Html.DisplayFor(modelItem => Model.Content[i].Name) ??
+                                                    Do you really to delete @Html.DisplayFor(modelItem => Model.Content[i].FuelName) ??
                                                 </div>
                                                 <div class="modal-footer">
                                                     @*@Html.ActionLink("Delete", "Fuel", new { id = Model.Content[i].FuilId }, new { target = "_blank", @class = "btn btn-primary button button4" })*@
-                                                    <a  data-toggle="tooltip" title="Delete" href="@Url.Action("Delete", "Fuel", new { id = Model.Content[i].FuilId })" class="btn btn-primary"><i class="fa fa-trash"></i> Delete</a>
+                                                    <a  data-toggle="tooltip" title="Delete" href="@Url.Action("Delete", "Fuel", new { id = Model.Content[i].FuelId })" class="btn btn-primary"><i class="fa fa-trash"></i> Delete</a>
                                                 </div>
                                             </div>
                                         </div>

@@ -260,6 +260,7 @@
         <Function Name="sp_HistorPerUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nip" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="sp_OrderAllActivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -637,6 +638,7 @@
           <FunctionImport Name="sp_HistorPerUser" ReturnType="Collection(BMotionDBModel.sp_HistorPerUser_Result)">
             <Parameter Name="nip" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_OrderAllActivity" ReturnType="Collection(BMotionDBModel.sp_OrderAllActivity_Result)" />
           <FunctionImport Name="sp_renamediagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -667,6 +669,17 @@
           <Property Type="String" Name="TransactionDate" Nullable="true" MaxLength="4000" />
           <Property Type="String" Name="OutletNo" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Liter" Nullable="true" MaxLength="34" />
+        </ComplexType>
+        <ComplexType Name="sp_OrderAllActivity_Result">
+          <Property Type="Int64" Name="Number" Nullable="true" />
+          <Property Type="String" Name="OrderNo" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NIP" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="IsVerify" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="OrderDetailId" Nullable="false" />
+          <Property Type="Int32" Name="FuelId" Nullable="true" />
+          <Property Type="String" Name="FuelName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Liter" Nullable="true" />
         </ComplexType>
         <ComplexType Name="sp_StrukPengambilanBBM_Result">
           <Property Type="String" Name="OrderNo" Nullable="false" MaxLength="50" />
@@ -845,6 +858,21 @@
                 <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
                 <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
                 <ScalarProperty Name="OutletNo" ColumnName="OutletNo" />
+                <ScalarProperty Name="Liter" ColumnName="Liter" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_OrderAllActivity" FunctionName="BMotionDBModel.Store.sp_OrderAllActivity">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BMotionDBModel.sp_OrderAllActivity_Result">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="IsVerify" ColumnName="IsVerify" />
+                <ScalarProperty Name="OrderDetailId" ColumnName="OrderDetailId" />
+                <ScalarProperty Name="FuelId" ColumnName="FuelId" />
+                <ScalarProperty Name="FuelName" ColumnName="FuelName" />
                 <ScalarProperty Name="Liter" ColumnName="Liter" />
               </ComplexTypeMapping>
             </ResultMapping>

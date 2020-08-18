@@ -24,8 +24,8 @@ namespace BMotionReporting.Controllers
             for(int i = 0; i < fuel.Count; i++)
             {
                 FuelModels item = new FuelModels();
-                item.FuilId = fuel[i].FuilId;
-                item.Name = fuel[i].Name;
+                item.FuelId = fuel[i].FuilId;
+                item.FuelName = fuel[i].Name;
                 item.Price = fuel[i].Price;
                 item.IsSubsidy = fuel[i].IsSubsidy == "Y"?"Subsidi":"Non Subsidi";
                 item.BackgroundColor = fuel[i].BackgroundColor;
@@ -57,11 +57,11 @@ namespace BMotionReporting.Controllers
                 if (FuelLogic.getInstance().CheckExistingData(model))
                 {
                     FuelLogic.getInstance().Add(model);
-                    TempData["Success"] = "Success saving Data for " + model.Name;
+                    TempData["Success"] = "Success saving Data for " + model.FuelName;
                 }
                 else
                 {
-                    TempData["Error"] = "User " + model.Name + " is exist";
+                    TempData["Error"] = "User " + model.FuelName + " is exist";
                 }
             }
             catch (Exception e)
@@ -79,8 +79,8 @@ namespace BMotionReporting.Controllers
             var data = db.Fuels.Where(f => f.FuilId == ID).ToList();
             if(data.Count() > 0)
             {
-                model.FuilId = data.FirstOrDefault().FuilId;
-                model.Name = data.FirstOrDefault().Name;
+                model.FuelId = data.FirstOrDefault().FuilId;
+                model.FuelName = data.FirstOrDefault().Name;
                 model.Price = data.FirstOrDefault().Price;
                 model.IsSubsidy = data.FirstOrDefault().IsSubsidy;
                 model.BackgroundColor = data.FirstOrDefault().BackgroundColor;
@@ -103,7 +103,7 @@ namespace BMotionReporting.Controllers
             try
             {
                 FuelLogic.getInstance().Update(model);
-                TempData["Success"] = "Success saving Data for " + model.Name;
+                TempData["Success"] = "Success saving Data for " + model.FuelName;
             }
             catch (Exception e)
             {

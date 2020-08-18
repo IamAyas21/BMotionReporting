@@ -23,6 +23,12 @@ namespace BMotionReporting.Logic
                 return orderLgc;
             }
         }
+
+        public List<sp_OrderAllActivity_Result> GetAllActivity()
+        {
+            var list = db.sp_OrderAllActivity().ToList();
+            return list;
+        }
         public Orders Add(Orders order)
         {
             try

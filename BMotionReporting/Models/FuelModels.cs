@@ -7,8 +7,9 @@ namespace BMotionReporting.Models
 {
     public class FuelModels
     {
-        public int FuilId { get; set; }
-        public string Name { get; set; }
+        public int FuelId { get; set; }
+        public string FuelName { get; set; }
+        public string NIP { get; set; }
         public Nullable<double> Price { get; set; }
         public string IsSubsidy { get; set; }
         public string BackgroundColor { get; set; }

@@ -186,6 +186,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
+    <Compile Include="Controllers\FuelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
@@ -234,6 +235,9 @@
     <Compile Include="Entity\sp_HistorPerUser_Result.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\sp_OrderAllActivity_Result.cs">
+      <DependentUpon>BMotionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\sp_StrukPengambilanBBM_Result.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
@@ -244,6 +248,7 @@
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Logic\DocumentLogic.cs" />
+    <Compile Include="Logic\FuelLogic.cs" />
     <Compile Include="Logic\OrdersLogic.cs" />
     <Compile Include="Logic\SessionManager.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -273,16 +278,19 @@
     <Content Include="Assets\bootstrap-outline.svg" />
     <Content Include="Assets\bootstrap-solid.svg" />
     <Content Include="Assets\b_motion.png" />
+    <Content Include="Assets\card-background.jpg" />
     <Content Include="Assets\icon_card.png" />
     <Content Include="Assets\icon_daftar_pengguna.png" />
     <Content Include="Assets\icon_home.png" />
     <Content Include="Assets\icon_keluar.png" />
     <Content Include="Assets\icon_loop.png" />
     <Content Include="Assets\icon_notifikasi.png" />
+    <Content Include="Assets\icon_order.png" />
     <Content Include="Assets\icon_pengambilan_bbm.png" />
     <Content Include="Assets\icon_riwayat_pengambilan_bbm.png" />
     <Content Include="Assets\icon_trash.png" />
     <Content Include="Assets\icon_qr_code.png" />
+    <Content Include="Assets\icon_fuel.png" />
     <Content Include="Assets\login.png" />
     <Content Include="Content\AdminLTE\adminlte.min.css" />
     <Content Include="Content\AdminLTE\all.min.css" />
@@ -521,6 +529,10 @@
     <Content Include="Views\Document\Upload.cshtml" />
     <Content Include="Views\Users\Document.cshtml" />
     <Content Include="Views\Users\NewPrintCards.cshtml" />
+    <Content Include="Views\Fuel\Create.cshtml" />
+    <Content Include="Views\Fuel\Edit.cshtml" />
+    <Content Include="Views\Fuel\Index.cshtml" />
+    <Content Include="Views\Orders\Activity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

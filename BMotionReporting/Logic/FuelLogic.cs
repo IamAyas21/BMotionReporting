@@ -33,7 +33,7 @@ namespace BMotionReporting.Logic
 
         public bool CheckExistingData(FuelModels model)
         {
-            if (db.Fuels.Where(fuel => fuel.Name.Equals(model.Name)).Count() == 0)
+            if (db.Fuels.Where(fuel => fuel.Name.Equals(model.FuelName)).Count() == 0)
             {
                 return true;
             }
@@ -52,8 +52,8 @@ namespace BMotionReporting.Logic
 
                 db = new BMotionDBEntities();
                 Fuel fuelEntity = new Fuel();
-                fuelEntity.FuilId = model.FuilId;
-                fuelEntity.Name = model.Name;
+                fuelEntity.FuilId = model.FuelId;
+                fuelEntity.Name = model.FuelName;
                 fuelEntity.Price = model.Price;
                 fuelEntity.IsSubsidy = model.IsSubsidy;
                 fuelEntity.BackgroundColor = model.BackgroundColor;
@@ -75,9 +75,9 @@ namespace BMotionReporting.Logic
             {
                 db = new BMotionDBEntities();
                 Fuel fuel = (from u in db.Fuels
-                            where u.FuilId.Equals(model.FuilId)
+                            where u.FuilId.Equals(model.FuelId)
                             select u).First();
-                fuel.Name = model.Name;
+                fuel.Name = model.FuelName;
                 fuel.Price = model.Price;
                 fuel.IsSubsidy = model.IsSubsidy;
                 db.SaveChanges();

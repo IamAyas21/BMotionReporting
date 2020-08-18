@@ -40,9 +40,13 @@
                 <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
             <div class="modal-body">
-                <div id="struk">
-                    
-                </div>
+                <div id="divOutlet" style="display:none"></div>
+                <div id="divOrder" style="display:none"></div>
+                <div id="divFooter" style="display:none"></div>
+                <div id="result"></div>
+                @*<div id="struk"></div>
+                <div id="qrcode"></div>*@
+
                 @*<div class="row" align="center">
                     <div class="col-lg-12">
                         <h2 id="outletNo"><strong>SPBU 34.413.55</strong></h2>
@@ -107,28 +111,44 @@
             url: "@Url.Action("StrukBBM", "Orders")",
             data: { orderNo: orderNo },
             success: function (response) {
-                document.getElementById('struk').innerHTML = "";
-                for (var i = 0; i < response.length; i++) {
+                //document.getElementById('struk').innerHTML = "";
+                //document.getElementById('qrcode').innerHTML = "";
+                for (var i = 0; i < 1; i++) {
                     if (response[i].OutletNo != undefined) {
+                        debugger
+                        document.getElementById('divOutlet').innerHTML = "<div class=\"row\" align=\"center\">" +
+                        "<div class=\"col-lg-12\"><h2><strong>" + response[i].OutletNo + "</strong></h2>" +
+                        "<h3><strong>" + response[i].OutletName + "</strong></h3></div></div>";
+                        
+                        document.getElementById('divOrder').innerHTML = "<div class=\"row\" style=\"margin:2%\">" +
+                        "<div class=\"col-lg-6\"><div class=\"row\"><div class=\"col-lg-5\" align=\"left\"><strong><label style=\"color:black\">" + response[i].FuelName +
+                        "</label></strong></div><div class=\"col-lg-2\" align=\"left\"><label style=\"color:black\">" + response[i].Liter + " Ltr</label></div>" +
+                        "<div class=\"col-lg-5\" align=\"left\"><label style=\"color:black\">" + response[i].CreatedDate + "</label></div></div></div>" +
+                        "<div class=\"col-lg-6\">" +
+                        "<div id=\"qrcode_"+i+"\"></div></div>";
+
+                        document.getElementById('divFooter').innerHTML = "<div class=\"row\" style=\"margin:2%\">"+
+                        "<div class=\"col-lg-12\"><h6><strong>syarat & ketentuan</strong></h6>"+
+                        "<p><small>dmsfnds dsdsk fsdf fsdfds fsdfsd fsdf sfsf dsfs dfsd fs f sd</small></p></div></div>";
+
+                        makeCode("qrcode_" + i, response[i].OrderDetailId);
+                        document.getElementById('result').innerHTML += document.getElementById('divOutlet').innerHTML + document.getElementById('divOrder').innerHTML + document.getElementById('divFooter').innerHTML;
+
                         //document.getElementById('outletNo').innerHTML = response[i].OutletNo;
                         //document.getElementById('outletName').innerHTML = response[i].OutletName;
                         //makeCode(response[i].OrderNo);
                         
-                        debugger
-                        var div = "<div id=\"qrcode_" + i + "\">";
-                        var qrcode = new QRCode("qrcode_" + i);
-                        qrcode.makeCode(response[i].OrderDetailId);
-
-                        document.getElementById('struk').innerHTML += "<div class=\"row\" align=\"center\">"+
-                        "<div class=\"col-lg-12\"><h2><strong>"+response[i].OutletNo+"</strong></h2>"+
-                        "<h3 id=\"outletName"+i+"\"><strong>"+response[i].OutletName+"</strong></h3></div></div>"+
-                        "<div class=\"row\" style=\"margin:2%\"><div class=\"col-lg-6\">"+div+"</div></div>" +
-                        "<div class=\"col-lg-2\" align=\"left\"><strong><label style=\"color:black\">" + response[i].FuelName +"</label></strong></div></div>"+
-                        "<div class=\"col-lg-2\" align=\"left\"><label style=\"color:black\">" + response[i].Liter + " Ltr</label></div>" +
-                        "<div class=\"col-lg-2\" align=\"left\"><label style=\"color:black\">" + response[i].CreatedDate + "</label></div></div></div>" +
-                        "<div class=\"row\" style=\"margin:2%\"><div class=\"col-lg-12\"><h6><strong>syarat & ketentuan</strong></h6>"+
-                        "<p><small>dmsfnds dsdsk fsdf fsdfds fsdfsd fsdf sfsf dsfs dfsd fs f sd</small></p></div></div>";
-                        
+                      //  document.getElementById('qrcode').innerHTML = "<div id=\"qrcode_" + i + "\"></div>";
+                      //  var divQRCode = makeCode("qrcode_" + i, response[i].OrderDetailId);
+                      //  document.getElementById('struk').innerHTML += "<div class=\"row\" align=\"center\">" +
+                      //"<div class=\"col-lg-12\"><h2><strong>" + response[i].OutletNo + "</strong></h2>" +
+                      //"<h3 id=\"outletName" + i + "\"><strong>" + response[i].OutletName + "</strong></h3></div></div>" +
+                      //"<div class=\"row\" style=\"margin:2%\"><div class=\"col-lg-6\">" + divQRCode + "</div></div>" +
+                      //"<div class=\"col-lg-2\" align=\"left\"><strong><label style=\"color:black\">" + response[i].FuelName + "</label></strong></div></div>" +
+                      //"<div class=\"col-lg-2\" align=\"left\"><label style=\"color:black\">" + response[i].Liter + " Ltr</label></div>" +
+                      //"<div class=\"col-lg-2\" align=\"left\"><label style=\"color:black\">" + response[i].CreatedDate + "</label></div></div></div>" +
+                      //"<div class=\"row\" style=\"margin:2%\"><div class=\"col-lg-12\"><h6><strong>syarat & ketentuan</strong></h6>" +
+                      //"<p><small>dmsfnds dsdsk fsdf fsdfds fsdfsd fsdf sfsf dsfs dfsd fs f sd</small></p></div></div>";
 
                         //document.getElementById('orderDetail').innerHTML = "";
                         //for (var k = 0; k < response[i].StruckOrderDetails.length; k++) {
@@ -151,8 +171,9 @@
                         }
                         $("#modalOrder").modal('show');
                     }
-                    $("#modalStruk").modal('show');
+                    
                 }
+                $("#modalStruk").modal('show');
             },
             error: function (response) {
                 //alert(response)
@@ -199,11 +220,11 @@
               });
     }
 
-    //var qrcode = new QRCode("qrcode");
-
-    //function makeCode(orderNo) {
-    //    qrcode.makeCode(orderNo);
-    //}
+    function makeCode(id, orderNo) {
+        debugger
+        var qrcode = new QRCode(id);
+        qrcode.makeCode(orderNo);
+    }
 
     Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {

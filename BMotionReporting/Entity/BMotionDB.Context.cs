@@ -137,6 +137,11 @@ namespace BMotionReporting.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_HistorPerUser_Result>("sp_HistorPerUser", nipParameter);
         }
     
+        public virtual ObjectResult<sp_OrderAllActivity_Result> sp_OrderAllActivity()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_OrderAllActivity_Result>("sp_OrderAllActivity");
+        }
+    
         public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
         {
             var diagramnameParameter = diagramname != null ?
