@@ -1,0 +1,89 @@
+﻿@model BMotionReporting.Models.PagedList<BMotionReporting.Models.FuelModels>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h1><strong style="font-family:Arial">Daftar Fuel</strong></h1>
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-warning" style="margin:10px">
+        <p><i class="fa fa-warning"></i> @TempData["Error"].ToString()</p>
+    </div>
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success" style="margin:10px">
+        <strong>Success!</strong> @TempData["Success"].ToString()
+    </div>
+}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="row" style="margin:10px">
+            <div class="col-lg-12" align="right">
+                <a data-toggle="tooltip" title="Pengguna Baru" href="@Url.Action("Create", "Fuel")" class="btn btn-primary">TAMBAH BARU</a>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Daftar Pengguna</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped" id="example1">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>IsSubsidy</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Content.Count; i++)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => modelItem.Content[i].Name) </td>
+                                <td>@Html.DisplayFor(modelItem => modelItem.Content[i].Price) </td>
+                                <td>@Html.DisplayFor(modelItem => modelItem.Content[i].IsSubsidy) </td>
+                                <td><a href="@Url.Action("Edit", "Fuel",new {ID = Model.Content[i].FuilId})">edit</a></td>
+                                <td>
+                                    <button type="button" value="loop" style="border:none" id="btnShow_@Model.Content[i].FuilId" onclick="ShowModal(@Model.Content[i].FuilId)">
+                                        <img src="~/Assets/icon_card.png" width="20" height="20" />
+                                    </button>
+                                    <div id="modalShow_@Model.Content[i].FuilId" class="modal fade" tabindex="-1"  data-keyboard="false" data-backdrop="static">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content" style="width:700px;">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title" style="width:100px; background-color:none"> <span class="fa fa-trash"></span> Delete !</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Do you really to delete @Html.DisplayFor(modelItem => Model.Content[i].Name) ??
+                                                </div>
+                                                <div class="modal-footer">
+                                                    @*@Html.ActionLink("Delete", "Fuel", new { id = Model.Content[i].FuilId }, new { target = "_blank", @class = "btn btn-primary button button4" })*@
+                                                    <a  data-toggle="tooltip" title="Delete" href="@Url.Action("Delete", "Fuel", new { id = Model.Content[i].FuilId })" class="btn btn-primary"><i class="fa fa-trash"></i> Delete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function ShowModal(idx) {
+        $("#modalShow_" + idx).modal('show');
+    }
+
+    function HideModal(idx) {
+        $("#modalShow_" + idx).modal('hide');
+    }
+
+</script>
