@@ -36,7 +36,12 @@ namespace BMotionReporting.Logic
 
         public List<User> getAllUsers()
         {
-            return userList = db.Users.ToList();
+            return userList = db.Users.Where(u => u.IsAdmin == null).ToList();
+        }
+
+        public List<User> getAllUserAdmin()
+        {
+            return userList = db.Users.Where(u => u.IsAdmin == "Y").ToList();
         }
 
         public UserModels GetUserById(string id)
@@ -134,6 +139,36 @@ namespace BMotionReporting.Logic
             }
         }
 
+
+
+        public void AddUserAdmin(UserModels model)
+        {
+            try
+            {
+                string dateTimeDayNow = DateTime.Now.ToString("ddMMyyyyHHmmss");
+                string dateDayNow = DateTime.Now.ToString("ddMMyyyy");
+
+                db = new BMotionDBEntities();
+                User userEntity = new User();
+
+                userEntity.NIP = dateTimeDayNow;
+                userEntity.Email = model.Email;
+                userEntity.Name = model.Name;
+                userEntity.Password = model.Password;
+                userEntity.CreatedDate = DateTime.Now;
+                userEntity.CreatedBy = SessionManager.NIP();
+                userEntity.IsAdmin = "Y";
+                //userEntity.RoleId = model.RoleId;
+                //userEntity.OutletNo = model.OutletNo;
+                db.Users.Add(userEntity);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public void Verification(UserModels model)
         {
             try
@@ -143,6 +178,24 @@ namespace BMotionReporting.Logic
                                 where u.NIP.Equals(model.NIP)
                                 select u).First();
                 usr.IsVerify = "Y";
+                usr.Password = model.Password;
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public void Update_UserAdmin(UserModels model)
+        {
+            try
+            {
+                db = new BMotionDBEntities();
+                User usr = (from u in db.Users
+                            where u.NIP.Equals(model.NIP)
+                            select u).First();
+                usr.IsVerify = "Y";
+                usr.Name = model.Name;
                 usr.Password = model.Password;
                 db.SaveChanges();
             }

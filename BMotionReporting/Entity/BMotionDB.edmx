@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BMotionDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BMotionDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Documents">
           <Key>
             <PropertyRef Name="DocumentNo" />
@@ -132,6 +132,7 @@
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="IsAdmin" Type="varchar" MaxLength="1" />
         </EntityType>
         <Association Name="FK_Documents_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
@@ -320,8 +321,7 @@
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BMotionDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -468,6 +468,7 @@
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Users" FromRole="Users" ToRole="Orders" />
           <NavigationProperty Name="Outlet" Relationship="Self.FK_Users_Outlets" FromRole="Users" ToRole="Outlets" />
           <NavigationProperty Name="Role" Relationship="Self.FK_Users_Role" FromRole="Users" ToRole="Role" />
+          <Property Name="IsAdmin" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Documents_Users">
           <End Role="Users" Type="Self.User" Multiplicity="0..1" />
@@ -621,7 +622,7 @@
             <Parameter Name="definition" Mode="In" Type="Binary" />
           </FunctionImport>
           <FunctionImport Name="sp_DocumentListByUser" ReturnType="Collection(BMotionDBModel.sp_DocumentListByUser_Result)">
-            <Parameter Name="nip" Mode="In" Type="String" />
+          <Parameter Name="nip" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_dropdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -636,7 +637,7 @@
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_HistorPerUser" ReturnType="Collection(BMotionDBModel.sp_HistorPerUser_Result)">
-            <Parameter Name="nip" Mode="In" Type="String" />
+          <Parameter Name="nip" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_OrderAllActivity" ReturnType="Collection(BMotionDBModel.sp_OrderAllActivity_Result)" />
           <FunctionImport Name="sp_renamediagram">
@@ -645,14 +646,14 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_StrukPengambilanBBM" ReturnType="Collection(BMotionDBModel.sp_StrukPengambilanBBM_Result)">
-            <Parameter Name="orderNo" Mode="In" Type="String" />
+          <Parameter Name="orderNo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="sp_UserPurchasedBBM" ReturnType="Collection(String)">
-            <Parameter Name="nip" Mode="In" Type="String" />
+          <Parameter Name="nip" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_UserQuota" ReturnType="Collection(String)">
-            <Parameter Name="nip" Mode="In" Type="String" />
+          <Parameter Name="nip" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_DocumentListByUser_Result">
@@ -817,6 +818,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="BMotionDBModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
                 <ScalarProperty Name="NIP" ColumnName="NIP" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="OutletNo" ColumnName="OutletNo" />
