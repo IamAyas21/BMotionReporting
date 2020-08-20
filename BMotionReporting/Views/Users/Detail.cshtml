@@ -36,7 +36,7 @@
                             </div>
                             <div class="col-lg-6" align="right">
                                 @{
-                                    if (Model.IsVerify == null)
+                                    if (Model.IsVerify.Equals("") || Model.IsVerify.Equals("N"))
                                     {
                                         <button name="Submit" type="submit" value="Verify Account" class="btn btn-default"><span style="color:black">Verify Account</span></button>
                                     }
