@@ -1,8 +1,14 @@
 ﻿@model BMotionReporting.Models.UserModels
 
 <link href="~/Content/CardPrint.css" rel="stylesheet" />
-<button style="right:1rem;top:1rem;border: none;background-color: #790000;padding: 5px 15px;color: white;font-family: Poppins-SemiBold;cursor:pointer;" onclick="window.print()">Print</button>
-<div class="card-member">
+<button style="right:1rem;top:1rem;border: none;background-color: #790000;padding: 5px 15px;color: white;font-family: Poppins-SemiBold;cursor:pointer;" onclick="printDiv('.card-member');">Print</button>
+<div class="card-member" style="background-image: url('../Assets/card-background.jpg');
+        width: 90mm;
+        height: 55mm;
+        padding: calc(55mm * 17 / 100) 1rem 1rem 1rem;
+        border: 1px solid;
+        position:relative;
+        background-size: contain;">
     <div style="position: absolute;width: 30%;height: 15%;padding:1px 1px 1px 1rem; background-color: white;right: 0;top:0px; border-bottom-left-radius: 2rem;">
         <img src="~/Assets/b_motion.png" width="100%">
     </div>
@@ -18,4 +24,25 @@
         </div>
     </div>
 </div>
+<script>
+    function printDiv(elem) {
+        renderMe($('<div/>').append($(elem).clone()).html());
+    }
+
+    function renderMe(data) {
+        var mywindow = window.open('', 'invoice-box', 'width=360, height=220;');
+        mywindow.document.write('<html><head><title>invoice-box</title>');
+        mywindow.document.write('<link rel="stylesheet" href="printstyle.css" type="text/css" />');
+        mywindow.document.write('</head><body >');
+        mywindow.document.write(data);
+        mywindow.document.write('</body></html>');
+
+
+        setTimeout(function () {
+            mywindow.print();
+            mywindow.close();
+        }, 1000)
+        return true;
+    }
+</script>
 

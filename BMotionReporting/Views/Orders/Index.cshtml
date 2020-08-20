@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="cetakOrder" class="btn btn-primary button button4">
+                <button type="button" id="cetakOrder" onclick="printDiv('#data');" class="btn btn-primary button button4">
                     Cetak
                 </button>
             </div>
@@ -69,12 +69,33 @@
     </div>
 </div>
 <script type="text/javascript">
+
     var fuelLength = 0;
     //$("#modalStruk").modal('show');
     let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
     scanner.addListener('scan', function (content) {
         ShowStruck(content);
     });
+
+    function printDiv(elem) {
+        renderMe($('<div/>').append($(elem).clone()).html());
+    }
+
+    function renderMe(data) {
+        var mywindow = window.open('', 'Struk Pengambilan', 'height=1000,width=1000');
+        mywindow.document.write('<html><head><title>invoice-box</title>');
+        mywindow.document.write('<link rel="stylesheet" href="printstyle.css" type="text/css" />');
+        mywindow.document.write('</head><body >');
+        mywindow.document.write(data);
+        mywindow.document.write('</body></html>');
+
+
+        setTimeout(function () {
+            mywindow.print();
+            mywindow.close();
+        }, 1000)
+        return true;
+    }
 
     function ShowStruck(orderNo) {
         $.ajax({
