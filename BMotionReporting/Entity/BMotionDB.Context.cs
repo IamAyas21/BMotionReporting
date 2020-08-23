@@ -142,6 +142,15 @@ namespace BMotionReporting.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_OrderAllActivity_Result>("sp_OrderAllActivity");
         }
     
+        public virtual ObjectResult<sp_OrderMonitoring_Result> sp_OrderMonitoring(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_OrderMonitoring_Result>("sp_OrderMonitoring", userIdParameter);
+        }
+    
         public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
         {
             var diagramnameParameter = diagramname != null ?
@@ -171,6 +180,15 @@ namespace BMotionReporting.Entity
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<sp_UserPengguna_Result> sp_UserPengguna(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_UserPengguna_Result>("sp_UserPengguna", userIdParameter);
         }
     
         public virtual ObjectResult<string> sp_UserPurchasedBBM(string nip)

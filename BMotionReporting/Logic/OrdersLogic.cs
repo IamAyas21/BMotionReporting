@@ -24,9 +24,9 @@ namespace BMotionReporting.Logic
             }
         }
 
-        public List<sp_OrderAllActivity_Result> GetAllActivity()
+        public List<sp_OrderMonitoring_Result> GetAllActivity()
         {
-            var list = db.sp_OrderAllActivity().ToList();
+            var list = db.sp_OrderMonitoring("").ToList();
             return list;
         }
         public Orders Add(Orders order)
@@ -65,6 +65,23 @@ namespace BMotionReporting.Logic
             catch (Exception e)
             {
                 Logging.Log.getInstance().CreateLogError(e);
+                throw e;
+            }
+        }
+
+        public void VerifyOrder(OrderDetails model)
+        {
+            try
+            {
+                db = new BMotionDBEntities();
+                OrderDetail dtl = (from d in db.OrderDetails
+                                    where d.OrderDetailId.Equals(model.OrderDetailId)
+                                    select d).First();
+                dtl.IsVerify = "Y";
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
                 throw e;
             }
         }

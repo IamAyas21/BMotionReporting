@@ -1,4 +1,4 @@
-﻿@model BMotionReporting.Models.PagedList<BMotionReporting.Models.UserModels>
+﻿@model BMotionReporting.Models.PagedList<BMotionReporting.Entity.sp_UserPengguna_Result>
 @{
     ViewBag.Title = "Data Pengguna BBM";
 }
@@ -34,19 +34,22 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayName("Pengguna")
+                                @Html.DisplayName("No")
                             </th>
                             <th>
                                 @Html.DisplayName("NIP")
                             </th>
                             <th>
-                                @Html.DisplayName("Profesi")
+                                @Html.DisplayName("Nama")
+                            </th>
+                            <th>
+                                @Html.DisplayName("Phone")
                             </th>
                             <th>
                                 @Html.DisplayName("Email")
                             </th>
                             <th>
-                                @Html.DisplayName("Contact")
+                                @Html.DisplayName("Verify")
                             </th>
                             <th></th>
                         </tr>
@@ -56,19 +59,22 @@
             {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => Model.Content[i].Name)
+                                    @Html.DisplayFor(modelItem => Model.Content[i].NO)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => Model.Content[i].NIP)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => Model.Content[i].Profesi)
+                                    @Html.DisplayFor(modelItem => Model.Content[i].Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => Model.Content[i].Phone)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => Model.Content[i].Email)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => Model.Content[i].Telp)
+                                    @Html.DisplayFor(modelItem => Model.Content[i].Verify)
                                 </td>
                                 <td>
                                     <a href="@Url.Action("Detail", "Users", new { id= Model.Content[i].NIP })"><img src="~/Assets/icon_notifikasi.png" width="20" height="20" /></a>

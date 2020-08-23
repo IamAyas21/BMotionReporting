@@ -25,7 +25,7 @@ namespace BMotionReporting.Controllers
         [CheckAuthorizeAttribute()]
         public ActionResult Activity()
         {
-            var page = new PagedList<sp_OrderAllActivity_Result>();
+            var page = new PagedList<sp_OrderMonitoring_Result>();
             try
             {
                 var model = OrdersLogic.getInstance().GetAllActivity().ToList();
@@ -50,7 +50,7 @@ namespace BMotionReporting.Controllers
             try
             {
                 var list = db.sp_StrukPengambilanBBM(orderNo).ToList();
-                if(list.Count > 0)
+                if (list.Count > 0)
                 {
                     foreach (var item in list)
                     {
@@ -75,6 +75,13 @@ namespace BMotionReporting.Controllers
 
                     //struk.StruckOrderDetails = listOrder;
                     //listModel.Add(struk);
+                }
+                else if (db.OrderDetails.AsEnumerable().Where(dtl => dtl.OrderDetailId == Int32.Parse(orderNo)).Count() > 0)
+                {
+                    OrderDetails model = new OrderDetails();
+                    model.OrderDetailId = Convert.ToInt32(orderNo);
+                    OrdersLogic.getInstance().VerifyOrder(model);
+                    return Json("OK", JsonRequestBehavior.AllowGet);
                 }
                 else
                 {

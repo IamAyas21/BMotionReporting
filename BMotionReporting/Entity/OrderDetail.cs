@@ -18,6 +18,7 @@ namespace BMotionReporting.Entity
         public string OrderNo { get; set; }
         public Nullable<int> FuelId { get; set; }
         public Nullable<int> Liter { get; set; }
+        public string IsVerify { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }

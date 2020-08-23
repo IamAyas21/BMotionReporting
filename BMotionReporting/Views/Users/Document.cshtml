@@ -60,8 +60,9 @@
                                 <div class="modal-body">
                                     <div class="row" align="center">
                                         <div class="col-lg-12">
-                                            <object data="@Model.Content[i].PathDocument" type="application/pdf"
-                                                    width="700" height="500"></object>  
+                                            @*<object data="@Model.Content[i].PathDocument" type="image/webp"
+                                                width="700" height="500"></object>*@
+                                            <img src="@Model.Content[i].PathDocument" width="100%">                                             
                                         </div>
                                     </div>
                                 </div>

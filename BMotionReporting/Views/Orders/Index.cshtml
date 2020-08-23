@@ -104,20 +104,41 @@
             data: { orderNo: orderNo },
             success: function (response) {
                 console.log(response);
-                var _html = "";
-                $(response).each(function (index, data) {
-                    _html += "<div><h2 class=\"text-center\"><strong style=\"font-family:Arial\">Struk Pengambilan BBM</strong></h2><hr /><h1 class=\"text-center\">SPBU 34.413.55</h1>"
-                    _html += "<div class=\"row\"><div class=\"col-md-4 text-right\"><h4>" + data.FuelName + "</h4></div><div class=\"col-md-4 text-center\"><h4>" + data.Liter + " Lt</h4></div><div class=\"col-md-4\"><h4>" + data.CreatedDate + "</h4></div></div>";
-                    _html += "<div class=\"row\"><div class=\"col-md-3\"></div><div class=\"col-md-6 text-center\" id=\"qr"+index+"\"></div><div class=\"col-md-3\"></div></div><h3 style=\"font-weight:bold\">syarat & ketentuan</h3><p class=\"text-justify\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p><hr /></div>"
-                });
-                document.getElementById("data").innerHTML = _html;
+                debugger
+                if (response == "OK")
+                {
+                    alert("Pembelian BBM sudah terverifikasi");
+                }
+                else if(response[0].FuelId == null)
+                {
+                    var _html = "";
+                    $(response).each(function (index, data) {
+                        _html += "<div><h2 class=\"text-center\"><strong style=\"font-family:Arial\">Struk Pengambilan BBM</strong></h2><hr /><h1 class=\"text-center\">SPBU 34.413.55</h1>"
+                        _html += "<div class=\"row\"><div class=\"col-md-4 text-right\"><h4>" + data.FuelName + "</h4></div><div class=\"col-md-4 text-center\"><h4>" + data.Liter + " Lt</h4></div><div class=\"col-md-4\"><h4>" + data.CreatedDate + "</h4></div></div>";
+                        _html += "<div class=\"row\"><div class=\"col-md-3\"></div><div id=\"qr" + index + "\"></div><div class=\"col-md-3\"></div></div><h3 style=\"font-weight:bold\">syarat & ketentuan</h3><p class=\"text-justify\">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p><hr /></div>"
+                    });
+                    document.getElementById("data").innerHTML = _html;
 
-                $(response).each(function (index, data) {
-                    var id = data.OrderDetailId;
-                    console.log(id);
-                    makeCode("qr" + index, id);
-                });
-                $("#modalStruk").modal('show');
+                    $(response).each(function (index, data) {
+                        var id = data.OrderDetailId;
+                        console.log(id);
+                        var qrcode = new QRCode("qr" + index);
+                        qrcode.makeCode(id.toString());
+                    });
+                    $("#modalStruk").modal('show');
+                }
+                else {
+                    document.getElementById('fuelForm').innerHTML = "";
+                    document.getElementById('fuelForm').innerHTML += "<div class=\"row\">" +
+                            "<div class=\"col-lg-4\" align=\"left\">NIP</div><div class=\"col-lg-8\"><label id=\"nip_0\" style=\"color:black\">" + response[0].NIP + "</label></div>";
+                    for (var i = 0; i < response.length; i++) {
+                        fuelLength++;
+                        document.getElementById('fuelForm').innerHTML += "<div class=\"row\">" +
+                            "<div class=\"col-lg-4\" align=\"left\"><label id=\"fuelId_" + i + "\" value=\"" + response[i].FuelId + "\" style=\"color:black\">" + response[i].FuelName + "</label></div>" +
+                            "<div class=\"col-lg-8\" align=\"left\"><input id=\"liter_" + i + "\" class=\"form-control\" maxlength=\"3\" onkeypress=\"return IsNumeric(event);\"></div></div>";
+                    }
+                    $("#modalOrder").modal('show');
+                }
             },
             error: function (response) {
                 //alert(response)
@@ -162,11 +183,6 @@
                       //alert(response)
                   }
               });
-    }
-
-    function makeCode(id, orderNo) {
-        var qrcode = new QRCode(id);
-        qrcode.makeCode(orderNo);
     }
 
     Instascan.Camera.getCameras().then(function (cameras) {

@@ -1,4 +1,4 @@
-﻿@model BMotionReporting.Models.PagedList<BMotionReporting.Entity.sp_OrderAllActivity_Result>
+﻿@model BMotionReporting.Models.PagedList<BMotionReporting.Entity.sp_OrderMonitoring_Result>
 @{
     ViewBag.Title = "Order Monitoring";
 }
@@ -23,16 +23,16 @@
                                 @Html.DisplayName("No")
                             </th>
                             <th>
-                                @Html.DisplayName("NIP")
+                                @Html.DisplayName("Tanggal Transaksi")
                             </th>
                             <th>
                                 @Html.DisplayName("Nama Pengguna")
                             </th>
                             <th>
-                                @Html.DisplayName("BBM")
+                                @Html.DisplayName("Total")
                             </th>
                             <th>
-                                @Html.DisplayName("Liter")
+                                @Html.DisplayName("Status")
                             </th>
                         </tr>
                     </thead>
@@ -41,19 +41,19 @@
             {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => Model.Content[i].Number)
+                                    @Html.DisplayFor(modelItem => Model.Content[i].No)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => Model.Content[i].NIP)
+                                    @Html.DisplayFor(modelItem => Model.Content[i].CreatedDate)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => Model.Content[i].Username)
+                                    @Html.DisplayFor(modelItem => Model.Content[i].Name)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => Model.Content[i].FuelName)
+                                    @Html.DisplayFor(modelItem => Model.Content[i].Total)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => Model.Content[i].Liter)
+                                    @Html.DisplayFor(modelItem => Model.Content[i].Status)
                                 </td>
                             </tr>
                         }

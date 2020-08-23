@@ -1,4 +1,5 @@
 ﻿using BMotionReporting.App_Start;
+using BMotionReporting.Entity;
 using BMotionReporting.Logic;
 using BMotionReporting.Models;
 using System;
@@ -16,23 +17,11 @@ namespace BMotionReporting.Controllers
         [CheckAuthorizeAttribute()]
         public ActionResult Index()
         {
-            var model = new UserModels();
-            List<UserModels> list = new List<UserModels>();
-            var page = new PagedList<UserModels>();
+            var page = new PagedList<sp_UserPengguna_Result>();
             try
             {
-                var userList = UserLogic.getInstance().getAllUsers();
-                foreach(var item in userList)
-                {
-                    model = new UserModels();
-                    model.NIP = item.NIP;
-                    model.Name = item.Name;
-                    model.Profesi = item.Profession;
-                    model.Email = item.Email;
-                    model.Telp = item.Phone;
-                    list.Add(model);
-                }
-                page.Content = list;
+                var model = UserLogic.getInstance().GetAllUsers().ToList();
+                page.Content = model;
             }
             catch (Exception e)
             {

@@ -33,11 +33,16 @@ namespace BMotionReporting.Logic
         //{
         //    db = new BMotionDBEntities();
         //}
-
-        public List<User> getAllUsers()
+        public List<sp_UserPengguna_Result> GetAllUsers()
         {
-            return userList = db.Users.Where(u => u.IsAdmin == null).ToList();
+            var list = db.sp_UserPengguna("").ToList();
+            return list;
         }
+
+        //public List<User> getAllUsers()
+        //{
+        //    return userList = db.Users.Where(u => u.IsAdmin == null).ToList();
+        //}
 
         public List<User> getAllUserAdmin()
         {

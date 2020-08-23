@@ -11,7 +11,7 @@ namespace BMotionReporting.Logic
 {
     public class DocumentLogic
     {
-        private static string pathUpload = ConfigurationManager.AppSettings["PathUploads"];
+        private static string pathUpload = ConfigurationManager.AppSettings["HostName"];
 
         BMotionDBEntities db = new BMotionDBEntities();
         List<Document> docList;
@@ -65,7 +65,8 @@ namespace BMotionReporting.Logic
 
         private string GetDocumentPathByDocNo(string id)
         {
-            return Path.Combine(pathUpload, db.Documents.Where(dc => dc.DocumentNo.Equals(id)).FirstOrDefault().CreatedDate.Value.ToString("ddMMyyyy"), "Document") + "\\" + db.Documents.Where(dc => dc.DocumentNo.Equals(id)).FirstOrDefault().DocumentFile;
+            //return Path.Combine(pathUpload, db.Documents.Where(dc => dc.DocumentNo.Equals(id)).FirstOrDefault().CreatedDate.Value.ToString("ddMMyyyy"), "Document") + "\\" + db.Documents.Where(dc => dc.DocumentNo.Equals(id)).FirstOrDefault().DocumentFile;
+            return Path.Combine(pathUpload,  "Document/" + db.Documents.Where(dc => dc.DocumentNo.Equals(id)).FirstOrDefault().DocumentFile);
         }
 
         public bool CheckExistingDocument(DocumentModels model)

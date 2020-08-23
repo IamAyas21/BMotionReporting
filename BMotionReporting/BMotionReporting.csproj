@@ -239,7 +239,13 @@
     <Compile Include="Entity\sp_OrderAllActivity_Result.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\sp_OrderMonitoring_Result.cs">
+      <DependentUpon>BMotionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\sp_StrukPengambilanBBM_Result.cs">
+      <DependentUpon>BMotionDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\sp_UserPengguna_Result.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\sysdiagram.cs">
@@ -280,6 +286,7 @@
     <Content Include="Assets\bootstrap-solid.svg" />
     <Content Include="Assets\b_motion.png" />
     <Content Include="Assets\card-background.jpg" />
+    <Content Include="Assets\icon_admin.png" />
     <Content Include="Assets\icon_card.png" />
     <Content Include="Assets\icon_daftar_pengguna.png" />
     <Content Include="Assets\icon_edit.png" />
