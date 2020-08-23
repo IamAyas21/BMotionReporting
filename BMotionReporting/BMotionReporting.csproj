@@ -314,6 +314,7 @@
     <Content Include="Content\CardPrint.css" />
     <Content Include="Content\CSS\jquery-ui.css" />
     <Content Include="Content\CSS\Users.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\webfonts\fa-brands-400.svg" />
     <Content Include="Content\webfonts\fa-regular-400.svg" />
     <Content Include="Content\webfonts\fa-solid-900.svg" />
@@ -395,6 +396,10 @@
     <Content Include="Entity\BMotionDB.edmx.diagram">
       <DependentUpon>BMotionDB.edmx</DependentUpon>
     </Content>
+    <Content Include="Fonts\fontawesome-webfont.eot" />
+    <Content Include="Fonts\fontawesome-webfont.ttf" />
+    <Content Include="Fonts\fontawesome-webfont.woff" />
+    <Content Include="Fonts\fontawesome-webfont.woff2" />
     <None Include="Properties\PublishProfiles\BMotionReporting.pubxml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />

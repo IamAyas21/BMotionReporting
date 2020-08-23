@@ -6,3 +6,18 @@
 .card-table td > label{
     margin:0px;
 }
+
+.label-background{
+    padding: 0.1rem 0.5rem;
+    border-radius: 7px;
+}
+
+.button-verify {
+    border: none;
+    background: #007bff;
+    color: white !important;
+    font-weight: bold;
+    padding: 0.15rem 0.6rem;
+    border-radius: 5px;
+    cursor:pointer;
+}

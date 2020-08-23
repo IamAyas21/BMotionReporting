@@ -55,7 +55,7 @@ namespace BMotionReporting.Logic
                 doc.DocumentNo = item.DocumentNo;
                 doc.ExpDate = item.ExpDate.Value.ToString("MM/dd/yyyy");
                 doc.Quota = item.Quota;
-                doc.IsVerify = item.Status;
+                doc.IsVerify = item.Status == "Y"? "Verified": "Unverified";
                 doc.DocumentFile = item.DocumentName;
                 doc.PathDocument = docPath;
                 dcList.Add(doc);

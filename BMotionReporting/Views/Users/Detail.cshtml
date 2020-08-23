@@ -53,50 +53,38 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="control-label col-md-2">Nama <span style="color:red">*</span></label>
-                                    <div class="col-md-10">
-                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @maxlength = 100, @placeholder = "Nama", autocomplete = "off", required = "required", disabled="disabled", value=Model.Name })
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
                                     <label class="control-label col-md-2">NIP <span style="color:red">*</span></label>
                                     <div class="col-md-10">
-                                        @Html.TextBoxFor(model => model.NIP, new { @class = "form-control", @maxlength = 16, @placeholder = "NIP", autocomplete = "off", required = "required", disabled = "disabled", value = Model.NIP })
+                                        @Html.TextBoxFor(model => model.NIP, new { @class = "form-control", @maxlength = 16, @placeholder = "NIP", autocomplete = "off", required = "required", value = Model.NIP })
                                         @Html.HiddenFor(model => model.NIP)
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label class="control-label col-md-2">Profesi <span style="color:red">*</span></label>
+                                    <label class="control-label col-md-2">Nama <span style="color:red">*</span></label>
                                     <div class="col-md-10">
-                                        @Html.TextBoxFor(model => model.Profesi, new { @class = "form-control", @maxlength = 100, @placeholder = "Profesi", autocomplete = "off", required = "required", disabled = "disabled", value = Model.Profesi })
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @maxlength = 100, @placeholder = "Nama", autocomplete = "off", required = "required",  value=Model.Name })
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="control-label col-md-2">Email <span style="color:red">*</span></label>
-                                    <div class="col-md-10">
-                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @maxlength = 50, @placeholder = "Email", autocomplete = "off", required = "required", disabled = "disabled", value = Model.Email })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="control-label col-md-2">No Telp <span style="color:red">*</span></label>
                                     <div class="col-md-10">
-                                        @Html.TextBoxFor(model => model.Telp, new { @class = "form-control", @maxlength = 12, @placeholder = "Telp", autocomplete = "off", required = "required", @type = "number", disabled = "disabled", value = Model.Telp })
+                                        @Html.TextBoxFor(model => model.Telp, new { @class = "form-control", @maxlength = 12, @placeholder = "Telp", autocomplete = "off", required = "required", @type = "number", value = Model.Telp })
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Email</label>
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @maxlength = 50, @placeholder = "Email", autocomplete = "off", value = Model.Email })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-2">Profesi</label>
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(model => model.Profesi, new { @class = "form-control", @maxlength = 100, @placeholder = "Profesi", autocomplete = "off", value = Model.Profesi })
+                                    </div>
+                                </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-2">Password <span style="color:red">*</span></label>
                                     <div class="col-md-10">
