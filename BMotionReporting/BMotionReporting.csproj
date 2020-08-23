@@ -188,6 +188,7 @@
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\FuelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
@@ -256,6 +257,7 @@
     </Compile>
     <Compile Include="Logic\DocumentLogic.cs" />
     <Compile Include="Logic\FuelLogic.cs" />
+    <Compile Include="Logic\InfoLogic.cs" />
     <Compile Include="Logic\OrdersLogic.cs" />
     <Compile Include="Logic\SessionManager.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -547,6 +549,7 @@
     <Content Include="Views\UserAdmin\Index.cshtml" />
     <Content Include="Views\UserAdmin\Create.cshtml" />
     <Content Include="Views\UserAdmin\Detail.cshtml" />
+    <Content Include="Views\Info\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
