@@ -243,6 +243,9 @@
     <Compile Include="Entity\sp_OrderMonitoring_Result.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\sp_RiwayatPengambilanBBM_Result.cs">
+      <DependentUpon>BMotionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\sp_StrukPengambilanBBM_Result.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
@@ -556,6 +559,7 @@
     <Content Include="Views\UserAdmin\Create.cshtml" />
     <Content Include="Views\UserAdmin\Detail.cshtml" />
     <Content Include="Views\Info\Index.cshtml" />
+    <Content Include="Views\Orders\History.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

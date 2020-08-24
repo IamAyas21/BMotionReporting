@@ -23,6 +23,7 @@ namespace BMotionReporting.Entity
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
+        public Nullable<decimal> Price { get; set; }
     
         public virtual Fuel Fuel { get; set; }
         public virtual Order Order { get; set; }

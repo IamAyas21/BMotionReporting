@@ -39,6 +39,22 @@ namespace BMotionReporting.Controllers
             return View(page);
         }
 
+        [CheckAuthorizeAttribute()]
+        public ActionResult History()
+        {
+            var page = new PagedList<sp_RiwayatPengambilanBBM_Result>();
+            try
+            {
+                var model = OrdersLogic.getInstance().GetAllHistory().ToList();
+                page.Content = model;
+            }
+            catch (Exception e)
+            {
+                Logging.Log.getInstance().CreateLogError(e);
+            }
+            return View(page);
+        }
+
         [HttpPost]
         public ActionResult StrukBBM(string orderNo)
         {

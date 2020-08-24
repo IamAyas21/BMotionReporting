@@ -29,6 +29,13 @@ namespace BMotionReporting.Logic
             var list = db.sp_OrderMonitoring("").ToList();
             return list;
         }
+
+        public List<sp_RiwayatPengambilanBBM_Result> GetAllHistory()
+        {
+            var list = db.sp_RiwayatPengambilanBBM("").ToList();
+            return list;
+        }
+
         public Orders Add(Orders order)
         {
             try
@@ -78,6 +85,7 @@ namespace BMotionReporting.Logic
                                     where d.OrderDetailId.Equals(model.OrderDetailId)
                                     select d).First();
                 dtl.IsVerify = "Y";
+                dtl.UpdatedDate = DateTime.Now;
                 db.SaveChanges();
             }
             catch (Exception e)

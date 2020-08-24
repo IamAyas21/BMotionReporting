@@ -208,5 +208,14 @@ namespace BMotionReporting.Entity
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_UserQuota", nipParameter);
         }
+    
+        public virtual ObjectResult<sp_RiwayatPengambilanBBM_Result> sp_RiwayatPengambilanBBM(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_RiwayatPengambilanBBM_Result>("sp_RiwayatPengambilanBBM", userIdParameter);
+        }
     }
 }
