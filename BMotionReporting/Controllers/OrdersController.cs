@@ -17,6 +17,7 @@ namespace BMotionReporting.Controllers
     {
         BMotionDBEntities db = new BMotionDBEntities();
         // GET: Orders
+        [CheckAuthorizeAttribute()]
         public ActionResult Index()
         {
            return View();
