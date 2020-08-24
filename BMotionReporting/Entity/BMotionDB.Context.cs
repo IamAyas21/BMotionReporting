@@ -217,5 +217,14 @@ namespace BMotionReporting.Entity
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_RiwayatPengambilanBBM_Result>("sp_RiwayatPengambilanBBM", userIdParameter);
         }
+    
+        public virtual int sp_OrderDetailVerify(string orderDetailId)
+        {
+            var orderDetailIdParameter = orderDetailId != null ?
+                new ObjectParameter("OrderDetailId", orderDetailId) :
+                new ObjectParameter("OrderDetailId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_OrderDetailVerify", orderDetailIdParameter);
+        }
     }
 }

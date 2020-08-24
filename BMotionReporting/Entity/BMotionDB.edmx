@@ -266,6 +266,9 @@
           <Parameter Name="nip" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_OrderAllActivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_OrderDetailVerify" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderDetailId" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_OrderMonitoring" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="varchar" Mode="In" />
         </Function>
@@ -679,7 +682,10 @@
           <Parameter Name="nip" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_RiwayatPengambilanBBM" ReturnType="Collection(BMotionDBModel.sp_RiwayatPengambilanBBM_Result)">
-            <Parameter Name="UserId" Mode="In" Type="String" />
+          <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_OrderDetailVerify">
+          <Parameter Name="OrderDetailId" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_DocumentListByUser_Result">
@@ -988,6 +994,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_OrderDetailVerify" FunctionName="BMotionDBModel.Store.sp_OrderDetailVerify" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
