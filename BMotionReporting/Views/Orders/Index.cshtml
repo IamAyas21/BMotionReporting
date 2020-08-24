@@ -19,7 +19,11 @@
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-                <h3 class="card-title">QR Code Scanner</h3>
+                @*<h3 class="card-title">QR Code Scanner</h3>*@
+                <div onclick="toggleScan()" style="width: max-content;background-color: #007bff;color: white;padding: 0.5rem 0.6rem;font-weight: bold;border-radius: 8px;">
+                    <img src="~/Assets/icon scan.png" style="height:1.5rem;" />
+                    Scan QR Code
+                </div>
             </div>
         </div>
         <div class="row">
@@ -34,7 +38,9 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal">×</button>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="fa fa-fw fa-close"></i>
+                </button>
                 <div id="data">
                     <div><h2 class="text-center"><strong style="font-family:Arial">Struk Pengambilan BBM</strong></h2><hr /><h1 class="text-center">SPBU 34.413.55</h1>
                         <div class="row"><div class="col-md-4 text-right"><h4>Premium</h4></div><div class="col-md-4 text-center"><h4>200 Lt</h4></div><div class="col-md-4"><h4>10.00</h4></div></div>
@@ -68,23 +74,37 @@
         </div>
     </div>
 </div>
+<style>
+    .divCode img{
+        position: relative;
+        left: 50%;
+        transform: translateX(-25%);
+    }
+</style>
 <script type="text/javascript">
 
     var fuelLength = 0;
     //$("#modalStruk").modal('show');
     let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
     scanner.addListener('scan', function (content) {
+        //scanner.stop();
         ShowStruck(content);
     });
 
+    //function toggleScan()
+    //{
+    //    scanner.
+    //}
     function printDiv(elem) {
         renderMe($('<div/>').append($(elem).clone()).html());
     }
 
     function renderMe(data) {
         var mywindow = window.open('', 'Struk Pengambilan', 'height=1000,width=1000');
-        mywindow.document.write('<html><head><title>invoice-box</title>');
-        mywindow.document.write('<link rel="stylesheet" href="printstyle.css" type="text/css" />');
+        mywindow.document.write('<html><head><title>Struk Pengambilan BBM</title>');
+        mywindow.document.write('<link href="Content/AdminLTE/adminlte.min.css" rel="stylesheet" />');
+        mywindow.document.write('<link href="~/Content/bootstrap.min.css" rel="stylesheet" />');
+        mywindow.document.write('<style>.divCode img{position: relative;left: 50%;transform: translateX(-25%);}</style>');
         mywindow.document.write('</head><body >');
         mywindow.document.write(data);
         mywindow.document.write('</body></html>');
@@ -98,24 +118,26 @@
     }
 
     function ShowStruck(orderNo) {
+       // debugger;
         $.ajax({
             type: "POST",
             url: "@Url.Action("StrukBBM", "Orders")",
             data: { orderNo: orderNo },
             success: function (response) {
                 console.log(response);
-                debugger
-                if (response == "OK")
-                {
-                    alert("Pembelian BBM sudah terverifikasi");
+                if (response == "OK"){
+                    alert("Pembelian BBM telah berhasil terverifikasi");
                 }
-                else if(response[0].FuelId == null)
+                else if (response == "Failed") {
+                    alert("Data tidak dapat dikenali.");
+                }
+                else 
                 {
                     var _html = "";
                     $(response).each(function (index, data) {
                         _html += "<div><h2 class=\"text-center\"><strong style=\"font-family:Arial\">Struk Pengambilan BBM</strong></h2><hr /><h1 class=\"text-center\">SPBU 34.413.55</h1>"
                         _html += "<div class=\"row\"><div class=\"col-md-4 text-right\"><h4>" + data.FuelName + "</h4></div><div class=\"col-md-4 text-center\"><h4>" + data.Liter + " Lt</h4></div><div class=\"col-md-4\"><h4>" + data.CreatedDate + "</h4></div></div>";
-                        _html += "<div class=\"row\"><div class=\"col-md-3\"></div><div id=\"qr" + index + "\"></div><div class=\"col-md-3\"></div></div><h3 style=\"font-weight:bold\">syarat & ketentuan</h3><p class=\"text-justify\">1. Struk Pengambilan BBM berlaku untuk 1 (satu) kali pengambilan BBM</p><hr/>2. Struk Pengambilan BBM berlaku hanya pada tanggal saat struk tersebut dikeluarkan<hr/>3. Jika Struk Pengambilan BBM rusak atau hilang, silahkan menghubungi Admin di SPBU tersebut.<hr/>4. Berikan Struk Pengambilan BBM tersebut kepada petugas SPBU saat hendak melakukan pengisian BBM<hr/>5. Syarat & Ketentuan sewaktu-waktu dapat berubah.</div>"
+                        _html += "<div class=\"row\"><div class=\"col-md-3\"></div><div class=\"divCode\" id=\"qr" + index + "\"></div><div class=\"col-md-3\"></div></div><h3 style=\"font-weight:bold\">syarat & ketentuan</h3><ol><li>Struk Pengambilan BBM berlaku untuk 1 (satu) kali pengambilan BBM;</li><li>Struk Pengambilan BBM berlaku hanya pada tanggal saat struk tersebut ;</li><li>Jika Struk Pengambilan BBM rusak atau hilang, silahkan menghubungi Admin di SPBU tersebut.</li><li>Berikan Struk Pengambilan BBM tersebut kepada petugas saat hendak melakukan pengisian BBM;</li><li>Syarat &amp; Ketentuan sewaktu-waktu dapat berubah.</li></ol></div>"
                     });
                     document.getElementById("data").innerHTML = _html;
 
@@ -127,18 +149,18 @@
                     });
                     $("#modalStruk").modal('show');
                 }
-                else {
-                    document.getElementById('fuelForm').innerHTML = "";
-                    document.getElementById('fuelForm').innerHTML += "<div class=\"row\">" +
-                            "<div class=\"col-lg-4\" align=\"left\">NIP</div><div class=\"col-lg-8\"><label id=\"nip_0\" style=\"color:black\">" + response[0].NIP + "</label></div>";
-                    for (var i = 0; i < response.length; i++) {
-                        fuelLength++;
-                        document.getElementById('fuelForm').innerHTML += "<div class=\"row\">" +
-                            "<div class=\"col-lg-4\" align=\"left\"><label id=\"fuelId_" + i + "\" value=\"" + response[i].FuelId + "\" style=\"color:black\">" + response[i].FuelName + "</label></div>" +
-                            "<div class=\"col-lg-8\" align=\"left\"><input id=\"liter_" + i + "\" class=\"form-control\" maxlength=\"3\" onkeypress=\"return IsNumeric(event);\"></div></div>";
-                    }
-                    $("#modalOrder").modal('show');
-                }
+                //else {
+                //    document.getElementById('fuelForm').innerHTML = "";
+                //    document.getElementById('fuelForm').innerHTML += "<div class=\"row\">" +
+                //            "<div class=\"col-lg-4\" align=\"left\">NIP</div><div class=\"col-lg-8\"><label id=\"nip_0\" style=\"color:black\">" + response[0].NIP + "</label></div>";
+                //    for (var i = 0; i < response.length; i++) {
+                //        fuelLength++;
+                //        document.getElementById('fuelForm').innerHTML += "<div class=\"row\">" +
+                //            "<div class=\"col-lg-4\" align=\"left\"><label id=\"fuelId_" + i + "\" value=\"" + response[i].FuelId + "\" style=\"color:black\">" + response[i].FuelName + "</label></div>" +
+                //            "<div class=\"col-lg-8\" align=\"left\"><input id=\"liter_" + i + "\" class=\"form-control\" maxlength=\"3\" onkeypress=\"return IsNumeric(event);\"></div></div>";
+                //    }
+                //    $("#modalOrder").modal('show');
+                //}
             },
             error: function (response) {
                 //alert(response)

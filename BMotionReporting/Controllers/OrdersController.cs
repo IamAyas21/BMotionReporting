@@ -49,8 +49,26 @@ namespace BMotionReporting.Controllers
             List<FuelModels> fuelList = new List<FuelModels>();
             try
             {
+                int n;
+                bool isNumeric = int.TryParse(orderNo, out n);
                 var list = db.sp_StrukPengambilanBBM(orderNo).ToList();
-                if (list.Count > 0)
+                if (isNumeric)
+                {
+                    // Confirmation Struck
+                    if (db.OrderDetails.AsEnumerable().Where(dtl => dtl.OrderDetailId == Int32.Parse(orderNo) && dtl.IsVerify == null).Count() > 0)
+                    {
+                        OrderDetails model = new OrderDetails();
+                        model.OrderDetailId = Convert.ToInt32(orderNo);
+                        OrdersLogic.getInstance().VerifyOrder(model);
+                        return Json("OK", JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        return Json("Failed", JsonRequestBehavior.AllowGet);
+                    }
+                }
+                // Get Struk
+                else if (list.Count > 0)
                 {
                     foreach (var item in list)
                     {
@@ -73,36 +91,41 @@ namespace BMotionReporting.Controllers
                         //listOrder.Add(orderDetail);
                     }
 
-                    //struk.StruckOrderDetails = listOrder;
-                    //listModel.Add(struk);
-                }
-                else if (db.OrderDetails.AsEnumerable().Where(dtl => dtl.OrderDetailId == Int32.Parse(orderNo)).Count() > 0)
-                {
-                    OrderDetails model = new OrderDetails();
-                    model.OrderDetailId = Convert.ToInt32(orderNo);
-                    OrdersLogic.getInstance().VerifyOrder(model);
-                    return Json("OK", JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    var listFuel = db.Fuels.ToList();
-                    foreach(var item in listFuel)
-                    {
-                        fuelModels = new FuelModels();
-                        fuelModels.NIP = orderNo;
-                        fuelModels.FuelId = item.FuilId;
-                        fuelModels.FuelName = item.Name;
-                        fuelList.Add(fuelModels);
-                    }
-                    return Json(fuelList, JsonRequestBehavior.AllowGet);
+                    return Json("Failed", JsonRequestBehavior.AllowGet);
                 }
+
+
+                //if (db.OrderDetails.AsEnumerable().Where(dtl => dtl.OrderDetailId == Int32.Parse(orderNo)).Count() > 0)
+                //{
+                //    OrderDetails model = new OrderDetails();
+                //    model.OrderDetailId = Convert.ToInt32(orderNo);
+                //    OrdersLogic.getInstance().VerifyOrder(model);
+
+                //}
+                //else
+                //{
+                //    var listFuel = db.Fuels.ToList();
+                //    foreach(var item in listFuel)
+                //    {
+                //        fuelModels = new FuelModels();
+                //        fuelModels.NIP = orderNo;
+                //        fuelModels.FuelId = item.FuilId;
+                //        fuelModels.FuelName = item.Name;
+                //        fuelList.Add(fuelModels);
+                //    }
+                //    return Json(fuelList, JsonRequestBehavior.AllowGet);
+                //}
+
             } 
             catch (Exception e)
             {
                 Logging.Log.getInstance().CreateLogError(e);
             }
-           
-            return Json(listModel, JsonRequestBehavior.AllowGet);   
+
+            return Json(listModel, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
