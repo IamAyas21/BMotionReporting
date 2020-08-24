@@ -703,6 +703,8 @@
           <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
           <Property Type="Int32" Name="Total" Nullable="true" />
           <Property Type="String" Name="Status" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="NIP" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Fuel" Nullable="false" MaxLength="25" />
         </ComplexType>
         <ComplexType Name="sp_StrukPengambilanBBM_Result">
           <Property Type="String" Name="OrderNo" Nullable="false" MaxLength="50" />
@@ -918,6 +920,8 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
+                <ScalarProperty Name="Fuel" ColumnName="Fuel" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

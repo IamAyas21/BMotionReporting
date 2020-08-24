@@ -18,5 +18,7 @@ namespace BMotionReporting.Entity
         public string Name { get; set; }
         public Nullable<int> Total { get; set; }
         public string Status { get; set; }
+        public string NIP { get; set; }
+        public string Fuel { get; set; }
     }
 }

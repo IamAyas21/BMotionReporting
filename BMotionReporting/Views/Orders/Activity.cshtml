@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Order Monitoring";
 }
+<link href="~/Content/CSS/Users.css" rel="stylesheet" />
 <div class="panel panel-primary">
     <div class="panel-heading">
         <div class="row" style="margin:10px">
@@ -34,6 +35,9 @@
                             <th>
                                 @Html.DisplayName("Status")
                             </th>
+                            <th>
+                                @Html.DisplayName("Fuel")
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -53,7 +57,21 @@
                                     @Html.DisplayFor(modelItem => Model.Content[i].Total)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => Model.Content[i].Status)
+                                    @if (Model.Content[i].Status != "Waiting Confirmation")
+                                    {
+                                        <span class="label bg-green label-background">
+                                            @Html.DisplayFor(modelItem => Model.Content[i].Status)
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label bg-danger label-background">
+                                            @Html.DisplayFor(modelItem => Model.Content[i].Status)
+                                        </span>
+                                    }
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => Model.Content[i].Fuel)
                                 </td>
                             </tr>
                         }

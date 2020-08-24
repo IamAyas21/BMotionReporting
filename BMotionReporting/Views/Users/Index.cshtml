@@ -110,47 +110,47 @@
                                                             <div class="col-lg-8">
                                                                 <table class="card-table">
                                                                     <tr>
-                                                                        <td>
+                                                                        <td style="text-align:left">
                                                                             NIP
                                                                         </td>
 
-                                                                        <td style="width:100%">
+                                                                        <td style="width:100%; text-align:left">
                                                                             <label id="nip_@Model.Content[i].NIP"></label>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td>
+                                                                        <td style="text-align:left">
                                                                             Nama
                                                                         </td>
 
-                                                                        <td style="width:100%">
+                                                                        <td style="width:100%; text-align:left">
                                                                             <label id="nama_@Model.Content[i].NIP"></label>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td>
+                                                                        <td style="text-align:left">
                                                                             Profesi
                                                                         </td>
 
-                                                                        <td style="width:100%">
+                                                                        <td style="width:100%; text-align:left">
                                                                             <label id="profesi_@Model.Content[i].NIP"></label>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td>
+                                                                        <td style="text-align:left">
                                                                             Email
                                                                         </td>
 
-                                                                        <td style="width:100%">
+                                                                        <td style="width:100%; text-align:left">
                                                                             <label id="email_@Model.Content[i].NIP"></label>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td>
+                                                                        <td style="text-align:left">
                                                                             Hp
                                                                         </td>
 
-                                                                        <td style="width:100%">
+                                                                        <td style="width:100%; text-align:left">
                                                                             <label id="hp_@Model.Content[i].NIP"></label>
                                                                         </td>
                                                                     </tr>
@@ -160,11 +160,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    @*<button type="button" id="btnPrint_@Model.Content[i].NIP" class="btn btn-primary button button4"
-                                                                onclick="PrintModal(@Model.Content[i].NIP)" formtarget="_blank">
+                                                    <button type="button" id="btnPrint_@Model.Content[i].NIP" class="btn btn-primary button button4"
+                                                                onclick="printDiv('printDiv_@Model.Content[i].NIP')" formtarget="_blank">
                                                             Cetak
-                                                        </button>*@
-                                                    @Html.ActionLink("Cetak", "NewPrintCards", "Users", new { nip = Model.Content[i].NIP }, new { target = "_blank", @class = "btn btn-primary button button4" })
+                                                        </button>
+                                                    @*@Html.ActionLink("Cetak", "NewPrintCards", "Users", new { nip = Model.Content[i].NIP }, new { target = "_blank", @class = "btn btn-primary button button4" })*@
                                                     <button type="button" id="btnHide_@Model.Content[i].NIP" class="btn btn-default button button4"
                                                             onclick="HideModal(@Model.Content[i].NIP)">
                                                         Tutup
@@ -184,6 +184,27 @@
 </div>
 
 <script type="text/javascript">
+    function printDiv(elem) {
+        renderMe($('<div/>').append($(elem).clone()).html());
+    }
+
+    function renderMe(data) {
+        var mywindow = window.open('', 'Struk Pengambilan', 'height=1000,width=1000');
+        mywindow.document.write('<html><head><title>Struk Pengambilan BBM</title>');
+        mywindow.document.write('<link href="Content/AdminLTE/adminlte.min.css" rel="stylesheet" />');
+        mywindow.document.write('<link href="~/Content/bootstrap.min.css" rel="stylesheet" />');
+        mywindow.document.write('<style>.divCode img{position: relative;left: 50%;transform: translateX(-25%);}</style>');
+        mywindow.document.write('</head><body >');
+        mywindow.document.write(data);
+        mywindow.document.write('</body></html>');
+
+
+        setTimeout(function () {
+            mywindow.print();
+            mywindow.close();
+        }, 1000)
+        return true;
+    }
     $(function () {
         $('#example1').DataTable({
             "responsive": true,
