@@ -80,6 +80,7 @@ namespace BMotionReporting.Logic
         {
             try
             {
+                Nullable<int> literSubsidy = 0;
                 db = new BMotionDBEntities();
                 OrderDetail dtl = (from d in db.OrderDetails
                                     where d.OrderDetailId.Equals(model.OrderDetailId)
@@ -87,6 +88,28 @@ namespace BMotionReporting.Logic
                 dtl.IsVerify = "Y";
                 dtl.UpdatedDate = DateTime.Now;
                 db.SaveChanges();
+
+                db = new BMotionDBEntities();
+                Fuel fl = (from f in db.Fuels
+                           where f.FuilId == dtl.FuelId
+                           select f).First();
+                db = new BMotionDBEntities();
+                if (fl.IsSubsidy.ToLower()=="y")
+                {
+                    literSubsidy = dtl.Liter;
+                }
+                db = new BMotionDBEntities();
+                Order or = (from o in db.Orders
+                             where o.OrderNo.Equals(dtl.OrderNo)
+                             select o).First();
+                db = new BMotionDBEntities();
+                Document dc = (from d in db.Documents
+                               where d.NIP.Equals(or.NIP) && d.IsVerify.Equals("Y")
+                               select d).First();
+
+                dc.Quota = dc.Quota - literSubsidy;
+                db.SaveChanges();
+
             }
             catch (Exception e)
             {
