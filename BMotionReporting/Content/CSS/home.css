@@ -1,0 +1,23 @@
+﻿.box-dashboard{
+    padding:1rem;
+}
+.box-fuel{
+    background-color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    box-shadow: 2px 4px 4px rgba(0,0,0,.5);
+
+}
+
+.box-fuel .fuel{
+    font-weight:bold
+}
+
+.liter{
+    text-align:right;
+    font-weight:bold;
+}
+
+.liter > span{
+    font-weight:normal;
+}

@@ -17,6 +17,7 @@
     <link href="~/Content/AdminLTE/responsive.bootstrap4.min.css" rel="stylesheet" />
     <link href="~/Content/AdminLTE/adminlte.min.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/CSS/layout.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     @RenderSection("scripts", required: false)
@@ -63,15 +64,20 @@
     <link href="~/Content/CSS/dashboard.css" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">BMotion Reporting</a>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow" style="background-color:#195396 !important">
+        <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3 text-center"  href="@Url.Action("Index","Home")">
+            <img src="~/Assets/logo-white.png" style="width:100px" />
+        </a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+        @*<input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">*@
         @*<ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
-                <a class="nav-link" href="#">Sign out</a>
+                <a class="nav-link" href="#">Keluar</a>
+            </li>
+            <li class="nav-item text-nowrap">
+                <a class="nav-link" href="#">Keluar</a>
             </li>
         </ul>*@
     </nav>
@@ -82,7 +88,7 @@
                 <div class="sidebar-sticky pt-3">
                     <ul class="nav flex-column">
                         <li class="nav-item" style="margin:10px;">
-                            <a class="nav-link active" href="#">
+                            <a class="nav-link" href="@Url.Action("Index","Home")">
                                 <img src="~/Assets/icon_home.png" width="20" height="20" />
                                 <span data-feather="home" style="padding:5px"></span>
                                 Home
@@ -156,7 +162,7 @@
                 </div>
             </nav>
 
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 page-background">
                 <div style="margin:5%">
                     @RenderBody()
                 </div>

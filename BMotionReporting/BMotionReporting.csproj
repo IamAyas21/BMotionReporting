@@ -291,6 +291,7 @@
     <Content Include="Assets\bootstrap-solid.svg" />
     <Content Include="Assets\b_motion.png" />
     <Content Include="Assets\card-background.jpg" />
+    <Content Include="Assets\Group 986%402x.png" />
     <Content Include="Assets\icon scan.png" />
     <Content Include="Assets\icon_admin.png" />
     <Content Include="Assets\icon_card.png" />
@@ -307,6 +308,8 @@
     <Content Include="Assets\icon_qr_code.png" />
     <Content Include="Assets\icon_fuel.png" />
     <Content Include="Assets\login.png" />
+    <Content Include="Assets\logo-white.png" />
+    <Content Include="Assets\Logo.png" />
     <Content Include="Content\AdminLTE\adminlte.min.css" />
     <Content Include="Content\AdminLTE\all.min.css" />
     <Content Include="Content\AdminLTE\bootstrap-colorpicker.min.css" />
@@ -316,7 +319,9 @@
     <Content Include="Content\AdminLTE\responsive.bootstrap4.min.css" />
     <Content Include="Content\AdminLTE\tempusdominus-bootstrap-4.min.css" />
     <Content Include="Content\CardPrint.css" />
+    <Content Include="Content\CSS\home.css" />
     <Content Include="Content\CSS\jquery-ui.css" />
+    <Content Include="Content\CSS\layout.css" />
     <Content Include="Content\CSS\Users.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\webfonts\fa-brands-400.svg" />
