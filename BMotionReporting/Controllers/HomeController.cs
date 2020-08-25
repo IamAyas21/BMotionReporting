@@ -1,4 +1,6 @@
 ﻿using BMotionReporting.App_Start;
+using BMotionReporting.Logic;
+using BMotionReporting.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +14,9 @@ namespace BMotionReporting.Controllers
         [CheckAuthorizeAttribute()]
         public ActionResult Index()
         {
-            return View();
+            HomeModels data = new HomeModels();
+            data = HomeLogic.getInstance().GetDashboard();
+            return View(data);
         }
 
         public ActionResult About()

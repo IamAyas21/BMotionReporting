@@ -226,5 +226,23 @@ namespace BMotionReporting.Entity
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_OrderDetailVerify", orderDetailIdParameter);
         }
+    
+        public virtual ObjectResult<sp_HomeTotalFuel_Result> sp_HomeTotalFuel(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_HomeTotalFuel_Result>("sp_HomeTotalFuel", userIdParameter);
+        }
+    
+        public virtual ObjectResult<sp_HomeUserPengguna_Result> sp_HomeUserPengguna(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_HomeUserPengguna_Result>("sp_HomeUserPengguna", userIdParameter);
+        }
     }
 }

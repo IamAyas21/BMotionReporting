@@ -20,6 +20,14 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Feedback">
+          <Property Name="FeedbackId" Type="varchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="Feedback" Type="varchar(max)" />
+        </EntityType>-->
         <EntityType Name="Fuels">
           <Key>
             <PropertyRef Name="FuilId" />
@@ -264,6 +272,12 @@
         </Function>
         <Function Name="sp_HistorPerUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nip" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_HomeTotalFuel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_HomeUserPengguna" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_OrderAllActivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_OrderDetailVerify" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -687,6 +701,12 @@
           <FunctionImport Name="sp_OrderDetailVerify">
           <Parameter Name="OrderDetailId" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_HomeTotalFuel" ReturnType="Collection(BMotionDBModel.sp_HomeTotalFuel_Result)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_HomeUserPengguna" ReturnType="Collection(BMotionDBModel.sp_HomeUserPengguna_Result)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_DocumentListByUser_Result">
           <Property Type="Int64" Name="No" Nullable="true" />
@@ -747,6 +767,18 @@
           <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
           <Property Type="Int32" Name="Liter" Nullable="true" />
           <Property Type="String" Name="Fuel" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_HomeTotalFuel_Result">
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Total" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="sp_HomeUserPengguna_Result">
+          <Property Type="Int64" Name="NO" Nullable="true" />
+          <Property Type="String" Name="NIP" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Verify" Nullable="false" MaxLength="10" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -995,6 +1027,26 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_OrderDetailVerify" FunctionName="BMotionDBModel.Store.sp_OrderDetailVerify" />
+          <FunctionImportMapping FunctionImportName="sp_HomeTotalFuel" FunctionName="BMotionDBModel.Store.sp_HomeTotalFuel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BMotionDBModel.sp_HomeTotalFuel_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_HomeUserPengguna" FunctionName="BMotionDBModel.Store.sp_HomeUserPengguna">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BMotionDBModel.sp_HomeUserPengguna_Result">
+                <ScalarProperty Name="NO" ColumnName="NO" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Verify" ColumnName="Verify" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
