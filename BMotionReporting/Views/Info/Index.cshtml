@@ -1,5 +1,63 @@
-﻿@{
+﻿@model BMotionReporting.Models.PagedList<BMotionReporting.Entity.sp_Notification_Result>
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h1><strong style="font-family:Arial">Info</strong></h1>
 
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-warning" style="margin:10px">
+        <p><i class="fa fa-warning"></i> @TempData["Error"].ToString()</p>
+    </div>
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success" style="margin:10px">
+        <strong>Success!</strong> @TempData["Success"].ToString()
+    </div>
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <div class="row" style="margin:10px">
+            <div class="col-lg-12" align="right">
+                <a data-toggle="tooltip" title="BBM Baru" href="@Url.Action("Create", "Info")" class="btn btn-primary">Buat Info Blasting</a>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Daftar Info</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped" id="example1">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Date</th>
+                            <th>Judul</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Content.Count; i++)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => modelItem.Content[i].NO) </td>
+                                <td>@Html.DisplayFor(modelItem => modelItem.Content[i].CreateDate) </td>
+                                <td>@Html.DisplayFor(modelItem => modelItem.Content[i].Title) </td>
+                                <td>
+                                    <a href="@Url.Action("Edit", "Fuel",new {ID = Model.Content[i].NotificationId})">
+                                        <img src="~/Assets/icon_edit.png" width="20" height="20" />
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 

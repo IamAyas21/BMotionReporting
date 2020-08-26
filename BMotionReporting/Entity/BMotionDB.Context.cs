@@ -244,5 +244,37 @@ namespace BMotionReporting.Entity
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_HomeUserPengguna_Result>("sp_HomeUserPengguna", userIdParameter);
         }
+    
+        public virtual ObjectResult<sp_Feedback_Result> sp_Feedback()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Feedback_Result>("sp_Feedback");
+        }
+    
+        public virtual int sp_FeedbackInsert(string feedback)
+        {
+            var feedbackParameter = feedback != null ?
+                new ObjectParameter("Feedback", feedback) :
+                new ObjectParameter("Feedback", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_FeedbackInsert", feedbackParameter);
+        }
+    
+        public virtual ObjectResult<sp_Notification_Result> sp_Notification()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Notification_Result>("sp_Notification");
+        }
+    
+        public virtual int sp_NotificationInsert(string message, string title)
+        {
+            var messageParameter = message != null ?
+                new ObjectParameter("Message", message) :
+                new ObjectParameter("Message", typeof(string));
+    
+            var titleParameter = title != null ?
+                new ObjectParameter("Title", title) :
+                new ObjectParameter("Title", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_NotificationInsert", messageParameter, titleParameter);
+        }
     }
 }

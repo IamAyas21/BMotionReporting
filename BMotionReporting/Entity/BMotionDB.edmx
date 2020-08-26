@@ -20,14 +20,6 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Feedback">
-          <Property Name="FeedbackId" Type="varchar" MaxLength="50" />
-          <Property Name="CreateDate" Type="datetime" />
-          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
-          <Property Name="Feedback" Type="varchar(max)" />
-        </EntityType>-->
         <EntityType Name="Fuels">
           <Key>
             <PropertyRef Name="FuilId" />
@@ -262,6 +254,10 @@ warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary ke
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_Feedback" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_FeedbackInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Feedback" Type="varchar(max)" Mode="In" />
+        </Function>
         <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -278,6 +274,11 @@ warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary ke
         </Function>
         <Function Name="sp_HomeUserPengguna" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_Notification" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_NotificationInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Message" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Title" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_OrderAllActivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_OrderDetailVerify" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -702,10 +703,19 @@ warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary ke
           <Parameter Name="OrderDetailId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_HomeTotalFuel" ReturnType="Collection(BMotionDBModel.sp_HomeTotalFuel_Result)">
-            <Parameter Name="UserId" Mode="In" Type="String" />
+          <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_HomeUserPengguna" ReturnType="Collection(BMotionDBModel.sp_HomeUserPengguna_Result)">
-            <Parameter Name="UserId" Mode="In" Type="String" />
+          <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Feedback" ReturnType="Collection(BMotionDBModel.sp_Feedback_Result)" />
+          <FunctionImport Name="sp_FeedbackInsert">
+          <Parameter Name="Feedback" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Notification" ReturnType="Collection(BMotionDBModel.sp_Notification_Result)" />
+          <FunctionImport Name="sp_NotificationInsert">
+          <Parameter Name="Message" Mode="In" Type="String" />
+            <Parameter Name="Title" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_DocumentListByUser_Result">
@@ -779,6 +789,19 @@ warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary ke
           <Property Type="String" Name="Phone" Nullable="true" MaxLength="15" />
           <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="Verify" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="sp_Feedback_Result">
+          <Property Type="Int64" Name="NO" Nullable="true" />
+          <Property Type="String" Name="FeedbackId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CreateDate" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="Feedback" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_Notification_Result">
+          <Property Type="Int64" Name="NO" Nullable="true" />
+          <Property Type="String" Name="NotificationId" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CreateDate" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="Message" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1047,6 +1070,29 @@ warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary ke
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Feedback" FunctionName="BMotionDBModel.Store.sp_Feedback">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BMotionDBModel.sp_Feedback_Result">
+                <ScalarProperty Name="NO" ColumnName="NO" />
+                <ScalarProperty Name="FeedbackId" ColumnName="FeedbackId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_FeedbackInsert" FunctionName="BMotionDBModel.Store.sp_FeedbackInsert" />
+          <FunctionImportMapping FunctionImportName="sp_Notification" FunctionName="BMotionDBModel.Store.sp_Notification">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BMotionDBModel.sp_Notification_Result">
+                <ScalarProperty Name="NO" ColumnName="NO" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_NotificationInsert" FunctionName="BMotionDBModel.Store.sp_NotificationInsert" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
