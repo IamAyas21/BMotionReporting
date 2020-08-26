@@ -190,6 +190,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
+    <Compile Include="Controllers\FeedbackController.cs" />
     <Compile Include="Controllers\FuelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InfoController.cs" />
@@ -218,6 +219,9 @@
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Menu.cs">
+      <DependentUpon>BMotionDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Notification.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Order.cs">
@@ -585,6 +589,7 @@
     <Content Include="Views\Info\Index.cshtml" />
     <Content Include="Views\Orders\History.cshtml" />
     <Content Include="Views\Info\Create.cshtml" />
+    <Content Include="Views\Feedback\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

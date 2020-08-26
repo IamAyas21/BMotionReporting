@@ -10,14 +10,14 @@
 namespace BMotionReporting.Entity
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class sp_Feedback_Result
+    public partial class Notification
     {
-        public Nullable<long> NO { get; set; }
-        public string FeedbackId { get; set; }
-        public string CreateDate { get; set; }
-        public string Feedback { get; set; }
+        public string NotificationId { get; set; }
+        public Nullable<System.DateTime> CreateAt { get; set; }
         public string CreateBy { get; set; }
-        public string NIP { get; set; }
+        public string Message { get; set; }
+        public string Title { get; set; }
     }
 }

@@ -37,6 +37,7 @@ namespace BMotionReporting.Entity
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -250,13 +251,17 @@ namespace BMotionReporting.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_Feedback_Result>("sp_Feedback");
         }
     
-        public virtual int sp_FeedbackInsert(string feedback)
+        public virtual int sp_FeedbackInsert(string nip, string feedback)
         {
+            var nipParameter = nip != null ?
+                new ObjectParameter("Nip", nip) :
+                new ObjectParameter("Nip", typeof(string));
+    
             var feedbackParameter = feedback != null ?
                 new ObjectParameter("Feedback", feedback) :
                 new ObjectParameter("Feedback", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_FeedbackInsert", feedbackParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_FeedbackInsert", nipParameter, feedbackParameter);
         }
     
         public virtual ObjectResult<sp_Notification_Result> sp_Notification()

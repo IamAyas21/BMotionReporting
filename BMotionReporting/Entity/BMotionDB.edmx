@@ -42,6 +42,16 @@
           <Property Name="MenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateAt" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="Message" Type="varchar(max)" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="OrderDetails">
           <Key>
             <PropertyRef Name="OrderDetailId" />
@@ -256,6 +266,7 @@
         </Function>
         <Function Name="sp_Feedback" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_FeedbackInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nip" Type="varchar" Mode="In" />
           <Parameter Name="Feedback" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -312,6 +323,7 @@
           <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fuels" EntityType="Self.Fuels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Outlets" EntityType="Self.Outlets" Schema="dbo" store:Type="Tables" />
@@ -710,13 +722,15 @@
           </FunctionImport>
           <FunctionImport Name="sp_Feedback" ReturnType="Collection(BMotionDBModel.sp_Feedback_Result)" />
           <FunctionImport Name="sp_FeedbackInsert">
-          <Parameter Name="Feedback" Mode="In" Type="String" />
+            <Parameter Name="Nip" Mode="In" Type="String" />
+            <Parameter Name="Feedback" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_Notification" ReturnType="Collection(BMotionDBModel.sp_Notification_Result)" />
           <FunctionImport Name="sp_NotificationInsert">
-          <Parameter Name="Message" Mode="In" Type="String" />
+            <Parameter Name="Message" Mode="In" Type="String" />
             <Parameter Name="Title" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Notifications" EntityType="BMotionDBModel.Notification" />
         </EntityContainer>
         <ComplexType Name="sp_DocumentListByUser_Result">
           <Property Type="Int64" Name="No" Nullable="true" />
@@ -795,6 +809,8 @@
           <Property Type="String" Name="FeedbackId" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="CreateDate" Nullable="true" MaxLength="4000" />
           <Property Type="String" Name="Feedback" Nullable="true" />
+          <Property Type="String" Name="CreateBy" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NIP" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="sp_Notification_Result">
           <Property Type="Int64" Name="NO" Nullable="true" />
@@ -803,6 +819,16 @@
           <Property Type="String" Name="Message" Nullable="true" />
           <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateAt" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1077,6 +1103,8 @@
                 <ScalarProperty Name="FeedbackId" ColumnName="FeedbackId" />
                 <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1093,6 +1121,17 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_NotificationInsert" FunctionName="BMotionDBModel.Store.sp_NotificationInsert" />
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="BMotionDBModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

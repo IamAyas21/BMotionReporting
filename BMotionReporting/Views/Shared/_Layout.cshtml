@@ -82,6 +82,9 @@
         </ul>*@
     </nav>
 
+    @{ 
+        BMotionReporting.Entity.sp
+    }
     <div class="container-fluid">
         <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style="overflow-y:hidden">
@@ -130,10 +133,10 @@
                             </a>
                         </li>
                         <li class="nav-item"  style="margin:10px;">
-                            <a class="nav-link" href="#">
-                                <img src="~/Assets/icon_notifikasi.png" width="30" height="30" />
+                            <a class="nav-link" href="@Url.Action("Index","Feedback")">
+                                <img src="~/Assets/icon_notifikasi.png"  width="30" height="30" />
                                 <span data-feather="users" style="padding:5px"></span>
-                                Notifikasi
+                                Kritik & Saran
                             </a>
                         </li>
                         <li class="nav-item" style="margin:10px;">

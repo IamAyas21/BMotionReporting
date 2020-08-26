@@ -1,0 +1,56 @@
+﻿@model BMotionReporting.Models.PagedList<BMotionReporting.Entity.sp_Feedback_Result>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1><strong style="font-family:Arial">Kritik & Saran</strong></h1>
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-warning" style="margin:10px">
+        <p><i class="fa fa-warning"></i> @TempData["Error"].ToString()</p>
+    </div>
+}
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success" style="margin:10px">
+        <strong>Success!</strong> @TempData["Success"].ToString()
+    </div>
+}
+<div class="panel panel-primary">
+    <div class="panel-body">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Daftar Kritik & Saran</h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-striped" id="example1">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Tanggal</th>
+                            <th>Pengirim</th>
+                            <th>Pesan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.Content.Count; i++)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => modelItem.Content[i].NO) </td>
+                                <td>@Html.DisplayFor(modelItem => modelItem.Content[i].CreateDate) </td>
+                                <td>
+                                     <a href="@Url.Action("Detail", "Users", new { id= Model.Content[i].NIP, })" target="_blank">
+                                        @Html.DisplayFor(modelItem => modelItem.Content[i].CreateBy)
+                                    </a>   
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => modelItem.Content[i].Feedback) </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
