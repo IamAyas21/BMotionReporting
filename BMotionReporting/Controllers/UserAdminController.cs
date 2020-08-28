@@ -89,7 +89,7 @@ namespace BMotionReporting.Controllers
         {
             try
             {
-                UserLogic.getInstance().Update_UserAdmin(model);
+                UserLogic.getInstance().UpdateUserAdmin(model);
                 TempData["Success"] = "Success verification for " + model.Email;
             }
             catch (Exception e)
