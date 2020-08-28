@@ -14,16 +14,26 @@
         <strong>Success!</strong> @TempData["Success"].ToString()
     </div>
 }
+<link href="~/Content/CSS/order.css" rel="stylesheet" />
 <h1><strong style="font-family:Arial">Pengambilan BBM</strong></h1>
 <div class="card card-primary" >
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
-                @*<h3 class="card-title">QR Code Scanner</h3>*@
-                @*<div  style="width: max-content;background-color: #007bff;color: white;padding: 0.5rem 0.6rem;font-weight: bold;border-radius: 8px;">
-                    <img src="~/Assets/icon scan.png" style="height:1.5rem;" />
-                    Scan QR Code
-                </div>*@
+                <div class="form-group">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="scan" value="option1" checked="">
+                            Scan Struk
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="optionsRadios" id="pesan" value="option2">
+                            Pesanan Baru
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -55,16 +65,90 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" tabindex="-1" id="modalOrder"
      data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h2><strong style="font-family:Arial">Order BBM</strong></h2>
+                <h2><strong style="font-family:Arial">Pesanan Baru</strong></h2>
                 <button type="button" class="close" data-dismiss="modal">×</button>
             </div>
             <div class="modal-body">
-                <div id="fuelForm"></div>
+                <div id="fuelForm">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="tbl-order">
+                                    <tr>
+                                        <td>
+                                            NIP
+                                        </td>
+                                        <td>
+                                            &nbsp;:&nbsp;
+                                        </td>
+                                        <td>
+                                            <span id="nip">asd</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Nama
+                                        </td>
+                                        <td>
+                                            &nbsp;:&nbsp;
+                                        </td>
+                                        <td>
+                                            <span id="nama">asd</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Telp
+                                        </td>
+                                        <td>
+                                            &nbsp;:&nbsp;
+                                        </td>
+                                        <td>
+                                            <span id="telp">asd</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Email
+                                        </td>
+                                        <td>
+                                            &nbsp;:&nbsp;
+                                        </td>
+                                        <td>
+                                            <span id="email">asd</span>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-12" style="margin-top:2rem;">
+                                <div class="box-order">
+                                    <label>Subsidi</label>
+                                    <div class="info" id="quota">60 ltr</div>
+                                </div>
+                                <div id="subsidi">
+                                    <div class="form-group"><label class="control-label col-md-2">Premium</label><div class="col-md-12"><input type="number" class="form-control" /></div></div>
+                                </div>
+                                <div class="box-order">
+                                    <label>Non Subsidi</label>
+                                </div>
+                                <div id="nonSubsidi">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2">Premium</label>
+                                        <div class="col-md-12">
+                                            <input type="number" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" onclick="OrderFuel()" class="btn btn-primary button button4">
@@ -82,23 +166,80 @@
     }
 </style>
 <script type="text/javascript">
+    var totalSubsidi = 0;
+    var totalNonSubsidi = 0;
+    var enable = "";
+    var TotalQuota = 0;
 
     var fuelLength = 0;
-    //$("#modalStruk").modal('show');
+    //$("#modalOrder").modal('show');
     let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
     scanner.addListener('scan', function (content) {
         //scanner.stop();
-        ShowStruck(content);
+        if (document.getElementById("scan").checked) {
+            ShowStruck(content);
+        }
+        else {
+            NewOrder(content);
+        }
     });
 
-    //function toggleScan()
-    //{
-    //    scanner.
-    //}
+    function NewOrder(nip) {
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("OrderFuel", "Orders")",
+            data: { NIP: nip },
+        success: function (response) {
+            if (response == "Failed") {
+                alert("Data tidak dapat dikenali.");
+            }
+            else {
+                totalSubsidi = 0;
+                totalNonSubsidi = 0;
+
+                document.getElementById("nip").innerHTML = response.NIP;
+                document.getElementById("nama").innerHTML = response.Nama;
+                document.getElementById("telp").innerHTML = response.Phone;
+                document.getElementById("email").innerHTML = response.Email;
+                document.getElementById("quota").innerHTML = response.Quota;
+                
+                var _html = "";
+                enable = "";
+                var quota = response.Quota;
+                TotalQuota = Number(quota.replace(" ltr", ""));
+                if (Number(quota.replace(" ltr", "")) <= 0) {
+                    enable = "disabled";
+                }
+                $(response.Fuel.Subsidi).each(function (index, data) {
+                    _html += "<div class=\"form-group\"><label class=\"control-label col-md-2\">" + data.Fuel + "</label><input type=\"hidden\" value=\""+data.FuelId+"\" id=\"si"+index+"\" /><div class=\"col-md-12\"><input id=\"s_"+index+"\" type=\"number\" " + enable + " class=\"form-control\" /></div></div>"
+                    totalSubsidi++;
+                    
+                });
+                document.getElementById("subsidi").innerHTML = _html;
+
+                _html = ""
+                $(response.Fuel.NonSubsidi).each(function (index, data) {
+                    _html += "<div class=\"form-group\"><label class=\"control-label col-md-2\">" + data.Fuel + "</label><input type=\"hidden\" value=\"" + data.FuelId + "\" id=\"ni" + index + "\" /><div class=\"col-md-12\"><input type=\"number\" id=\"n_" + index + "\" class=\"form-control\" /></div></div>"
+                    totalNonSubsidi++;
+                });
+
+                document.getElementById("nonSubsidi").innerHTML = _html;
+
+                $("#modalOrder").modal('show');
+            }
+               
+        },
+        error: function (response) {
+            alert(response)
+        }
+    });
+    }
+
     function printDiv(elem) {
         renderMe($('<div/>').append($(elem).clone()).html());
     }
 
+   
     function renderMe(data) {
         var mywindow = window.open('', 'Struk Pengambilan', 'height=1000,width=1000');
         mywindow.document.write('<html><head><title>Struk Pengambilan BBM</title>');
@@ -118,7 +259,6 @@
     }
 
     function ShowStruck(orderNo) {
-        debugger;
         $.ajax({
             type: "POST",
             url: "@Url.Action("StrukBBM", "Orders")",
@@ -149,63 +289,72 @@
                     });
                     $("#modalStruk").modal('show');
                 }
-                //else {
-                //    document.getElementById('fuelForm').innerHTML = "";
-                //    document.getElementById('fuelForm').innerHTML += "<div class=\"row\">" +
-                //            "<div class=\"col-lg-4\" align=\"left\">NIP</div><div class=\"col-lg-8\"><label id=\"nip_0\" style=\"color:black\">" + response[0].NIP + "</label></div>";
-                //    for (var i = 0; i < response.length; i++) {
-                //        fuelLength++;
-                //        document.getElementById('fuelForm').innerHTML += "<div class=\"row\">" +
-                //            "<div class=\"col-lg-4\" align=\"left\"><label id=\"fuelId_" + i + "\" value=\"" + response[i].FuelId + "\" style=\"color:black\">" + response[i].FuelName + "</label></div>" +
-                //            "<div class=\"col-lg-8\" align=\"left\"><input id=\"liter_" + i + "\" class=\"form-control\" maxlength=\"3\" onkeypress=\"return IsNumeric(event);\"></div></div>";
-                //    }
-                //    $("#modalOrder").modal('show');
-                //}
+               
             },
             error: function (response) {
-                //alert(response)
+                alert(response)
             }
         });
     }
 
     function OrderFuel() {
-        var fuel = [];
-        var nip = "";
-        var fuelId = "";
-        var liter = "";
-
-        for (var i = 0; i < fuelLength; i++) {
-            if ($('#liter_' + i).val() != undefined && $('#liter_' + i).val() != "") {
-                if (nip == "") {
-                    nip = document.getElementById('nip_0').innerText;
-                    fuelId = i + 1;
-                    liter = $('#liter_' + i).val();
+        var order = [];
+        var total = 0;
+        var allow = true;
+        if (enable != "disabled") {
+            for (var i = 0; i < totalNonSubsidi; i++) {
+                var item = { FuelId: document.getElementById("si" + i).value, liter: document.getElementById("s_" + i).value }
+                order.push(item);
+                try {
+                    total += Number(item.liter);
                 }
-                else {
-                    var ii = i + 1;
-                    nip += "," + document.getElementById('nip_0').innerText;
-                    fuelId += "," + ii;
-                    liter += "," + $('#liter_' + i).val();
+                catch (err) {
+                    
                 }
+            }
 
-                fuel = [nip, fuelId, liter];
+            if (total > TotalQuota) {
+                allow = false;
             }
         }
+        
+        if (allow) {
+            for (var i = 0; i < totalNonSubsidi; i++) {
+                var item = { FuelId: document.getElementById("ni" + i).value, liter: document.getElementById("n_" + i).value }
+                order.push(item);
+            }
 
-        $.ajax(
-              {
-                  type: "POST",
-                  url: "@Url.Action("OrderFuel", "Orders")",
-                  data: { arrValue: fuel },
-                  success: function (response) {
-                      $("#modalOrder").modal('hide');
-                      ShowStruck(response.OrderNo);
-                  },
-                  error: function (response) {
-                      //alert(response)
-                  }
-              });
+            var data = { NIP: document.getElementById("nip").innerHTML, Orders: order };
+            console.log(data);
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("OrderAdd", "Orders")",
+                data: { param: data },
+            success: function (response) {
+                $("#modalOrder").modal('hide');
+                ShowStruck(response);
+            },
+            error: function (response) {
+                alert(response)
+            }
+        });
+        }
+        else {
+            alert("asdasd");
+        }
+        
+
+        //var x = [];
+        ////for(var i = 0 ; i<4 ; i++){
+        ////    var y = { no: i, nama: "dimas" + i };
+        ////    x.push(y);
+        ////}
+        //var z = { data: x };
+        
     }
+
+
 
     Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {

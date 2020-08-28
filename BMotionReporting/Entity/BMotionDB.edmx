@@ -20,6 +20,14 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Feedback">
+          <Property Name="FeedbackId" Type="varchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="Feedback" Type="varchar(max)" />
+        </EntityType>-->
         <EntityType Name="Fuels">
           <Key>
             <PropertyRef Name="FuilId" />
@@ -705,9 +713,6 @@
           <FunctionImport Name="sp_UserPurchasedBBM" ReturnType="Collection(String)">
           <Parameter Name="nip" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="sp_UserQuota" ReturnType="Collection(String)">
-          <Parameter Name="nip" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="sp_RiwayatPengambilanBBM" ReturnType="Collection(BMotionDBModel.sp_RiwayatPengambilanBBM_Result)">
           <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
@@ -731,6 +736,9 @@
             <Parameter Name="Title" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="Notifications" EntityType="BMotionDBModel.Notification" />
+          <FunctionImport Name="sp_UserQuota" ReturnType="Collection(BMotionDBModel.sp_UserQuota_Result)">
+            <Parameter Name="nip" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_DocumentListByUser_Result">
           <Property Type="Int64" Name="No" Nullable="true" />
@@ -829,6 +837,10 @@
           <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="sp_UserQuota_Result">
+          <Property Type="String" Name="Quota" Nullable="false" MaxLength="16" />
+          <Property Type="String" Name="TotalPurchaseBBM" Nullable="false" MaxLength="16" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1062,7 +1074,6 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_UserPurchasedBBM" FunctionName="BMotionDBModel.Store.sp_UserPurchasedBBM" />
-          <FunctionImportMapping FunctionImportName="sp_UserQuota" FunctionName="BMotionDBModel.Store.sp_UserQuota" />
           <FunctionImportMapping FunctionImportName="sp_RiwayatPengambilanBBM" FunctionName="BMotionDBModel.Store.sp_RiwayatPengambilanBBM">
             <ResultMapping>
               <ComplexTypeMapping TypeName="BMotionDBModel.sp_RiwayatPengambilanBBM_Result">
@@ -1132,6 +1143,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_UserQuota" FunctionName="BMotionDBModel.Store.sp_UserQuota">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BMotionDBModel.sp_UserQuota_Result">
+                <ScalarProperty Name="Quota" ColumnName="Quota" />
+                <ScalarProperty Name="TotalPurchaseBBM" ColumnName="TotalPurchaseBBM" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

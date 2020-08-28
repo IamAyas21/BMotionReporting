@@ -201,15 +201,6 @@ namespace BMotionReporting.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_UserPurchasedBBM", nipParameter);
         }
     
-        public virtual ObjectResult<string> sp_UserQuota(string nip)
-        {
-            var nipParameter = nip != null ?
-                new ObjectParameter("nip", nip) :
-                new ObjectParameter("nip", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("sp_UserQuota", nipParameter);
-        }
-    
         public virtual ObjectResult<sp_RiwayatPengambilanBBM_Result> sp_RiwayatPengambilanBBM(string userId)
         {
             var userIdParameter = userId != null ?
@@ -280,6 +271,15 @@ namespace BMotionReporting.Entity
                 new ObjectParameter("Title", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_NotificationInsert", messageParameter, titleParameter);
+        }
+    
+        public virtual ObjectResult<sp_UserQuota_Result> sp_UserQuota(string nip)
+        {
+            var nipParameter = nip != null ?
+                new ObjectParameter("nip", nip) :
+                new ObjectParameter("nip", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_UserQuota_Result>("sp_UserQuota", nipParameter);
         }
     }
 }

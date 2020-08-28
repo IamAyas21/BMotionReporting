@@ -36,7 +36,7 @@ namespace BMotionReporting.Logic
             return list;
         }
 
-        public Orders Add(Orders order)
+        public string Add(OrderParameter order)
         {
             try
             {
@@ -48,26 +48,28 @@ namespace BMotionReporting.Logic
                 orderEntity.IsVerify = "N";
                 orderEntity.CreatedDate = DateTime.Now;
                 orderEntity.CreatedBy = orderEntity.NIP;
+                orderEntity.ExpiredDate = DateTime.Now.AddHours(4);
                 db.Orders.Add(orderEntity);
                 db.SaveChanges();
 
-                foreach (var item in order.OrderDetails)
+                foreach (var item in order.Orders)
                 {
                     db = new BMotionDBEntities();
-                    OrderDetail orderDetailEntity = new OrderDetail();
-                    orderDetailEntity.OrderNo = orderEntity.OrderNo;
-                    orderDetailEntity.FuelId = item.FuelId;
-                    orderDetailEntity.Liter = item.Liter;
-                    orderDetailEntity.CreatedDate = DateTime.Now;
-                    orderDetailEntity.CreatedBy = orderEntity.NIP;
-                    db.OrderDetails.Add(orderDetailEntity);
-                    db.SaveChanges();
+                    int n;
+                    bool isNumeric = int.TryParse(item.Liter, out n);
+                    if(isNumeric && n != 0)
+                    {
+                        OrderDetail orderDetailEntity = new OrderDetail();
+                        orderDetailEntity.OrderNo = orderEntity.OrderNo;
+                        orderDetailEntity.FuelId = Convert.ToInt32(item.FuelId);
+                        orderDetailEntity.Liter = n;
+                        orderDetailEntity.CreatedDate = DateTime.Now;
+                        orderDetailEntity.CreatedBy = orderEntity.NIP;
+                        db.OrderDetails.Add(orderDetailEntity);
+                        db.SaveChanges();
+                    }
                 }
-
-                order.OrderNo = guidId.ToString();
-                order.IsVerify = "N";
-
-                return order;
+                return guidId.ToString();
             }
             catch (Exception e)
             {

@@ -101,13 +101,6 @@ namespace BMotionReporting.Controllers
                         struk.OrderDetailId = item.OrderDetailId;
                         struk.CreatedDate = item.CreatedDate.Value.ToString("MM/dd/yyyy HH:mm");
                         listModel.Add(struk);
-
-                        //orderDetail = new StruckOrderDetails();
-                        //orderDetail.OrderDetailId = item.OrderDetailId;
-                        //orderDetail.FuelName = item.FuelName;
-                        //orderDetail.Liter = item.Liter;
-                        //orderDetail.CreatedDate = item.CreatedDate.Value.ToString("MM/dd/yyyy HH:mm");
-                        //listOrder.Add(orderDetail);
                     }
 
                 }
@@ -115,28 +108,6 @@ namespace BMotionReporting.Controllers
                 {
                     return Json("Failed", JsonRequestBehavior.AllowGet);
                 }
-
-
-                //if (db.OrderDetails.AsEnumerable().Where(dtl => dtl.OrderDetailId == Int32.Parse(orderNo)).Count() > 0)
-                //{
-                //    OrderDetails model = new OrderDetails();
-                //    model.OrderDetailId = Convert.ToInt32(orderNo);
-                //    OrdersLogic.getInstance().VerifyOrder(model);
-
-                //}
-                //else
-                //{
-                //    var listFuel = db.Fuels.ToList();
-                //    foreach(var item in listFuel)
-                //    {
-                //        fuelModels = new FuelModels();
-                //        fuelModels.NIP = orderNo;
-                //        fuelModels.FuelId = item.FuilId;
-                //        fuelModels.FuelName = item.Name;
-                //        fuelList.Add(fuelModels);
-                //    }
-                //    return Json(fuelList, JsonRequestBehavior.AllowGet);
-                //}
 
             } 
             catch (Exception e)
@@ -148,41 +119,105 @@ namespace BMotionReporting.Controllers
         }
 
         [HttpPost]
-        public ActionResult OrderFuel(string[] arrValue)
+        public ActionResult OrderFuel(string NIP)
         {
             try
             {
-                Orders order = new Models.Orders();
-                OrderDetails detail = new OrderDetails();
-                Orders orderDetails = new Orders();
-
-                List<OrderDetails> listDetail = new List<OrderDetails>();
-                
-                if (arrValue != null)
+                NewOrder order = new Models.NewOrder();
+                if (db.Users.Where(u => u.NIP.Equals(NIP)).Count() != 0)
                 {
-                    string[] arrNIP = arrValue[0].Split(',');
-                    string[] arrFuelId = arrValue[1].Split(',');
-                    string[] arrLiter = arrValue[2].Split(',');
-
-                    if (order.NIP == null)
+                    var user = UserLogic.getInstance().GetUserById(NIP);
+                    if (user.IsVerify.ToLower() == "y")
                     {
-                        order = new Models.Orders();
-                        order.NIP = arrNIP[0];
-                    }
 
-                    for (int i = 0; i < arrFuelId.Length; i++)
+                        var quota = db.sp_UserQuota(NIP).FirstOrDefault();
+                        order.NIP = user.NIP;
+                        order.Nama = user.Name;
+                        order.Phone = user.Telp;
+                        order.Email = user.Email;
+                        order.Quota = quota.Quota;
+
+                        FuelOrder fuel = new FuelOrder();
+                        List<FuelItemOrder> subsidi = new List<FuelItemOrder>();
+                        List<FuelItemOrder> nonSubsidi = new List<FuelItemOrder>();
+
+                        List<Fuel> fuelList = FuelLogic.getInstance().getAllFuel();
+                        for (int i = 0; i < fuelList.Count; i++)
+                        {
+                            FuelItemOrder item = new FuelItemOrder();
+
+                            item.FuelId = fuelList[i].FuilId.ToString();
+                            item.Fuel = fuelList[i].Name;
+
+                            if (fuelList[i].IsSubsidy.ToLower() == "y")
+                            {
+                                subsidi.Add(item);
+                            }
+                            else
+                            {
+                                nonSubsidi.Add(item);
+                            }
+                        }
+
+                        fuel.Subsidi = subsidi;
+                        fuel.NonSubsidi = nonSubsidi;
+
+                        order.Fuel = fuel;
+
+                        return Json(order, JsonRequestBehavior.AllowGet);
+                    }
+                    else
                     {
-                        detail = new OrderDetails();
-                        detail.FuelId = Convert.ToInt32(arrFuelId[i]);
-                        detail.Liter = Convert.ToInt32(arrLiter[i]);
-                        listDetail.Add(detail);
+                        return Json("Failed", JsonRequestBehavior.AllowGet);
                     }
-
-                    order.OrderDetails = listDetail;
-                    orderDetails = OrdersLogic.getInstance().Add(order);
                 }
+                else {
+                    return Json("Failed", JsonRequestBehavior.AllowGet);
+                }
+                //OrderDetails detail = new OrderDetails();
+                //Orders orderDetails = new Orders();
 
-                return Json(orderDetails, JsonRequestBehavior.AllowGet);
+                //List<OrderDetails> listDetail = new List<OrderDetails>();
+                
+                //if (arrValue != null)
+                //{
+                //    string[] arrNIP = arrValue[0].Split(',');
+                //    string[] arrFuelId = arrValue[1].Split(',');
+                //    string[] arrLiter = arrValue[2].Split(',');
+
+                //    if (order.NIP == null)
+                //    {
+                //        order = new Models.Orders();
+                //        order.NIP = arrNIP[0];
+                //    }
+
+                //    for (int i = 0; i < arrFuelId.Length; i++)
+                //    {
+                //        detail = new OrderDetails();
+                //        detail.FuelId = Convert.ToInt32(arrFuelId[i]);
+                //        detail.Liter = Convert.ToInt32(arrLiter[i]);
+                //        listDetail.Add(detail);
+                //    }
+
+                //    order.OrderDetails = listDetail;
+                //    orderDetails = OrdersLogic.getInstance().Add(order);
+                //}
+
+                //return Json(orderDetails, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                Logging.Log.getInstance().CreateLogError(e);
+                return Json(e.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+        [HttpPost]
+        public ActionResult OrderAdd(OrderParameter param)
+        {
+            try
+            {
+                return Json(OrdersLogic.getInstance().Add(param), JsonRequestBehavior.AllowGet);
+                
             }
             catch (Exception e)
             {

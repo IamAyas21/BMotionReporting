@@ -283,6 +283,9 @@
     <Compile Include="Entity\sp_UserPengguna_Result.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\sp_UserQuota_Result.cs">
+      <DependentUpon>BMotionDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\sysdiagram.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
@@ -306,7 +309,6 @@
     <Compile Include="Models\FuelModels.cs" />
     <Compile Include="Models\HomeModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\InfoModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\OrderDetails.cs" />
     <Compile Include="Models\OrderDetailViewModels.cs" />
@@ -356,6 +358,7 @@
     <Content Include="Content\CSS\home.css" />
     <Content Include="Content\CSS\jquery-ui.css" />
     <Content Include="Content\CSS\layout.css" />
+    <Content Include="Content\CSS\order.css" />
     <Content Include="Content\CSS\Users.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\webfonts\fa-brands-400.svg" />

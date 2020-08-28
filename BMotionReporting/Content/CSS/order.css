@@ -1,0 +1,42 @@
+﻿.tbl-order{
+    width:100%;
+    border: 1px solid #efefef;
+}
+.tbl-order td{
+    padding: 0.4rem 5px;
+    font-size: 1.3rem;
+}
+
+.tbl-order tr:nth-child(2n+1){
+    background-color:#efefef;
+}
+
+.tbl-order td > span{
+    font-weight:bold;
+}
+
+.tbl-order td:nth-child(2){
+    width:20px;
+}
+.tbl-order td:first-child{
+    width:50px;
+}
+
+.box-order {
+    padding: 0rem 0.3rem;
+    position: relative;
+    border-bottom: 3px solid #196bc8;
+}
+
+.box-order > label{
+    font-size: 1.5rem;
+}
+
+.box-order > .info {
+    color: red;
+    font-size: 1rem;
+    position: absolute;
+    right: 0.3rem;
+    bottom: 0.8rem;
+    font-weight: bold;
+}
