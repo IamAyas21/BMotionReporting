@@ -12,13 +12,16 @@ namespace BMotionReporting.Logic
     {
 
         private static string fcm = ConfigurationManager.AppSettings["FCM"];
+        private static string key = ConfigurationManager.AppSettings["KEY"];
         public static String SendNotificationFromFirebaseCloud()
         {
             var result = "-1";
+            string apiKey = string.Format("key={0}", key);
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(fcm);
             httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Headers.Add(HttpRequestHeader.Authorization, "key=AAAAFPBBRHU:APA91bHACuno9RdWBYmQeg5_kVfgNOM3pEM5hzRW6g9J1AQkCDYTPUAnVEkDT7FszF5XX8DFch-t_yj99SOGU6BO16PjEIZoEK_lDT4t-z90ASlIlQBQzAcBzHYTX24netn994kt8QLA");
+            httpWebRequest.Headers.Add(HttpRequestHeader.Authorization, apiKey);
             httpWebRequest.Method = "POST";
+                
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
                 string strNJson = @"{
