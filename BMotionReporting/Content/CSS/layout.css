@@ -1,0 +1,6 @@
+﻿.page-background {
+    background-image: url('../../Assets/background_spbu.png');
+    background-size: cover;
+    background-repeat: space;
+    min-height: calc(100vh - 54px);
+}

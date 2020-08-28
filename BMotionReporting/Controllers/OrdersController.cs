@@ -74,9 +74,11 @@ namespace BMotionReporting.Controllers
                     // Confirmation Struck
                     if (db.OrderDetails.AsEnumerable().Where(dtl => dtl.OrderDetailId == Int32.Parse(orderNo) && dtl.IsVerify == null).Count() > 0)
                     {
-                        OrderDetails model = new OrderDetails();
-                        model.OrderDetailId = Convert.ToInt32(orderNo);
-                        OrdersLogic.getInstance().VerifyOrder(model);
+                        //OrderDetails model = new OrderDetails();
+                        //model.OrderDetailId = Convert.ToInt32(orderNo);
+                        //OrdersLogic.getInstance().VerifyOrder(model);
+                        
+                        var verify = db.sp_OrderDetailVerify(orderNo);
                         return Json("OK", JsonRequestBehavior.AllowGet);
                     }
                     else

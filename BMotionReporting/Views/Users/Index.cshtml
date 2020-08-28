@@ -91,7 +91,7 @@
                                     <a href="@Url.Action("Detail", "Users", new { id= Model.Content[i].NIP, })" tooltip="Detail" >
                                         <i class="fa fa-fw fa-th-list"></i>
                                     </a>
-                                    <a style="cursor:pointer" id="btnShow_@Model.Content[i].NIP" onclick="ShowCard(@Model.Content[i].NIP)">
+                                    <a style="cursor:pointer" id="btnShow_@Model.Content[i].NIP" onclick="ShowCard('@Model.Content[i].NIP')">
                                         <i class="fa fa-fw fa-credit-card"></i>
                                     </a>
                                     <div class="modal fade" tabindex="-1" id="modalShow_@Model.Content[i].NIP"
@@ -103,65 +103,58 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <div id="printDiv_@Model.Content[i].NIP">
-                                                        <div class="row">
-                                                            <div class="col-lg-4">
-                                                                <div id="qrcode_@Model.Content[i].NIP"></div>
-                                                            </div>
-                                                            <div class="col-lg-8">
-                                                                <table class="card-table">
-                                                                    <tr>
-                                                                        <td style="text-align:left">
-                                                                            NIP
-                                                                        </td>
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <table style="width:90mm;border:1px solid black;">
+                                                                        <tr>
+                                                                            <td colspan="3" class="text-right" style="padding:1rem;"><img src="~/Assets/Logo.png" style="width:100px;" /></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td rowspan="4" style="padding:1rem;width:20mm;"><div id="qrcode_@Model.Content[i].NIP"></div></td>
+                                                                            <td style="text-align:left;padding:1rem;">
+                                                                                NIP
+                                                                            </td>
+                                                                            <td style="width:100%; text-align:left;padding:1rem;">
+                                                                                <label>@Model.Content[i].NIP</label>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="text-align:left;padding:1rem;">
+                                                                                Nama
+                                                                            </td>
 
-                                                                        <td style="width:100%; text-align:left">
-                                                                            <label id="nip_@Model.Content[i].NIP"></label>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td style="text-align:left">
-                                                                            Nama
-                                                                        </td>
+                                                                            <td style="width:100%; text-align:left;padding:1rem;">
+                                                                                <label>@Model.Content[i].Name</label>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="text-align:left;padding:1rem;">
+                                                                                Email
+                                                                            </td>
 
-                                                                        <td style="width:100%; text-align:left">
-                                                                            <label id="nama_@Model.Content[i].NIP"></label>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td style="text-align:left">
-                                                                            Profesi
-                                                                        </td>
+                                                                            <td style="width:100%; text-align:left;padding:1rem;">
+                                                                                <label>@Model.Content[i].Email</label>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td style="text-align:left;padding:1rem;">
+                                                                                Hp
+                                                                            </td>
 
-                                                                        <td style="width:100%; text-align:left">
-                                                                            <label id="profesi_@Model.Content[i].NIP"></label>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td style="text-align:left">
-                                                                            Email
-                                                                        </td>
-
-                                                                        <td style="width:100%; text-align:left">
-                                                                            <label id="email_@Model.Content[i].NIP"></label>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td style="text-align:left">
-                                                                            Hp
-                                                                        </td>
-
-                                                                        <td style="width:100%; text-align:left">
-                                                                            <label id="hp_@Model.Content[i].NIP"></label>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
+                                                                            <td style="width:100%; text-align:left;padding:1rem;">
+                                                                                <label> @Model.Content[i].Phone</label>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" id="btnPrint_@Model.Content[i].NIP" class="btn btn-primary button button4"
-                                                                onclick="printDiv('printDiv_@Model.Content[i].NIP')" formtarget="_blank">
+                                                                onclick="printDiv(printDiv_@Model.Content[i].NIP)">
                                                             Cetak
                                                         </button>
                                                     @*@Html.ActionLink("Cetak", "NewPrintCards", "Users", new { nip = Model.Content[i].NIP }, new { target = "_blank", @class = "btn btn-primary button button4" })*@
@@ -185,14 +178,19 @@
 
 <script type="text/javascript">
     function printDiv(elem) {
-        renderMe($('<div/>').append($(elem).clone()).html());
+
+       
+        var _data = $('<div/>').append($(elem).clone()).html();
+        //console.log($('<div/>').append($(elem).clone()).html());
+        renderMe(_data);
     }
 
     function renderMe(data) {
-        var mywindow = window.open('', 'Struk Pengambilan', 'height=1000,width=1000');
+        console.log("masuk");
+        var mywindow = window.open('', 'Kartu Pengguna', 'height=370,width=550');
         mywindow.document.write('<html><head><title>Struk Pengambilan BBM</title>');
         mywindow.document.write('<link href="Content/AdminLTE/adminlte.min.css" rel="stylesheet" />');
-        mywindow.document.write('<link href="~/Content/bootstrap.min.css" rel="stylesheet" />');
+        mywindow.document.write('<link href="Content/bootstrap.min.css" rel="stylesheet" />');
         mywindow.document.write('<style>.divCode img{position: relative;left: 50%;transform: translateX(-25%);}</style>');
         mywindow.document.write('</head><body >');
         mywindow.document.write(data);
@@ -201,15 +199,17 @@
 
         setTimeout(function () {
             mywindow.print();
-            mywindow.close();
+            //mywindow.close();
         }, 1000)
         return true;
     }
+
+
     $(function () {
-        $('#example1').DataTable({
-            "responsive": true,
-            "autoWidth": false
-        });
+        //$('#example1').DataTable({
+        //    "responsive": true,
+        //    "autoWidth": false
+        //});
     });
     function ShowModal(idx) {
         $("#modalShow_" + idx).modal('show');
@@ -219,38 +219,23 @@
         $("#modalShow_" + idx).modal('hide');
     }
 
-    function PrintModal(id) {
-        var headstr = "<html><head><title></title></head><body>";
-        var footstr = "</body>";
-        var newstr = document.all.item("printDiv_" + id).innerHTML;
-        var oldstr = document.body.innerHTML;
-        document.body.innerHTML = headstr + newstr + footstr;
-        window.print();
-        document.body.innerHTML = oldstr;
-        return false;
-    }
+    //function PrintModal(id) {
+    //    var headstr = "<html><head><title></title></head><body>";
+    //    var footstr = "</body>";
+    //    var newstr = document.all.item("printDiv_" + id).innerHTML;
+    //    var oldstr = document.body.innerHTML;
+    //    document.body.innerHTML = headstr + newstr + footstr;
+    //    window.print();
+    //    document.body.innerHTML = oldstr;
+    //    return false;
+    //}
 
     function ShowCard(id) {
-        $.ajax({
-            type: "POST",
-            url: "@Url.Action("PrintCards", "Users")",
-            data: { nip: id },
-            success: function (response) {
-                document.getElementById("qrcode_" + id).innerHTML = "";
-                var qrcode = new QRCode("qrcode_" + id);
-                qrcode.makeCode(response.NIP);
-                document.getElementById('nip_' + id).innerHTML = response.NIP;
-                document.getElementById('nama_' + id).innerHTML = response.Name;
-                document.getElementById('email_' + id).innerHTML = response.Email;
-                document.getElementById('hp_' + id).innerHTML = response.Telp;
-                document.getElementById('profesi_' + id).innerHTML = response.Profesi;
+        document.getElementById("qrcode_" + id).innerHTML = "";
+        var qrcode = new QRCode("qrcode_" + id);
+        qrcode.makeCode(id);
 
-                ShowModal(id);
-            },
-            error: function (response) {
-                //alert(response)
-            }
-        });
+        ShowModal(id);
     }
 
 </script>

@@ -1,73 +1,114 @@
-﻿@{
+﻿@model BMotionReporting.Models.HomeModels
+@{
     ViewBag.Title = "Home Page";
 }
+<link href="~/Content/CSS/home.css" rel="stylesheet" />
+<link href="~/Content/CSS/Users.css" rel="stylesheet" />
+<h1>My BBM Dashboard</h1>
+<div class="row">
+    @for (int i = 0; i < Model.Fuel.Count; i++)
+    {
+        <div class="col-md-3 box-dashboard">
+            <div class="box-fuel">
+                <h6 class="title">Pengeluaran</h6>
+                <h4 class="fuel">@Model.Fuel[i].Name</h4>
+                <h3 class="liter">@Model.Fuel[i].Total.Replace(",",".") <span>ltr</span></h3>
+            </div>
+        </div>
+    }
+</div>
+<div class="row">
+    <div class="col-md-8 box-dashboard">
+        <div class="box-fuel">
+            <h4 class="fuel pull-left">Daftar Pengguna</h4>
+            <a class="pull-right label bg-primary label-background"  style="font-weight:bold" href="@Url.Action("Create", "Users")">+ Pengguna Baru</a>
+            <table class="table table-bordered table-striped" id="example1">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayName("No")
+                        </th>
+                        <th>
+                            @Html.DisplayName("NIP")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Nama")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Phone")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Email")
+                        </th>
+                        <th>
+                            @Html.DisplayName("Status")
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.UserPengguna.Count; i++)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => Model.UserPengguna[i].NO)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.UserPengguna[i].NIP)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.UserPengguna[i].Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.UserPengguna[i].Phone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model.UserPengguna[i].Email)
+                            </td>
+                            <td class="text-center">
+                                @if (Model.UserPengguna[i].Verify != "Unverified")
+                                {
+                                    <span class="label bg-green label-background">
+                                        @Html.DisplayFor(modelItem => Model.UserPengguna[i].Verify)
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="label bg-danger label-background">
+                                        @Html.DisplayFor(modelItem => Model.UserPengguna[i].Verify)
+                                    </span>
+                                }
+                            </td>
+                            <td class="text-center">
+                                <a href="@Url.Action("Detail", "Users", new { id= Model.UserPengguna[i].NIP, })" tooltip="Detail">
+                                    <i class="fa fa-fw fa-th-list"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
-<div class="jumbotron">
-    <h1>My BBM Dashboard</h1>
-    <div class="row">
-        <div class="col-2 col-sm-2 col-md-2">
-            <div class="small-box" style="background-color:white;height:100%">
-                <div class="inner">
-                    <h6 style="color:black;font-size:15px">Pengeluaran</h6>
-                    <div class="bg-warning" style="width:50%;" align="center"><strong>PREMIUM</strong></div>
-                </div>
-                <div align="right" style="margin:10px"><strong style="font-size:32px">124.000</strong><small style="font-size:20px;"> Ltr </small></div>
-            </div>
         </div>
-        <!-- /.col -->
-        <div class="col-2 col-sm-2 col-md-2">
-            <div class="small-box" style="background-color:white;height:100%">
-                <div class="inner">
-                    <h6 style="color:black;font-size:15px">Pengeluaran</h6>
-                    <div style="width:50%;border:solid;" align="center"><strong style="color:lightgreen">PERTALITE</strong></div>
-                </div>
-                <div align="right" style="margin:10px"><strong style="font-size:32px">124.000</strong><small style="font-size:20px;"> Ltr </small></div>
-            </div>
+    </div>
+    <div class="col-md-4 box-dashboard">
+        <div class="box-fuel">
+            <table>
+                <tr>
+                    <td>
+                        <img src="~/Assets/icon_pengambilan_bbm.png" />
+                    </td>
+                    <td>
+                        <h3><a class="pull-right label bg-primary label-background" style="font-weight:bold" href="@Url.Action("Index", "Orders")">+ Scan QR Code</a></h3>
+                    </td>
+                </tr>
+            </table>
         </div>
-        <!-- /.col -->
-        <!-- fix for small devices only -->
-        <div class="clearfix hidden-md-up"></div>
-
-        <div class="col-2 col-sm-2 col-md-2">
-            <div class="small-box" style="background-color:aqua;height:100%">
-                <div class="inner">
-                    <h6 style="color:black;font-size:15px">Pengeluaran</h6>
-                    <div style="width:50%;background-color:blue" align="center"><strong style="color:white">PERTAMAX</strong></div>
-                </div>
-                <div align="right" style="margin:10px"><strong style="font-size:32px">124.000</strong><small style="font-size:20px;"> Ltr </small></div>
-            </div>
+        <div class="box-fuel" style="margin-top:1rem;">
+            <h4 class="fuel">Pengumuman</h4>
+            <p class="text-justify">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla magna mi, facilisis vel elementum eget, placerat at magna. Nam ac auctor turpis, id commodo turpis. Vestibulum ultrices libero in felis lacinia, vitae suscipit sapien ornare. Morbi eget mollis justo. Donec id orci arcu. Nunc tristique nec lorem sed pharetra. 
+            </p>
         </div>
-        <!-- /.col -->
-        <div class="col-2 col-sm-2 col-md-2">
-            <div class="small-box" style="background-color:greenyellow;height:100%">
-                <div class="inner">
-                    <h6 style="color:black;font-size:15px">Pengeluaran</h6>
-                    <div style="width:50%;background-color:lightgreen" align="center"><strong>BIO SOLAR</strong></div>
-                </div>
-                <div align="right" style="margin:10px"><strong style="font-size:32px">124.000</strong><small style="font-size:20px;"> Ltr </small></div>
-            </div>
-        </div>
-        <!-- /.col -->
-
-        <!-- /.col -->
-        <div class="col-4 col-sm-4 col-md-4">
-            <div class="info-box" style="height:100%">
-                <span>
-                    <img src="~/Assets/icon_notifikasi.png" width="100" height="100" />
-                </span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text"><small>Notifikasi</small></span>
-                    <span class="info-box-number">
-                        <strong>Pengguna baru</strong>
-                    </span>
-                    <span class="info-box-number">
-                        <strong style="color:green">+2 dua jam yang lalu</strong>
-                    </span>
-                </div>
-                <!-- /.info-box-content -->
-            </div>
-        </div>
-        <!-- /.col -->
     </div>
 </div>

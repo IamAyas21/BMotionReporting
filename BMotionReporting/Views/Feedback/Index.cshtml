@@ -1,9 +1,9 @@
-﻿@model BMotionReporting.Models.PagedList<BMotionReporting.Entity.sp_Notification_Result>
+﻿@model BMotionReporting.Models.PagedList<BMotionReporting.Entity.sp_Feedback_Result>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1><strong style="font-family:Arial">Info</strong></h1>
 
+<h1><strong style="font-family:Arial">Kritik & Saran</strong></h1>
 @if (TempData["Error"] != null)
 {
     <div class="alert alert-warning" style="margin:10px">
@@ -16,28 +16,20 @@
         <strong>Success!</strong> @TempData["Success"].ToString()
     </div>
 }
-
 <div class="panel panel-primary">
-    <div class="panel-heading">
-        <div class="row" style="margin:10px">
-            <div class="col-lg-12" align="right">
-                <a data-toggle="tooltip" title="BBM Baru" href="@Url.Action("Create", "Info")" class="btn btn-primary">Buat Info Blasting</a>
-            </div>
-        </div>
-    </div>
     <div class="panel-body">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Daftar Info</h3>
+                <h3 class="card-title">Daftar Kritik & Saran</h3>
             </div>
             <div class="card-body">
                 <table class="table table-bordered table-striped" id="example1">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Date</th>
-                            <th>Judul</th>
-                            <th></th>
+                            <th>Tanggal</th>
+                            <th>Pengirim</th>
+                            <th>Pesan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,12 +38,12 @@
                             <tr>
                                 <td>@Html.DisplayFor(modelItem => modelItem.Content[i].NO) </td>
                                 <td>@Html.DisplayFor(modelItem => modelItem.Content[i].CreateDate) </td>
-                                <td>@Html.DisplayFor(modelItem => modelItem.Content[i].Title) </td>
                                 <td>
-                                    <a href="@Url.Action("Edit", "Fuel",new {ID = Model.Content[i].NotificationId})">
-                                        <img src="~/Assets/icon_edit.png" width="20" height="20" />
-                                    </a>
+                                     <a href="@Url.Action("Detail", "Users", new { id= Model.Content[i].NIP, })" target="_blank">
+                                        @Html.DisplayFor(modelItem => modelItem.Content[i].CreateBy)
+                                    </a>   
                                 </td>
+                                <td>@Html.DisplayFor(modelItem => modelItem.Content[i].Feedback) </td>
                             </tr>
                         }
                     </tbody>
@@ -60,4 +52,5 @@
         </div>
     </div>
 </div>
+
 

@@ -7,6 +7,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using QRCoder;
+using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace BMotionReporting.Controllers
 {
@@ -20,6 +24,7 @@ namespace BMotionReporting.Controllers
             var page = new PagedList<sp_UserPengguna_Result>();
             try
             {
+                
                 var model = UserLogic.getInstance().GetAllUsers().ToList();
                 page.Content = model;
             }
@@ -106,6 +111,7 @@ namespace BMotionReporting.Controllers
             }
             return page;
         }
+       
 
         [HttpPost]
         public ActionResult Verification(string[] arrValue)
@@ -142,6 +148,7 @@ namespace BMotionReporting.Controllers
         {
             try
             {
+               
                 UserModels user = UserLogic.getInstance().GetUserById(nip);
                 return Json(user, JsonRequestBehavior.AllowGet);
             }

@@ -42,6 +42,16 @@
           <Property Name="MenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreateAt" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="Message" Type="varchar(max)" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="OrderDetails">
           <Key>
             <PropertyRef Name="OrderDetailId" />
@@ -254,6 +264,11 @@
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_Feedback" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_FeedbackInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nip" Type="varchar" Mode="In" />
+          <Parameter Name="Feedback" Type="varchar(max)" Mode="In" />
+        </Function>
         <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -265,7 +280,21 @@
         <Function Name="sp_HistorPerUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="nip" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="sp_HomeTotalFuel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_HomeUserPengguna" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_Notification" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_NotificationInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Message" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_OrderAllActivity" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_OrderDetailVerify" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="OrderDetailId" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_OrderMonitoring" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="varchar" Mode="In" />
         </Function>
@@ -294,6 +323,7 @@
           <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Fuels" EntityType="Self.Fuels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Outlets" EntityType="Self.Outlets" Schema="dbo" store:Type="Tables" />
@@ -679,8 +709,28 @@
           <Parameter Name="nip" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_RiwayatPengambilanBBM" ReturnType="Collection(BMotionDBModel.sp_RiwayatPengambilanBBM_Result)">
-            <Parameter Name="UserId" Mode="In" Type="String" />
+          <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="sp_OrderDetailVerify">
+          <Parameter Name="OrderDetailId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_HomeTotalFuel" ReturnType="Collection(BMotionDBModel.sp_HomeTotalFuel_Result)">
+          <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_HomeUserPengguna" ReturnType="Collection(BMotionDBModel.sp_HomeUserPengguna_Result)">
+          <Parameter Name="UserId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Feedback" ReturnType="Collection(BMotionDBModel.sp_Feedback_Result)" />
+          <FunctionImport Name="sp_FeedbackInsert">
+            <Parameter Name="Nip" Mode="In" Type="String" />
+            <Parameter Name="Feedback" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_Notification" ReturnType="Collection(BMotionDBModel.sp_Notification_Result)" />
+          <FunctionImport Name="sp_NotificationInsert">
+            <Parameter Name="Message" Mode="In" Type="String" />
+            <Parameter Name="Title" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Notifications" EntityType="BMotionDBModel.Notification" />
         </EntityContainer>
         <ComplexType Name="sp_DocumentListByUser_Result">
           <Property Type="Int64" Name="No" Nullable="true" />
@@ -742,6 +792,43 @@
           <Property Type="Int32" Name="Liter" Nullable="true" />
           <Property Type="String" Name="Fuel" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="sp_HomeTotalFuel_Result">
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Total" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <ComplexType Name="sp_HomeUserPengguna_Result">
+          <Property Type="Int64" Name="NO" Nullable="true" />
+          <Property Type="String" Name="NIP" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Verify" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="sp_Feedback_Result">
+          <Property Type="Int64" Name="NO" Nullable="true" />
+          <Property Type="String" Name="FeedbackId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CreateDate" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="Feedback" Nullable="true" />
+          <Property Type="String" Name="CreateBy" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NIP" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_Notification_Result">
+          <Property Type="Int64" Name="NO" Nullable="true" />
+          <Property Type="String" Name="NotificationId" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CreateDate" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="Message" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="NotificationId" />
+          </Key>
+          <Property Name="NotificationId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateAt" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -988,6 +1075,63 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_OrderDetailVerify" FunctionName="BMotionDBModel.Store.sp_OrderDetailVerify" />
+          <FunctionImportMapping FunctionImportName="sp_HomeTotalFuel" FunctionName="BMotionDBModel.Store.sp_HomeTotalFuel">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BMotionDBModel.sp_HomeTotalFuel_Result">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_HomeUserPengguna" FunctionName="BMotionDBModel.Store.sp_HomeUserPengguna">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BMotionDBModel.sp_HomeUserPengguna_Result">
+                <ScalarProperty Name="NO" ColumnName="NO" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Verify" ColumnName="Verify" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_Feedback" FunctionName="BMotionDBModel.Store.sp_Feedback">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BMotionDBModel.sp_Feedback_Result">
+                <ScalarProperty Name="NO" ColumnName="NO" />
+                <ScalarProperty Name="FeedbackId" ColumnName="FeedbackId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_FeedbackInsert" FunctionName="BMotionDBModel.Store.sp_FeedbackInsert" />
+          <FunctionImportMapping FunctionImportName="sp_Notification" FunctionName="BMotionDBModel.Store.sp_Notification">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BMotionDBModel.sp_Notification_Result">
+                <ScalarProperty Name="NO" ColumnName="NO" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_NotificationInsert" FunctionName="BMotionDBModel.Store.sp_NotificationInsert" />
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="BMotionDBModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="NotificationId" ColumnName="NotificationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

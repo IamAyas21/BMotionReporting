@@ -3,9 +3,15 @@ using BMotionReporting.Models;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Web;
+using System.Web.Mvc;
+
+
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BMotionReporting.Logic
 {
@@ -29,20 +35,11 @@ namespace BMotionReporting.Logic
             }
         }
 
-        //private UserLogic()
-        //{
-        //    db = new BMotionDBEntities();
-        //}
         public List<sp_UserPengguna_Result> GetAllUsers()
         {
             var list = db.sp_UserPengguna("").ToList();
             return list;
         }
-
-        //public List<User> getAllUsers()
-        //{
-        //    return userList = db.Users.Where(u => u.IsAdmin == null).ToList();
-        //}
 
         public List<User> getAllUserAdmin()
         {
@@ -97,8 +94,6 @@ namespace BMotionReporting.Logic
                 userEntity.CreatedBy = SessionManager.NIP();
                 userEntity.IsVerify = model.IsVerify;
                 userEntity.Profession = model.Profesi;
-                //userEntity.RoleId = model.RoleId;
-                //userEntity.OutletNo = model.OutletNo;
                 db.Users.Add(userEntity);
                 db.SaveChanges();
 
@@ -144,8 +139,6 @@ namespace BMotionReporting.Logic
             }
         }
 
-
-
         public void AddUserAdmin(UserModels model)
         {
             try
@@ -163,8 +156,6 @@ namespace BMotionReporting.Logic
                 userEntity.CreatedDate = DateTime.Now;
                 userEntity.CreatedBy = SessionManager.NIP();
                 userEntity.IsAdmin = "Y";
-                //userEntity.RoleId = model.RoleId;
-                //userEntity.OutletNo = model.OutletNo;
                 db.Users.Add(userEntity);
                 db.SaveChanges();
             }
@@ -191,7 +182,8 @@ namespace BMotionReporting.Logic
                 throw e;
             }
         }
-        public void Update_UserAdmin(UserModels model)
+
+        public void UpdateUserAdmin(UserModels model)
         {
             try
             {
@@ -209,5 +201,7 @@ namespace BMotionReporting.Logic
                 throw e;
             }
         }
+
+      
     }
 }

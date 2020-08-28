@@ -31,6 +31,7 @@ namespace BMotionReporting.Logic
             return db.Fuels.ToList();
         }
 
+
         public bool CheckExistingData(FuelModels model)
         {
             if (db.Fuels.Where(fuel => fuel.Name.Equals(model.FuelName)).Count() == 0)

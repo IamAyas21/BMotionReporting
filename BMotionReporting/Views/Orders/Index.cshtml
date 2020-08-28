@@ -15,20 +15,20 @@
     </div>
 }
 <h1><strong style="font-family:Arial">Pengambilan BBM</strong></h1>
-<div class="card card-primary" style="width:50%">
+<div class="card card-primary" >
     <div class="card-body">
         <div class="row">
             <div class="col-lg-12">
                 @*<h3 class="card-title">QR Code Scanner</h3>*@
-                <div  style="width: max-content;background-color: #007bff;color: white;padding: 0.5rem 0.6rem;font-weight: bold;border-radius: 8px;">
+                @*<div  style="width: max-content;background-color: #007bff;color: white;padding: 0.5rem 0.6rem;font-weight: bold;border-radius: 8px;">
                     <img src="~/Assets/icon scan.png" style="height:1.5rem;" />
                     Scan QR Code
-                </div>
+                </div>*@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-12">
-                <video id="preview" width="500" height="500"></video>
+            <div class="col-lg-12 text-center">
+                <video id="preview"></video>
             </div>
         </div>
     </div>
@@ -118,7 +118,7 @@
     }
 
     function ShowStruck(orderNo) {
-       // debugger;
+        debugger;
         $.ajax({
             type: "POST",
             url: "@Url.Action("StrukBBM", "Orders")",
