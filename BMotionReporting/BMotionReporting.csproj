@@ -325,13 +325,13 @@
     <Content Include="Assets\bootstrap-solid.svg" />
     <Content Include="Assets\b_motion.png" />
     <Content Include="Assets\card-background.jpg" />
-    <Content Include="Assets\Group 986%402x.png" />
     <Content Include="Assets\icon scan.png" />
     <Content Include="Assets\icon_admin.png" />
     <Content Include="Assets\icon_card.png" />
     <Content Include="Assets\icon_daftar_pengguna.png" />
     <Content Include="Assets\icon_edit.png" />
     <Content Include="Assets\icon_home.png" />
+    <Content Include="Assets\icon_info.png" />
     <Content Include="Assets\icon_keluar.png" />
     <Content Include="Assets\icon_loop.png" />
     <Content Include="Assets\icon_notifikasi.png" />
