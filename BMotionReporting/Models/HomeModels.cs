@@ -10,6 +10,7 @@ namespace BMotionReporting.Models
     {
         public List<sp_HomeTotalFuel_Result> Fuel { get; set; }
         public List<sp_HomeUserPengguna_Result> UserPengguna { get; set; }
+        public sp_Notification_Result Pengumuman { get; set; }
     }
     
 }

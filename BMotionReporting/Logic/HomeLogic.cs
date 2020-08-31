@@ -30,6 +30,7 @@ namespace BMotionReporting.Logic
             HomeModels data = new HomeModels();
             data.Fuel = GetTotalFuel();
             data.UserPengguna = GetUserPengguna();
+            data.Pengumuman = GetLastPengumuman();
             return data;
         }
 
@@ -43,6 +44,12 @@ namespace BMotionReporting.Logic
         {
             var list = db.sp_HomeUserPengguna("").ToList();
             return list;
+        }
+
+        public sp_Notification_Result GetLastPengumuman()
+        {
+            var list = db.sp_Notification().ToList();
+            return list.FirstOrDefault();
         }
     }
 }
