@@ -1,5 +1,6 @@
 ﻿using BMotionReporting.Entity;
 using BMotionReporting.Models;
+using ImageProcessor;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,7 +12,8 @@ namespace BMotionReporting.Logic
 {
     public class DocumentLogic
     {
-        private static string pathUpload = ConfigurationManager.AppSettings["HostName"];
+        private static string hostName = ConfigurationManager.AppSettings["HostName"];
+        private static string pathUploads = ConfigurationManager.AppSettings["PathUploads"];
 
         BMotionDBEntities db = new BMotionDBEntities();
         List<Document> docList;
@@ -66,7 +68,7 @@ namespace BMotionReporting.Logic
         private string GetDocumentPathByDocNo(string id)
         {
             //return Path.Combine(pathUpload, db.Documents.Where(dc => dc.DocumentNo.Equals(id)).FirstOrDefault().CreatedDate.Value.ToString("ddMMyyyy"), "Document") + "\\" + db.Documents.Where(dc => dc.DocumentNo.Equals(id)).FirstOrDefault().DocumentFile;
-            return Path.Combine(pathUpload,  "Document/" + db.Documents.Where(dc => dc.DocumentNo.Equals(id)).FirstOrDefault().DocumentFile);
+            return Path.Combine(hostName,  "Document/" + db.Documents.Where(dc => dc.DocumentNo.Equals(id)).FirstOrDefault().DocumentFile);
         }
 
         public bool CheckExistingDocument(DocumentModels model)
@@ -85,19 +87,20 @@ namespace BMotionReporting.Logic
         {
             try
             {
-                string dateTimeDayNow = DateTime.Now.ToString("ddMMyyyyHHmmss");
-                string dateDayNow = DateTime.Now.ToString("ddMMyyyy");
+                //string dateTimeDayNow = DateTime.Now.ToString("ddMMyyyyHHmmss");
+                //string dateDayNow = DateTime.Now.ToString("ddMMyyyy");
                 
                 if (model.PDF != null)
                 {
-                    var pathFilePdf = Path.Combine(HttpContext.Current.Server.MapPath(pathUpload), dateDayNow, "Document");
+                    var pathFilePdf = Path.Combine(pathUploads, "Document");
+                    var imageName = Path.GetFileNameWithoutExtension(model.PDF.FileName) + ".webp";
 
                     db = new BMotionDBEntities();
                     Document docEntity = new Document();
                     docEntity.DocumentNo = model.DocumentNo;
                     docEntity.NIP = model.NIP;
                     docEntity.Quota = model.Quota;
-                    docEntity.DocumentFile = model.PDF.FileName;
+                    docEntity.DocumentFile = imageName;
                     docEntity.ExpDate = Convert.ToDateTime(model.ExpDate);
                     docEntity.IsVerify = "Y";
                     docEntity.CreatedDate = DateTime.Now;
@@ -109,7 +112,8 @@ namespace BMotionReporting.Logic
                     {
                         System.IO.Directory.CreateDirectory(pathFilePdf);
                     }
-                    using (var fileStream = new System.IO.FileStream(pathFilePdf + "\\" + model.PDF.FileName, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+
+                    using (var fileStream = new System.IO.FileStream(pathFilePdf + "\\" + imageName, System.IO.FileMode.Create, System.IO.FileAccess.Write))
                     {
                         model.PDF.InputStream.CopyTo(fileStream);
                     }

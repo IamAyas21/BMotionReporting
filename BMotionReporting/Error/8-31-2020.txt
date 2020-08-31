@@ -1,0 +1,9 @@
+Time: 31/08/2020 09:12:53 PM
+------------------------------------------------------------------------
+Message: 'http:/45.32.217.185:86/BMotionReporting/Uploads/' is not a valid virtual path.
+StackTrace:    at BMotionReporting.Logic.DocumentLogic.Add(DocumentModels model) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Logic\DocumentLogic.cs:line 120
+   at BMotionReporting.Controllers.DocumentController.Upload(DocumentModels model) in D:\Visual Studio\Project\BMotionReporting\BMotionReporting\Controllers\DocumentController.cs:line 33
+Source: BMotionReporting
+TargetSite: Void Add(BMotionReporting.Models.DocumentModels)
+------------------------------------------------------------------------
+
