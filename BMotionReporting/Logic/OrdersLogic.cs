@@ -32,7 +32,13 @@ namespace BMotionReporting.Logic
 
         public List<sp_RiwayatPengambilanBBM_Result> GetAllHistory()
         {
-            var list = db.sp_RiwayatPengambilanBBM("").ToList();
+            var list = db.sp_RiwayatPengambilanBBM(SessionManager.NIP()).ToList();
+            return list;
+        }
+
+        public List<sp_RiwayatPengambilanBBMExport_Result> GetAllHistoryExport()
+        {
+            var list = db.sp_RiwayatPengambilanBBMExport(SessionManager.NIP()).ToList();
             return list;
         }
 

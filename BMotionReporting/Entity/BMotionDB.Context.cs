@@ -281,5 +281,14 @@ namespace BMotionReporting.Entity
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_UserQuota_Result>("sp_UserQuota", nipParameter);
         }
+    
+        public virtual ObjectResult<sp_RiwayatPengambilanBBMExport_Result> sp_RiwayatPengambilanBBMExport(string userId)
+        {
+            var userIdParameter = userId != null ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_RiwayatPengambilanBBMExport_Result>("sp_RiwayatPengambilanBBMExport", userIdParameter);
+        }
     }
 }

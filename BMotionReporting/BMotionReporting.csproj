@@ -59,6 +59,10 @@
       <HintPath>..\packages\AForge.Video.DirectShow.2.2.5\lib\AForge.Video.DirectShow.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EPPlus, Version=5.3.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\FWA\FWA\bin\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Gma.QrCodeNet.Encoding, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\QrCode.Net.0.4.0.0\lib\net45\Gma.QrCodeNet.Encoding.dll</HintPath>
       <Private>True</Private>
@@ -284,6 +288,9 @@
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\sp_OrderMonitoring_Result.cs">
+      <DependentUpon>BMotionDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\sp_RiwayatPengambilanBBMExport_Result.cs">
       <DependentUpon>BMotionDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\sp_RiwayatPengambilanBBM_Result.cs">

@@ -42,4 +42,14 @@ namespace BMotionReporting.Models
             set { orderDetails = value; }
         }
     }
+
+    public class HistoryOrder
+    {
+        public string No { get; set; }
+        public string TanggalTransaksi { get; set; }
+        public string NIP { get; set; }
+        public string Pengguna { get; set; }
+        public string Fuel { get; set; }
+        public string Qty { get; set; }
+    }
 }

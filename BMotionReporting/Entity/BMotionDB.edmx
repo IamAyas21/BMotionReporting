@@ -150,11 +150,12 @@ warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary ke
           <Property Name="Phone" Type="varchar" MaxLength="15" />
           <Property Name="KTP" Type="varchar" MaxLength="50" />
           <Property Name="IsVerify" Type="varchar" MaxLength="1" />
+          <Property Name="IsAdmin" Type="varchar" MaxLength="1" />
+          <Property Name="District" Type="varchar" MaxLength="100" />
           <Property Name="CreatedDate" Type="datetime" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
-          <Property Name="IsAdmin" Type="varchar" MaxLength="1" />
         </EntityType>
         <Association Name="FK_Documents_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
@@ -312,6 +313,9 @@ warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary ke
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_RiwayatPengambilanBBM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_RiwayatPengambilanBBMExport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserId" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_StrukPengambilanBBM" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -524,6 +528,7 @@ warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary ke
           <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Users" FromRole="Users" ToRole="Orders" />
           <NavigationProperty Name="Outlet" Relationship="Self.FK_Users_Outlets" FromRole="Users" ToRole="Outlets" />
           <NavigationProperty Name="Role" Relationship="Self.FK_Users_Role" FromRole="Users" ToRole="Role" />
+          <Property Name="District" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Documents_Users">
           <End Role="Users" Type="Self.User" Multiplicity="0..1" />
@@ -737,7 +742,10 @@ warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary ke
           </FunctionImport>
           <EntitySet Name="Notifications" EntityType="BMotionDBModel.Notification" />
           <FunctionImport Name="sp_UserQuota" ReturnType="Collection(BMotionDBModel.sp_UserQuota_Result)">
-            <Parameter Name="nip" Mode="In" Type="String" />
+          <Parameter Name="nip" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_RiwayatPengambilanBBMExport" ReturnType="Collection(BMotionDBModel.sp_RiwayatPengambilanBBMExport_Result)">
+            <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_DocumentListByUser_Result">
@@ -840,6 +848,14 @@ warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary ke
         <ComplexType Name="sp_UserQuota_Result">
           <Property Type="String" Name="Quota" Nullable="false" MaxLength="16" />
           <Property Type="String" Name="TotalPurchaseBBM" Nullable="false" MaxLength="16" />
+        </ComplexType>
+        <ComplexType Name="sp_RiwayatPengambilanBBMExport_Result">
+          <Property Type="Int64" Name="No" Nullable="true" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="NIP" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Fuel" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Liter" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -972,6 +988,7 @@ warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary ke
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="BMotionDBModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="District" ColumnName="District" />
                 <ScalarProperty Name="NIP" ColumnName="NIP" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="OutletNo" ColumnName="OutletNo" />
@@ -1148,6 +1165,18 @@ warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary ke
               <ComplexTypeMapping TypeName="BMotionDBModel.sp_UserQuota_Result">
                 <ScalarProperty Name="Quota" ColumnName="Quota" />
                 <ScalarProperty Name="TotalPurchaseBBM" ColumnName="TotalPurchaseBBM" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_RiwayatPengambilanBBMExport" FunctionName="BMotionDBModel.Store.sp_RiwayatPengambilanBBMExport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BMotionDBModel.sp_RiwayatPengambilanBBMExport_Result">
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Fuel" ColumnName="Fuel" />
+                <ScalarProperty Name="Liter" ColumnName="Liter" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
