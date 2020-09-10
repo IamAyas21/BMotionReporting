@@ -20,14 +20,6 @@
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="UpdatedBy" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="Feedback">
-          <Property Name="FeedbackId" Type="varchar" MaxLength="50" />
-          <Property Name="CreateDate" Type="datetime" />
-          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
-          <Property Name="Feedback" Type="varchar(max)" />
-        </EntityType>-->
         <EntityType Name="Fuels">
           <Key>
             <PropertyRef Name="FuilId" />
@@ -745,7 +737,7 @@ warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary ke
           <Parameter Name="nip" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_RiwayatPengambilanBBMExport" ReturnType="Collection(BMotionDBModel.sp_RiwayatPengambilanBBMExport_Result)">
-            <Parameter Name="UserId" Mode="In" Type="String" />
+          <Parameter Name="UserId" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_DocumentListByUser_Result">
@@ -791,6 +783,7 @@ warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary ke
           <Property Type="String" Name="FuelName" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="Liter" Nullable="true" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
         </ComplexType>
         <ComplexType Name="sp_UserPengguna_Result">
           <Property Type="Int64" Name="NO" Nullable="true" />
@@ -1074,6 +1067,7 @@ warning 6013: The table/view 'BMotionDB.dbo.Feedback' does not have a primary ke
                 <ScalarProperty Name="FuelName" ColumnName="FuelName" />
                 <ScalarProperty Name="Liter" ColumnName="Liter" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

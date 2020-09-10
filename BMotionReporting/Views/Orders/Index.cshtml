@@ -244,9 +244,10 @@
         var mywindow = window.open('', 'Struk Pengambilan', 'height=1000,width=1000');
         mywindow.document.write('<html><head><title>Struk Pengambilan BBM</title>');
         mywindow.document.write('<link href="Content/AdminLTE/adminlte.min.css" rel="stylesheet" />');
-        mywindow.document.write('<link href="~/Content/bootstrap.min.css" rel="stylesheet" />');
-        mywindow.document.write('<style>.divCode img{position: relative;left: 50%;transform: translateX(-25%);}</style>');
-        mywindow.document.write('</head><body >');
+        mywindow.document.write('<link href="Content/bootstrap.min.css" rel="stylesheet" />');
+        mywindow.document.write('<link href="Content/CSS/Print.css" rel="stylesheet" />');
+        //mywindow.document.write('<style>.divCode img{position: absolute;left: 50%;transform: translateX(-25%);}</style>');
+        mywindow.document.write('</head><body style="margin:0px; >');
         mywindow.document.write(data);
         mywindow.document.write('</body></html>');
 
@@ -275,9 +276,10 @@
                 {
                     var _html = "";
                     $(response).each(function (index, data) {
-                        _html += "<div><h2 class=\"text-center\"><strong style=\"font-family:Arial\">Struk Pengambilan BBM</strong></h2><hr /><h1 class=\"text-center\">SPBU 34.413.55</h1>"
-                        _html += "<div class=\"row\"><div class=\"col-md-4 text-right\"><h4>" + data.FuelName + "</h4></div><div class=\"col-md-4 text-center\"><h4>" + data.Liter + " Lt</h4></div><div class=\"col-md-4\"><h4>" + data.CreatedDate + "</h4></div></div>";
-                        _html += "<div class=\"row\"><div class=\"col-md-3\"></div><div class=\"divCode\" id=\"qr" + index + "\"></div><div class=\"col-md-3\"></div></div><h3 style=\"font-weight:bold\">syarat & ketentuan</h3><ol><li>Struk Pengambilan BBM berlaku untuk 1 (satu) kali pengambilan BBM;</li><li>Struk Pengambilan BBM berlaku hanya pada tanggal saat struk tersebut ;</li><li>Jika Struk Pengambilan BBM rusak atau hilang, silahkan menghubungi Admin di SPBU tersebut.</li><li>Berikan Struk Pengambilan BBM tersebut kepada petugas saat hendak melakukan pengisian BBM;</li><li>Syarat &amp; Ketentuan sewaktu-waktu dapat berubah.</li></ol></div>"
+                        _html += "<div><h2 class=\"text-center\"><strong style=\"font-family:Arial\">Slip Pengambilan BBM</strong></h2><hr /><h1 class=\"text-center\">SPBU 34.413.55</h1>"
+                        _html += "<div class=\"row\"><div class=\"col-md-12 text-center\"><h4 class=\"nama\">" + data.Name + "</h4></div></div>";
+                        _html += "<div class=\"row\"><div class=\"col-md-4 text-right\"><h4 class=\"fuel\">" + data.FuelName + "</h4></div><div class=\"col-md-4 text-center\"><h4 class=\"fuel\">" + data.Liter + " Lt</h4></div><div class=\"col-md-4\"><h4>" + data.CreatedDate + "</h4></div></div>";
+                        _html += "<div class=\"row\"><div class=\"col-md-3\"></div><div class=\"divCode\" id=\"qr" + index + "\"></div><div class=\"col-md-3\"></div></div><h3 style=\"font-weight:bold\">syarat & ketentuan</h3><ol><li>Slip Pengambilan BBM berlaku untuk 1 (satu) kali pengambilan BBM;</li><li>Slip Pengambilan BBM berlaku hanya pada tanggal saat slip ini dicetak ;</li><li>Jika Slip Pengambilan BBM rusak atau hilang, silahkan menghubungi Admin di SPBU tersebut.</li><li>Berikan Slip Pengambilan BBM tersebut kepada petugas saat hendak melakukan pengisian BBM;</li><li>Syarat &amp; Ketentuan sewaktu-waktu dapat berubah.</li></ol></div>"
                     });
                     document.getElementById("data").innerHTML = _html;
 

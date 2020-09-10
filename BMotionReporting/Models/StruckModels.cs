@@ -14,6 +14,7 @@ namespace BMotionReporting.Models
         public string FuelName { get; set; }
         public Nullable<int> Liter { get; set; }
         public string CreatedDate { get; set; }
+        public string Name { get; set; }
         //public List<StruckOrderDetails> StruckOrderDetails { get; set; }
     }
 

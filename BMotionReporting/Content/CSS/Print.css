@@ -1,0 +1,47 @@
+﻿@media print 
+{
+    @page {
+      width: 40mm;
+      height:100cm;
+      /*size:auto;*/ /* DIN A4 standard, Europe */
+      margin:0;
+      margin-right:10px;
+    }
+    html, body {
+        width: 40mm;
+        /* height: 297mm; */
+        height: 100cm;
+        font-size: 40px;
+        background: #FFF;
+        overflow:visible;
+        margin-right:10px;
+    }
+    body {
+        padding-top:15mm;
+        padding-bottom:30mm;
+        margin:0;
+        margin-right:10px;
+    }
+
+    ol{
+        padding-right:2rem !important;
+        margin-bottom:30mm;
+    }
+
+    .divCode img{
+        position:relative;
+        width:220mm;
+        margin:15mm 0 15mm 10mm;
+    }
+    h4{
+        text-align:center !important;
+        font-weight:bold !important;
+    }
+    h2{
+        font-size:3rem !important;
+    }
+
+    .fuel{
+        font-weight:bold !important;
+    }
+}

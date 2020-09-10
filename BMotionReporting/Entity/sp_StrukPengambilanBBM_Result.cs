@@ -20,5 +20,6 @@ namespace BMotionReporting.Entity
         public string FuelName { get; set; }
         public Nullable<int> Liter { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        public string Name { get; set; }
     }
 }

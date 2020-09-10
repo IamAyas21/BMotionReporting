@@ -100,11 +100,12 @@ namespace BMotionReporting.Controllers
                         struk.OrderNo = item.OrderNo;
                         struk.OutletNo = item.OutletNo;
                         struk.OutletName = item.OutletName;
+                        struk.Name = item.Name;
 
                         struk.FuelName = item.FuelName;
                         struk.Liter = item.Liter;
                         struk.OrderDetailId = item.OrderDetailId;
-                        struk.CreatedDate = item.CreatedDate.Value.ToString("MM/dd/yyyy HH:mm");
+                        struk.CreatedDate = item.CreatedDate.Value.ToString("MM/dd/yyyy HH:mm:ss");
                         listModel.Add(struk);
                     }
 
