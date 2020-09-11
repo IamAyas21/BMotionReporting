@@ -321,7 +321,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Logging\Log.cs" />
+    <Compile Include="Controllers\Logging\Log.cs" />
     <Compile Include="Logic\UserLogic.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DocumentModels.cs" />

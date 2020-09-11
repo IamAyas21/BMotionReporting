@@ -71,7 +71,7 @@ namespace BMotionReporting.Controllers
         //[ValidateAntiForgeryToken]
         public ActionResult Login(LoginViewModel model, string returnUrl)
         {
-            var user = db.Users.Where(usr => usr.Email.Equals(model.Email) && usr.Password.Equals(model.Password)).ToList();
+            var user = db.Users.Where(usr => usr.Email.Equals(model.Email) && usr.Password.Equals(model.Password) && usr.IsAdmin.Equals("Y")).ToList();
             if(user.Count > 0)
             {
                 Session["nip"] = user.FirstOrDefault().NIP;

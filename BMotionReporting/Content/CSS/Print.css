@@ -2,7 +2,7 @@
 {
     @page {
       width: 40mm;
-      height:100cm;
+      height:auto;
       /*size:auto;*/ /* DIN A4 standard, Europe */
       margin:0;
       margin-right:10px;
@@ -10,7 +10,7 @@
     html, body {
         width: 40mm;
         /* height: 297mm; */
-        height: 100cm;
+        height: auto;
         font-size: 40px;
         background: #FFF;
         overflow:visible;
