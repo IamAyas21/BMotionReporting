@@ -106,9 +106,9 @@
                                                         <div class="container">
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <table style="width:90mm;border:1px solid black;">
+                                                                    <table style="width:50mm;border:1px solid black;">
                                                                         <tr>
-                                                                            <td colspan="3" class="text-right" style="padding:1rem;"><img src="~/Assets/Logo.png" style="width:100px;" /></td>
+                                                                            <td colspan="3" class="text-right" style="padding:1rem;"><img src="~/Assets/Logo.png" style="width:75px;" /></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td rowspan="4" style="padding:1rem;width:20mm;"><div id="qrcode_@Model.Content[i].NIP"></div></td>
@@ -187,11 +187,12 @@
 
     function renderMe(data) {
         console.log("masuk");
-        var mywindow = window.open('', 'Kartu Pengguna', 'height=370,width=550');
+        var mywindow = window.open('', 'Kartu Pengguna', 'height=370,width=450');
         mywindow.document.write('<html><head><title>Struk Pengambilan BBM</title>');
         mywindow.document.write('<link href="Content/AdminLTE/adminlte.min.css" rel="stylesheet" />');
         mywindow.document.write('<link href="Content/bootstrap.min.css" rel="stylesheet" />');
-        mywindow.document.write('<style>.divCode img{position: relative;left: 50%;transform: translateX(-25%);}</style>');
+        mywindow.document.write('<link href="Content/CardPrint.css" rel="stylesheet" />');
+        mywindow.document.write('');
         mywindow.document.write('</head><body >');
         mywindow.document.write(data);
         mywindow.document.write('</body></html>');
@@ -199,7 +200,7 @@
 
         setTimeout(function () {
             mywindow.print();
-            //mywindow.close();
+            mywindow.close();
         }, 1000)
         return true;
     }
