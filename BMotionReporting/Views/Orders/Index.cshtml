@@ -303,8 +303,10 @@
         var order = [];
         var total = 0;
         var allow = true;
+        
         if (enable != "disabled") {
-            for (var i = 0; i < totalNonSubsidi; i++) {
+            for (var i = 0; i < totalSubsidi; i++) {
+                console.log(i);
                 var item = { FuelId: document.getElementById("si" + i).value, liter: document.getElementById("s_" + i).value }
                 order.push(item);
                 try {

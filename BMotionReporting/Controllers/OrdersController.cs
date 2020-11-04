@@ -320,19 +320,9 @@ namespace BMotionReporting.Controllers
                 ws.Cells["F1"].Style.Border.Top.Style = DefaultBorder;
                 ws.Cells["F1"].Style.Border.Right.Style = DefaultBorder;
 
-                //HistoryOrder historyOrders = new HistoryOrder();
-                //List<HistoryOrder> historyOrdersList = new List<HistoryOrder>();
                 int idx = 1;
                 foreach (var item in OrdersLogic.getInstance().GetAllHistoryExport().ToList())
                 {
-                    //historyOrders = new HistoryOrder();
-                    //historyOrders.No = item.No.ToString();
-                    //historyOrders.TanggalTransaksi = item.CreateDate;
-                    //historyOrders.NIP = item.NIP;
-                    //historyOrders.Pengguna = item.Name;
-                    //historyOrders.Fuel = item.Fuel;
-                    //historyOrders.Qty = string.Format("{0} Liter", item.Liter.ToString());
-                    //historyOrdersList.Add(historyOrders);
 
                     idx++;
                     ws.Cells["A" + idx.ToString()].LoadFromText(item.No.ToString());
@@ -403,20 +393,6 @@ namespace BMotionReporting.Controllers
                 Response.BinaryWrite(Package.GetAsByteArray());
                 Response.End();
 
-                //var gv = new GridView();
-                //gv.DataSource = historyOrdersList;
-                //gv.DataBind();
-                //Response.ClearContent();
-                //Response.Buffer = true;
-                //Response.AddHeader("content-disposition", "attachment; filename=RiwayatPengambilanBBM_" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".xls");
-                //Response.ContentType = "application/ms-excel";
-                //Response.Charset = "";
-                //StringWriter objStringWriter = new StringWriter();
-                //HtmlTextWriter objHtmlTextWriter = new HtmlTextWriter(objStringWriter);
-                //gv.RenderControl(objHtmlTextWriter);
-                //Response.Output.Write(objStringWriter.ToString());
-                //Response.Flush();
-                //Response.End();
             }
             catch (Exception e)
             {
